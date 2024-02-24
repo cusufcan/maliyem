@@ -75,7 +75,7 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
   void _bottomSheetOnComplete() {
     if (_formKey.currentState!.validate()) {
       widget.onSave(
-        _controller.text,
+        _controller.text.trim(),
         colorToString(BaseColor.colors[active]),
       );
       clearInputs([_controller]);

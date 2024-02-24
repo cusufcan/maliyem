@@ -87,7 +87,7 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
       Account tempAcc = widget.user.accounts[widget.index];
       widget.onSave(
         Account(
-          name: _controller.text,
+          name: _controller.text.trim(),
           balance: tempAcc.balance,
           monthlyIncome: tempAcc.monthlyIncome,
           monthlyExpense: tempAcc.monthlyExpense,

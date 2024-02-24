@@ -130,7 +130,7 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
       widget.onSave(Change(
         account: widget.user.accounts[accountsActive].name,
         category: widget.user.categories[categoriesActive].name,
-        amount: double.parse(controller.text),
+        amount: double.parse(controller.text.trim()),
         date: date.toString(),
         isIncome: widget.change.isIncome,
       ));

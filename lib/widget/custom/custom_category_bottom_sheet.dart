@@ -60,7 +60,7 @@ class _CustomCategoryBottomSheetState extends State<CustomCategoryBottomSheet> {
 
   void _bottomSheetOnComplete() {
     if (_formKey.currentState!.validate()) {
-      widget.onSave(_controller.text);
+      widget.onSave(_controller.text.trim());
       clearInputs([_controller]);
       Navigator.of(context).pop();
     }

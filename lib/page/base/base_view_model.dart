@@ -26,6 +26,7 @@ abstract class _BaseViewModel extends State<BaseView> {
         return HomeBottomSheet(
           user: widget.user,
           amount: amount,
+          isIncome: isIncome,
           onSave: (date, categoryIdx, accountIdx) => _addChange(
             isIncome,
             date,

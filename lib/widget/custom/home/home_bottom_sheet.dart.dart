@@ -9,6 +9,7 @@ import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/widget/base/base_elevated_button.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
 import 'package:gelir_gider_takibi/widget/base/base_input.dart';
+import 'package:gelir_gider_takibi/widget/base/base_text.dart';
 import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_bottom_sheet.dart';
 import 'package:gelir_gider_takibi/widget/custom/custom_category_bottom_sheet.dart';
 import 'package:gelir_gider_takibi/widget/custom/custom_horizontal_list_view.dart';
@@ -20,11 +21,13 @@ class HomeBottomSheet extends StatefulWidget {
     required this.user,
     required this.onSave,
     required this.amount,
+    required this.isIncome,
   });
 
   final User user;
   final void Function(DateTime date, int categoryIdx, int accountIdx) onSave;
   final TextEditingController amount;
+  final bool isIncome;
 
   @override
   State<HomeBottomSheet> createState() => _HomeBottomSheetState();
@@ -54,6 +57,13 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
+            BaseText(
+              widget.isIncome ? BaseString.income : BaseString.expense,
+              alignment: Alignment.centerLeft,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const BaseHeightBox(height: BaseSize.semiMed),
             BaseInput(
               autoFocus: true,
               maxLength: BaseSize.intMax,

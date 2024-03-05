@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/model/account.dart';
+import 'package:gelir_gider_takibi/model/category.dart';
 
 class BaseInput extends StatelessWidget {
   const BaseInput({
@@ -16,8 +17,11 @@ class BaseInput extends StatelessWidget {
     this.maxLength = 20,
     this.isAccount = false,
     this.isAccountEdit = false,
+    this.isCategoryEdit = false,
+    this.editCategory,
     this.onChanged,
     this.accounts,
+    this.categories,
     this.editAccount,
   });
 
@@ -31,8 +35,11 @@ class BaseInput extends StatelessWidget {
   final int maxLength;
   final bool isAccount;
   final List<Account>? accounts;
+  final List<Category>? categories;
   final bool isAccountEdit;
   final Account? editAccount;
+  final bool isCategoryEdit;
+  final Category? editCategory;
   final void Function(String value)? onChanged;
 
   @override
@@ -59,6 +66,15 @@ class BaseInput extends StatelessWidget {
               if (account.name.toLowerCase() == value.toLowerCase() &&
                   editAccount!.name.toLowerCase() != value.toLowerCase()) {
                 return BaseString.accountExist;
+              }
+            }
+          }
+
+          if (isCategoryEdit) {
+            for (var category in categories!) {
+              if (category.name.toLowerCase() == value.toLowerCase() &&
+                  editCategory!.name.toLowerCase() != value.toLowerCase()) {
+                return BaseString.categoryExist;
               }
             }
           }

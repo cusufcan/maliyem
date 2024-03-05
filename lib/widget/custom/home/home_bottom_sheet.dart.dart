@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
+import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
 import 'package:gelir_gider_takibi/helper/date_helper.dart';
 import 'package:gelir_gider_takibi/helper/input_helper.dart';
 import 'package:gelir_gider_takibi/model/account.dart';
 import 'package:gelir_gider_takibi/model/category.dart';
 import 'package:gelir_gider_takibi/model/user.dart';
+import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 import 'package:gelir_gider_takibi/widget/base/base_elevated_button.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
 import 'package:gelir_gider_takibi/widget/base/base_input.dart';
@@ -18,12 +22,14 @@ import 'package:gelir_gider_takibi/widget/custom/custom_scroll_date_picker.dart'
 class HomeBottomSheet extends StatefulWidget {
   const HomeBottomSheet({
     super.key,
+    required this.sharedManager,
     required this.user,
     required this.onSave,
     required this.amount,
     required this.isIncome,
   });
 
+  final SharedManager sharedManager;
   final User user;
   final void Function(DateTime date, int categoryIdx, int accountIdx) onSave;
   final TextEditingController amount;
@@ -42,6 +48,7 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    _saveData();
     return Padding(
       padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom + BaseSize.med,
@@ -189,5 +196,12 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
   void _onDateChanged(DateTime value) {
     date = value;
     setState(() {});
+  }
+
+  void _saveData() {
+    widget.sharedManager.setString(
+      SharedEnum.save,
+      jsonEncode(widget.user.toJson()),
+    );
   }
 }

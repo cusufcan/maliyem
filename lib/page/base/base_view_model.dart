@@ -6,11 +6,6 @@ abstract class _BaseViewModel extends State<BaseView> {
 
   TextEditingController amount = TextEditingController();
 
-  final List<PreferredSizeWidget> appBars = [
-    const HomeAppBar(),
-    const AccountsAppBar(),
-  ];
-
   int active = 0;
 
   void _changePage(int i) {
@@ -24,6 +19,7 @@ abstract class _BaseViewModel extends State<BaseView> {
       isScrollControlled: true,
       builder: (context) {
         return HomeBottomSheet(
+          sharedManager: widget.sharedManager,
           user: widget.user,
           amount: amount,
           isIncome: isIncome,

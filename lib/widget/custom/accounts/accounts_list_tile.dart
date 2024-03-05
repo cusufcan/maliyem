@@ -35,7 +35,7 @@ class AccountsListTile extends StatelessWidget {
                 balance: account.balance,
                 onDelete: onDelete,
               ),
-              AccounstTileBottom(
+              AccountsTileBottom(
                 monthlyIncome: account.monthlyIncome,
                 monthlyExpense: account.monthlyExpense,
               ),

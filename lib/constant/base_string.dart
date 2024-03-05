@@ -2,8 +2,10 @@ class BaseString {
   static const String username = 'Misafir';
   static const String home = 'Anasayfa';
   static const String accounts = 'Hesaplar';
+  static const String categories = 'Kategoriler';
   static const String cash = 'Nakit';
   static const String general = 'Genel';
+  static const String graph = 'Grafik';
 
   static const String icPath = 'assets/image/ic_foreground.png';
 
@@ -44,6 +46,7 @@ class BaseString {
 
   static const String emptyInput = 'Boş bırakılamaz';
   static const String accountExist = 'Hesap zaten var';
+  static const String categoryExist = 'Kategori zaten var';
 
   static const String today = 'Bugün';
   static const String yesterday = 'Dün';

@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_color.dart';
 import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/helper/color_helper.dart';
 import 'package:gelir_gider_takibi/helper/input_helper.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
+import 'package:gelir_gider_takibi/model/category.dart';
 import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/widget/base/base_elevated_button.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
 import 'package:gelir_gider_takibi/widget/base/base_input.dart';
-import 'package:gelir_gider_takibi/widget/custom/custom_account_horizontal_list_view.dart';
 
-class AccountsEditTileDialog extends StatefulWidget {
-  const AccountsEditTileDialog({
+class CategoriesEditTileDialog extends StatefulWidget {
+  const CategoriesEditTileDialog({
     super.key,
     required this.onSave,
     required this.user,
@@ -21,23 +18,21 @@ class AccountsEditTileDialog extends StatefulWidget {
 
   final User user;
   final int index;
-  final void Function(Account newCategory) onSave;
+  final void Function(Category newCategory) onSave;
 
   @override
-  State<AccountsEditTileDialog> createState() => _AccountsEditTileDialogState();
+  State<CategoriesEditTileDialog> createState() =>
+      _CategoriesEditTileDialogState();
 }
 
-class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
+class _CategoriesEditTileDialogState extends State<CategoriesEditTileDialog> {
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  int active = 0;
 
   @override
   void initState() {
     super.initState();
-    _controller.text = widget.user.accounts[widget.index].name;
-    active = findColorIndex(widget.user.accounts[widget.index]);
+    _controller.text = widget.user.categories[widget.index].name;
   }
 
   @override
@@ -55,15 +50,10 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
               autoFocus: true,
               maxLength: BaseSize.stringMax,
               controller: _controller,
-              label: BaseString.account,
-              isAccountEdit: true,
-              accounts: widget.user.accounts,
-              editAccount: widget.user.accounts[widget.index],
-            ),
-            const BaseHeightBox(height: BaseSize.semiMed),
-            CustomAccountHorizontalListView(
-              active: active,
-              onTap: _changeAccountActive,
+              label: BaseString.category,
+              isCategoryEdit: true,
+              categories: widget.user.categories,
+              editCategory: widget.user.categories[widget.index],
             ),
             const BaseHeightBox(height: BaseSize.semiMed),
             BaseElevatedButton(
@@ -77,21 +67,11 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
     );
   }
 
-  void _changeAccountActive(int index) {
-    active = index;
-    setState(() {});
-  }
-
   void _bottomSheetOnComplete() {
     if (_formKey.currentState!.validate()) {
-      Account tempAcc = widget.user.accounts[widget.index];
       widget.onSave(
-        Account(
+        Category(
           name: _controller.text.trim(),
-          balance: tempAcc.balance,
-          monthlyIncome: tempAcc.monthlyIncome,
-          monthlyExpense: tempAcc.monthlyExpense,
-          color: colorToString(BaseColor.colors[active]),
         ),
       );
       clearInputs([_controller]);

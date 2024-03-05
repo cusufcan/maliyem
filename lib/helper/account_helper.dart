@@ -1,4 +1,5 @@
 import 'package:gelir_gider_takibi/model/account.dart';
+import 'package:gelir_gider_takibi/model/category.dart';
 import 'package:gelir_gider_takibi/model/user.dart';
 
 Account findAccount(User user, String name) {
@@ -10,6 +11,13 @@ Account findAccount(User user, String name) {
 bool isAccountsHaveChange(User user, Account account) {
   for (var change in user.changes) {
     if (change.account == account.name) return true;
+  }
+  return false;
+}
+
+bool isCategoryHaveChange(User user, Category category) {
+  for (var change in user.changes) {
+    if (change.category == category.name) return true;
   }
   return false;
 }

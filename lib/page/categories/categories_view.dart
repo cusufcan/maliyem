@@ -8,43 +8,39 @@ import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
 import 'package:gelir_gider_takibi/helper/account_helper.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
+import 'package:gelir_gider_takibi/model/category.dart';
 import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 import 'package:gelir_gider_takibi/widget/base/base_alert_dialog.dart';
 import 'package:gelir_gider_takibi/widget/base/base_text.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_appbar.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_edit_tile_dialog.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_list_tile.dart';
+import 'package:gelir_gider_takibi/widget/custom/categories/categories_appbar.dart';
+import 'package:gelir_gider_takibi/widget/custom/categories/categories_edit_tile_dialog.dart';
+import 'package:gelir_gider_takibi/widget/custom/categories/categories_list_tile.dart';
 
-part 'accounts_view_model.dart';
+part 'categories_view_model.dart';
 
-class AccountsView extends StatefulWidget {
-  const AccountsView({
+class CategoriesView extends StatefulWidget {
+  const CategoriesView({
     Key? key,
     required this.sharedManager,
     required this.user,
-    required this.accounts,
+    required this.categories,
   }) : super(key: key);
 
   final SharedManager sharedManager;
   final User user;
-  final List<Account> accounts;
+  final List<Category> categories;
 
   @override
-  State<AccountsView> createState() => _AccountsViewState();
+  State<CategoriesView> createState() => _CategoriesViewState();
 }
 
-class _AccountsViewState extends AccountsViewModel {
+class _CategoriesViewState extends CategoriesViewModel {
   @override
   Widget build(BuildContext context) {
     _saveData();
     return Scaffold(
-      appBar: AccountsAppBar(
-        sharedManager: widget.sharedManager,
-        user: widget.user,
-        categories: widget.user.categories,
-      ),
+      appBar: const CategoriesAppBar(),
       body: SingleChildScrollView(
         padding: BasePadding.home,
         physics: BasePhysics.base,
@@ -52,16 +48,16 @@ class _AccountsViewState extends AccountsViewModel {
         child: Form(
           key: _formKey,
           child: ListView.builder(
-            itemCount: widget.accounts.length,
+            itemCount: widget.categories.length,
             physics: BasePhysics.base,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
-              return AccountsListTile(
-                account: widget.accounts[index],
+              return CategoriesListTile(
+                category: widget.categories[index],
                 onTap: () => _openEditDialog(index),
-                onDelete: widget.accounts.length > 1 &&
-                        !isAccountsHaveChange(
-                            widget.user, widget.accounts[index])
+                onDelete: widget.categories.length > 1 &&
+                        !isCategoryHaveChange(
+                            widget.user, widget.categories[index])
                     ? () => _openDeleteDialog(index)
                     : null,
               );

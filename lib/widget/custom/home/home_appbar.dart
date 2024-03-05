@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:gelir_gider_takibi/constant/base_icon.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
+import 'package:gelir_gider_takibi/model/user.dart';
+import 'package:gelir_gider_takibi/page/graph/graph_view.dart';
 import 'package:gelir_gider_takibi/widget/base/base_text.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
+  const HomeAppBar({
+    super.key,
+    required this.user,
+  });
+
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -15,24 +23,25 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               fontWeight: FontWeight.bold,
             ),
       ),
-      // actions: [
-      //   ElevatedButton.icon(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.date_range_outlined),
-      //     label: const Row(
-      //       children: [
-      //         Text('February'),
-      //       ],
-      //     ),
-      //   ),
-      //   ElevatedButton(
-      //     onPressed: () {},
-      //     style: ElevatedButton.styleFrom(
-      //       shape: const CircleBorder(),
-      //     ),
-      //     child: const Icon(Icons.arrow_drop_down_outlined),
-      //   )
-      // ],
+      actions: [
+        IconButton(
+          icon: BaseIcon.graph,
+          tooltip: BaseString.graph,
+          onPressed: () => _goToGraphPage(context),
+        ),
+      ],
+    );
+  }
+
+  void _goToGraphPage(BuildContext context) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (context, anim, secondAnim) {
+          return GraphView(user: user);
+        },
+      ),
     );
   }
 

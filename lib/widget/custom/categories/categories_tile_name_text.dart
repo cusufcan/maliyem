@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_color.dart';
 import 'package:gelir_gider_takibi/widget/base/base_text.dart';
 
-class AccountsTileNameText extends StatelessWidget {
-  const AccountsTileNameText({
+class CategoriesTileNameText extends StatelessWidget {
+  const CategoriesTileNameText({
     super.key,
     required this.name,
   });
@@ -16,7 +16,7 @@ class AccountsTileNameText extends StatelessWidget {
       name,
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w500,
-            color: BaseColor.white,
+            color: BaseColor.black,
           ),
       alignment: Alignment.centerLeft,
     );

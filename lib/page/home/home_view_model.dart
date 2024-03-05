@@ -11,6 +11,74 @@ abstract class _HomeViewModel extends State<HomeView> {
     List<DateTime> temp = dates.toList();
     temp.sort((a, b) => b.compareTo(a));
     dates = temp.toSet();
+
+    _sortCategories();
+    _sortAccounts();
+  }
+
+  void _sortCategories() {
+    // bu ayki tum giderleri baska bir listeye cek
+    var tempExpenses = widget.user.changes.where((element) {
+      return !element.isIncome &&
+          DateTime.parse(element.date).month == DateTime.now().month;
+    }).toList();
+
+    // tum kategorilerde gez
+    Map<Category, int> categoriesSortedMap = {};
+    for (var category in widget.user.categories) {
+      int counter = 0;
+      // yeni giderler listesini gez
+      for (var expense in tempExpenses) {
+        // bu kategoriye uygun gider varsa sayac arttir
+        if (category.name == expense.category) counter++;
+      }
+      // kategoriye ait gider sayisini listeye ekle
+      categoriesSortedMap[category] = counter;
+    }
+
+    // kategorileri gider sayisina gore sirala
+    categoriesSortedMap = Map.fromEntries(
+      categoriesSortedMap.entries.toList()
+        ..sort((e1, e2) => e2.value.compareTo(e1.value)),
+    );
+
+    // kullanici kategorilerini yeni siralamaya gore guncelle
+    widget.user.categories.clear();
+    categoriesSortedMap.forEach((key, value) {
+      widget.user.categories.add(key);
+    });
+  }
+
+  void _sortAccounts() {
+    // bu ayki tum gelir-giderleri baska bir listeye cek
+    var tempExpenses = widget.user.changes.where((element) {
+      return DateTime.parse(element.date).month == DateTime.now().month;
+    }).toList();
+
+    // tum kategorilerde gez
+    Map<Account, int> accountsSortedMap = {};
+    for (var account in widget.user.accounts) {
+      int counter = 0;
+      // yeni gelir-gider listesini gez
+      for (var expense in tempExpenses) {
+        // bu hesaba uygun gelir-gider varsa sayac arttir
+        if (account.name == expense.account) counter++;
+      }
+      // hesaba ait gelir-gider sayisini listeye ekle
+      accountsSortedMap[account] = counter;
+    }
+
+    // hesaplari gelir-gider sayisina gore sirala
+    accountsSortedMap = Map.fromEntries(
+      accountsSortedMap.entries.toList()
+        ..sort((e1, e2) => e2.value.compareTo(e1.value)),
+    );
+
+    // kullanici hesaplarini yeni siralamaya gore guncelle
+    widget.user.accounts.clear();
+    accountsSortedMap.forEach((key, value) {
+      widget.user.accounts.add(key);
+    });
   }
 
   void _setUserSettings() {

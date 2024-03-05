@@ -4,8 +4,8 @@ import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_tile_monthly_box.dart';
 
-class AccounstTileBottom extends StatelessWidget {
-  const AccounstTileBottom({
+class AccountsTileBottom extends StatelessWidget {
+  const AccountsTileBottom({
     super.key,
     required this.monthlyIncome,
     required this.monthlyExpense,

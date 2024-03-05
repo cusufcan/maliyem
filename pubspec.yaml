@@ -19,6 +19,9 @@ dependencies:
   # Shared Preferences
   shared_preferences: ^2.2.2
 
+  # Splash
+  flutter_native_splash: ^2.3.11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

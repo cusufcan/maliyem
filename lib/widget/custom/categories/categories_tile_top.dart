@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/widget/base/base_width_box.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_tile_balance_text.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_tile_name_text.dart';
+import 'package:gelir_gider_takibi/widget/custom/categories/categories_tile_name_text.dart';
 import 'package:gelir_gider_takibi/widget/custom/custom_action_chip.dart';
 
-class AccountsTileTop extends StatelessWidget {
-  const AccountsTileTop({
+class CategoriesTileTop extends StatelessWidget {
+  const CategoriesTileTop({
     super.key,
     required this.name,
-    required this.balance,
     this.onDelete,
   });
 
   final String name;
-  final double balance;
   final void Function()? onDelete;
 
   @override
@@ -31,19 +28,14 @@ class AccountsTileTop extends StatelessWidget {
           vertical: BaseSize.med,
           horizontal: BaseSize.semiLg,
         ),
-        child: Column(
+        child: Row(
           children: [
-            Row(
-              children: [
-                Expanded(child: AccountsTileNameText(name: name)),
-                const BaseWidthBox(),
-                CustomActionChip(
-                  text: BaseString.delete,
-                  onTap: onDelete,
-                ),
-              ],
+            Expanded(child: CategoriesTileNameText(name: name)),
+            const BaseWidthBox(),
+            CustomActionChip(
+              text: BaseString.delete,
+              onTap: onDelete,
             ),
-            AccountsTileBalanceText(balance: balance),
           ],
         ),
       ),

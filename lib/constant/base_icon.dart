@@ -21,4 +21,7 @@ class BaseIcon {
 
   static const add = Icon(Icons.add);
   static const remove = Icon(Icons.remove);
+
+  static const category = Icon(Icons.category_outlined);
+  static const graph = Icon(Icons.bar_chart_outlined);
 }

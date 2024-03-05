@@ -7,10 +7,8 @@ import 'package:gelir_gider_takibi/page/accounts/accounts_view.dart';
 import 'package:gelir_gider_takibi/page/home/home_view.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 import 'package:gelir_gider_takibi/widget/base/base_bottombar.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_appbar.dart';
 import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_bottom_sheet.dart';
 import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_fab.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_appbar.dart';
 import 'package:gelir_gider_takibi/widget/custom/home/home_bottom_sheet.dart.dart';
 import 'package:gelir_gider_takibi/widget/custom/home/home_fab.dart';
 
@@ -56,7 +54,6 @@ class _BaseViewState extends _BaseViewModel {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: appBars[active],
       floatingActionButton: fabs[active],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BaseBottomBar(onTap: _changePage, active: active),

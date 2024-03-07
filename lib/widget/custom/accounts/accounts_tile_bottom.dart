@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_color.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_tile_monthly_box.dart';
+
+import '../../../constant/index.dart';
+import 'index.dart';
 
 class AccountsTileBottom extends StatelessWidget {
   const AccountsTileBottom({

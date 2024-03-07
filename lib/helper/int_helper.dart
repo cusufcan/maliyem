@@ -1,5 +1,4 @@
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
+import '../constant/index.dart';
 
 String formatNumber({
   required double num,

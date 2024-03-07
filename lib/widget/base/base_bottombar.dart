@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_icon.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
+
+import '../../constant/index.dart';
 
 class BaseBottomBar extends StatelessWidget {
   const BaseBottomBar({

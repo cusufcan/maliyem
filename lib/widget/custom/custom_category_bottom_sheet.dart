@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/helper/input_helper.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
-import 'package:gelir_gider_takibi/widget/base/base_elevated_button.dart';
-import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
-import 'package:gelir_gider_takibi/widget/base/base_input.dart';
+
+import '../../constant/index.dart';
+import '../../helper/index.dart';
+import '../../model/index.dart';
+import '../base/index.dart';
 
 class CustomCategoryBottomSheet extends StatefulWidget {
   const CustomCategoryBottomSheet({

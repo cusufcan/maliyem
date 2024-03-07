@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
+
+import '../../constant/index.dart';
+import 'index.dart';
 
 class BaseAlertDialog extends StatelessWidget {
   const BaseAlertDialog({

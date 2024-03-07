@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/helper/int_helper.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
+
+import '../../../constant/index.dart';
+import '../../../helper/index.dart';
+import '../../base/index.dart';
 
 class AccountsTileMonthlyBox extends StatelessWidget {
   const AccountsTileMonthlyBox({

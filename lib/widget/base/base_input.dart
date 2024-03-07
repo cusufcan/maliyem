@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/model/category.dart';
+
+import '../../constant/index.dart';
+import '../../model/index.dart';
 
 class BaseInput extends StatelessWidget {
   const BaseInput({

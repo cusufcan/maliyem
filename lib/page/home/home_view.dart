@@ -1,27 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_key.dart';
-import 'package:gelir_gider_takibi/constant/base_padding.dart';
-import 'package:gelir_gider_takibi/constant/base_physics.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/model/category.dart';
-import 'package:gelir_gider_takibi/model/change.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
-import 'package:gelir_gider_takibi/widget/base/base_alert_dialog.dart';
-import 'package:gelir_gider_takibi/widget/base/base_divider.dart';
-import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_appbar.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_daily_container.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_daily_detailed_container.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_edit_tile_dialog.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_monthly_container.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_summary_container.dart';
+
+import '../../constant/index.dart';
+import '../../model/index.dart';
+import '../../widget/base/index.dart';
+import '../../widget/custom/home/index.dart';
 
 part 'home_view_model.dart';
 

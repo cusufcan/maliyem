@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/widget/base/base_width_box.dart';
-import 'package:gelir_gider_takibi/widget/custom/categories/categories_tile_name_text.dart';
-import 'package:gelir_gider_takibi/widget/custom/custom_action_chip.dart';
+
+import '../../../constant/index.dart';
+import '../../base/index.dart';
+import '../index.dart';
+import 'index.dart';
 
 class CategoriesTileTop extends StatelessWidget {
   const CategoriesTileTop({

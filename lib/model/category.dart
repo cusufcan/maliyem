@@ -1,4 +1,4 @@
-import 'package:gelir_gider_takibi/model/name.dart';
+import 'index.dart';
 
 class Category extends Name {
   Category({

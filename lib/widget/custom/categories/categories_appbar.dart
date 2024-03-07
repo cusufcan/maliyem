@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
+
+import '../../../constant/index.dart';
+import '../../base/index.dart';
 
 class CategoriesAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CategoriesAppBar({super.key});

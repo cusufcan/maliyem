@@ -1,6 +1,4 @@
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/model/category.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
+import '../model/index.dart';
 
 Account findAccount(User user, String name) {
   return user.accounts.firstWhere(

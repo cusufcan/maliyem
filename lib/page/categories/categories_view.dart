@@ -1,23 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_key.dart';
-import 'package:gelir_gider_takibi/constant/base_padding.dart';
-import 'package:gelir_gider_takibi/constant/base_physics.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
-import 'package:gelir_gider_takibi/helper/account_helper.dart';
-import 'package:gelir_gider_takibi/model/category.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
-import 'package:gelir_gider_takibi/widget/base/base_alert_dialog.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
-import 'package:gelir_gider_takibi/widget/custom/categories/categories_appbar.dart';
-import 'package:gelir_gider_takibi/widget/custom/categories/categories_edit_tile_dialog.dart';
-import 'package:gelir_gider_takibi/widget/custom/categories/categories_fab.dart';
-import 'package:gelir_gider_takibi/widget/custom/categories/categories_list_tile.dart';
-import 'package:gelir_gider_takibi/widget/custom/custom_category_bottom_sheet.dart';
+
+import '../../constant/index.dart';
+import '../../helper/index.dart';
+import '../../model/index.dart';
+import '../../widget/base/index.dart';
+import '../../widget/custom/categories/index.dart';
+import '../../widget/custom/index.dart';
 
 part 'categories_view_model.dart';
 
@@ -35,7 +27,7 @@ class CategoriesView extends StatefulWidget {
   State<CategoriesView> createState() => _CategoriesViewState();
 }
 
-class _CategoriesViewState extends CategoriesViewModel {
+class _CategoriesViewState extends _CategoriesViewModel {
   @override
   Widget build(BuildContext context) {
     _saveData();

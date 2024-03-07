@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/helper/color_helper.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/widget/base/base_container.dart';
-import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_tile_bottom.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_tile_top.dart';
+
+import '../../../constant/index.dart';
+import '../../../helper/index.dart';
+import '../../../model/index.dart';
+import '../../base/index.dart';
+import 'index.dart';
 
 class AccountsListTile extends StatelessWidget {
   const AccountsListTile({

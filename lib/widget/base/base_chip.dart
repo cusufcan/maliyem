@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_color.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/helper/color_helper.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
+
+import '../../constant/index.dart';
+import '../../helper/index.dart';
+import 'index.dart';
 
 class BaseChip extends StatelessWidget {
   const BaseChip({

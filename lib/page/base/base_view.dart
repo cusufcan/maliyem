@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/model/change.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/page/accounts/accounts_view.dart';
 import 'package:gelir_gider_takibi/page/home/home_view.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
-import 'package:gelir_gider_takibi/widget/base/base_bottombar.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_bottom_sheet.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_fab.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_bottom_sheet.dart.dart';
-import 'package:gelir_gider_takibi/widget/custom/home/home_fab.dart';
+
+import '../../constant/index.dart';
+import '../../model/index.dart';
+import '../../widget/base/index.dart';
+import '../../widget/custom/accounts/index.dart';
+import '../../widget/custom/home/index.dart';
 
 part 'base_view_model.dart';
 

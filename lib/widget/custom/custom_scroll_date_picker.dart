@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_color.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
+
+import '../../constant/index.dart';
 
 class CustomScrollDatePicker extends StatelessWidget {
   const CustomScrollDatePicker({

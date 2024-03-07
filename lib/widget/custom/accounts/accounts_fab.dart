@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_icon.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/widget/base/base_floating_action_button.dart';
+
+import '../../../constant/index.dart';
+import '../../base/index.dart';
 
 class AccountsFab extends StatelessWidget {
   const AccountsFab({

@@ -1,6 +1,6 @@
 part of 'accounts_view.dart';
 
-abstract class AccountsViewModel extends State<AccountsView> {
+abstract class _AccountsViewModel extends State<AccountsView> {
   final TextEditingController accountController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();

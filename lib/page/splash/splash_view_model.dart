@@ -1,19 +1,6 @@
-import 'dart:convert';
+part of 'splash_view.dart';
 
-import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_color.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
-import 'package:gelir_gider_takibi/helper/color_helper.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/model/category.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
-import 'package:gelir_gider_takibi/page/base/base_view.dart';
-import 'package:gelir_gider_takibi/page/splash/splash_view.dart';
-import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
-
-abstract class SplashViewModel extends State<SplashView> {
+abstract class _SplashViewModel extends State<SplashView> {
   late final SharedManager _sharedManager;
   User? user;
 

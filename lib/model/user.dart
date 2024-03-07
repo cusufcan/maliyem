@@ -1,6 +1,4 @@
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/model/category.dart';
-import 'package:gelir_gider_takibi/model/change.dart';
+import 'index.dart';
 
 class User {
   String name;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_icon.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/page/categories/categories_view.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
+
+import '../../../constant/index.dart';
+import '../../../model/index.dart';
+import '../../base/index.dart';
 
 class AccountsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AccountsAppBar({

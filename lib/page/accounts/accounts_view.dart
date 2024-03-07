@@ -1,21 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_key.dart';
-import 'package:gelir_gider_takibi/constant/base_padding.dart';
-import 'package:gelir_gider_takibi/constant/base_physics.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
-import 'package:gelir_gider_takibi/helper/account_helper.dart';
-import 'package:gelir_gider_takibi/model/account.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
-import 'package:gelir_gider_takibi/widget/base/base_alert_dialog.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_appbar.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_edit_tile_dialog.dart';
-import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_list_tile.dart';
+
+import '../../constant/index.dart';
+import '../../helper/index.dart';
+import '../../model/index.dart';
+import '../../widget/base/index.dart';
+import '../../widget/custom/accounts/index.dart';
 
 part 'accounts_view_model.dart';
 
@@ -35,7 +28,7 @@ class AccountsView extends StatefulWidget {
   State<AccountsView> createState() => _AccountsViewState();
 }
 
-class _AccountsViewState extends AccountsViewModel {
+class _AccountsViewState extends _AccountsViewModel {
   @override
   Widget build(BuildContext context) {
     _saveData();

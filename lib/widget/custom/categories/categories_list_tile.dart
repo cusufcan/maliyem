@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_color.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/model/category.dart';
-import 'package:gelir_gider_takibi/widget/base/base_container.dart';
-import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
-import 'package:gelir_gider_takibi/widget/custom/categories/categories_tile_top.dart';
+
+import '../../../constant/index.dart';
+import '../../../model/index.dart';
+import '../../base/index.dart';
+import 'index.dart';
 
 class CategoriesListTile extends StatelessWidget {
   const CategoriesListTile({

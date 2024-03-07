@@ -1,5 +1,5 @@
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/helper/date_helper.dart';
+import '../constant/index.dart';
+import 'index.dart';
 
 String getDayString(DateTime date) {
   final now = DateTime.now();

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_color.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/helper/color_helper.dart';
-import 'package:gelir_gider_takibi/model/name.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
-import 'package:gelir_gider_takibi/widget/base/base_container.dart';
-import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
-import 'package:gelir_gider_takibi/widget/base/base_text.dart';
-import 'package:gelir_gider_takibi/widget/base/base_width_box.dart';
+
+import '../../constant/index.dart';
+import '../../helper/index.dart';
+import '../../model/index.dart';
+import '../base/index.dart';
 
 class CustomHorizontalListView extends StatelessWidget {
   const CustomHorizontalListView({

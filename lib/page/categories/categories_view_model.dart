@@ -1,6 +1,6 @@
 part of 'categories_view.dart';
 
-abstract class CategoriesViewModel extends State<CategoriesView> {
+abstract class _CategoriesViewModel extends State<CategoriesView> {
   final TextEditingController accountController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();

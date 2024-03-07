@@ -15,9 +15,10 @@ class BaseInput extends StatelessWidget {
     this.type = TextInputType.text,
     this.action = TextInputAction.done,
     this.maxLength = 20,
-    this.isAccount = false,
+    this.isAccountAdd = false,
     this.isAccountEdit = false,
     this.isCategoryEdit = false,
+    this.isCategoryAdd = false,
     this.editCategory,
     this.onChanged,
     this.accounts,
@@ -33,13 +34,14 @@ class BaseInput extends StatelessWidget {
   final TextInputType type;
   final TextInputAction action;
   final int maxLength;
-  final bool isAccount;
+  final bool isAccountAdd;
   final List<Account>? accounts;
   final List<Category>? categories;
   final bool isAccountEdit;
   final Account? editAccount;
   final bool isCategoryEdit;
   final Category? editCategory;
+  final bool isCategoryAdd;
   final void Function(String value)? onChanged;
 
   @override
@@ -55,7 +57,7 @@ class BaseInput extends StatelessWidget {
         if (value == null || value.isEmpty) {
           return BaseString.emptyInput;
         } else {
-          if (isAccount) {
+          if (isAccountAdd) {
             for (var account in accounts!) {
               if (account.name.toLowerCase() == value.toLowerCase()) {
                 return BaseString.accountExist;
@@ -70,7 +72,13 @@ class BaseInput extends StatelessWidget {
             }
           }
 
-          if (isCategoryEdit) {
+          if (isCategoryAdd) {
+            for (var category in categories!) {
+              if (category.name.toLowerCase() == value.toLowerCase()) {
+                return BaseString.categoryExist;
+              }
+            }
+          } else if (isCategoryEdit) {
             for (var category in categories!) {
               if (category.name.toLowerCase() == value.toLowerCase() &&
                   editCategory!.name.toLowerCase() != value.toLowerCase()) {

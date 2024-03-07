@@ -48,7 +48,7 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             BaseInput(
-              isAccount: true,
+              isAccountAdd: true,
               accounts: widget.accounts,
               autoFocus: true,
               maxLength: BaseSize.stringMax,

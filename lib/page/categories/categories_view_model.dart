@@ -13,8 +13,31 @@ abstract class CategoriesViewModel extends State<CategoriesView> {
   }
 
   void _deleteCategory(int index) {
-    widget.categories.removeAt(index);
+    widget.user.categories.removeAt(index);
     Navigator.of(context).pop();
+    setState(() {});
+  }
+
+  void _openAddDialog() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return CustomCategoryBottomSheet(
+          isCategoryAdd: true,
+          user: widget.user,
+          onSave: (value) {
+            _addCategory(
+              Category(name: value),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  _addCategory(Category category) {
+    widget.user.categories.add(category);
     setState(() {});
   }
 

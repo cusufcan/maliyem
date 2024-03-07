@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
 import 'package:gelir_gider_takibi/helper/input_helper.dart';
+import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/widget/base/base_elevated_button.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
 import 'package:gelir_gider_takibi/widget/base/base_input.dart';
@@ -10,9 +11,18 @@ class CustomCategoryBottomSheet extends StatefulWidget {
   const CustomCategoryBottomSheet({
     super.key,
     required this.onSave,
+    this.user,
+    this.isCategoryAdd = false,
+    this.isCategoryEdit = false,
+    this.index = 0,
   });
 
   final void Function(String value) onSave;
+
+  final User? user;
+  final int index;
+  final bool isCategoryAdd;
+  final bool isCategoryEdit;
 
   @override
   State<CustomCategoryBottomSheet> createState() =>
@@ -45,6 +55,10 @@ class _CustomCategoryBottomSheetState extends State<CustomCategoryBottomSheet> {
               maxLength: BaseSize.stringMax,
               controller: _controller,
               label: BaseString.category,
+              isCategoryAdd: widget.isCategoryAdd,
+              isCategoryEdit: widget.isCategoryEdit,
+              categories: widget.user?.categories,
+              editCategory: widget.user?.categories[widget.index],
             ),
             const BaseHeightBox(height: BaseSize.sm),
             BaseElevatedButton(

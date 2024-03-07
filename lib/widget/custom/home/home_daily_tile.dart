@@ -18,7 +18,7 @@ class HomeDailyTile extends StatelessWidget {
     required this.account,
     required this.color,
     required this.category,
-    this.onTap,
+    this.onLongPress,
     this.onDelete,
   });
 
@@ -26,7 +26,7 @@ class HomeDailyTile extends StatelessWidget {
   final String color;
   final String category;
   final double money;
-  final void Function()? onTap;
+  final void Function()? onLongPress;
   final void Function()? onDelete;
 
   @override
@@ -34,7 +34,7 @@ class HomeDailyTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: BaseSize.semiMed),
       child: BaseContainer(
-        onTap: onTap,
+        onLongPress: onLongPress,
         padding: const EdgeInsets.symmetric(
           horizontal: BaseSize.med,
           vertical: BaseSize.semiMed,

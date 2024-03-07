@@ -21,13 +21,15 @@ String formatNumber({
     }
   } else {
     if (num.abs() < 1000.00) return num.toStringAsFixed(2);
-    final numberString = num.toInt().toString();
+    final bool isNegative = num < 0;
+    final numberString = num.abs().toInt().toString();
     final numberDigits = List.from(numberString.split(''));
     int index = numberDigits.length - 3;
     while (index > 0) {
       numberDigits.insert(index, ',');
       index -= 3;
     }
+    if (isNegative) return '-${numberDigits.join()}.00';
     return '${numberDigits.join()}.00';
   }
 }

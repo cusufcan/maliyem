@@ -15,7 +15,9 @@ import 'package:gelir_gider_takibi/widget/base/base_alert_dialog.dart';
 import 'package:gelir_gider_takibi/widget/base/base_text.dart';
 import 'package:gelir_gider_takibi/widget/custom/categories/categories_appbar.dart';
 import 'package:gelir_gider_takibi/widget/custom/categories/categories_edit_tile_dialog.dart';
+import 'package:gelir_gider_takibi/widget/custom/categories/categories_fab.dart';
 import 'package:gelir_gider_takibi/widget/custom/categories/categories_list_tile.dart';
+import 'package:gelir_gider_takibi/widget/custom/custom_category_bottom_sheet.dart';
 
 part 'categories_view_model.dart';
 
@@ -24,12 +26,10 @@ class CategoriesView extends StatefulWidget {
     Key? key,
     required this.sharedManager,
     required this.user,
-    required this.categories,
   }) : super(key: key);
 
   final SharedManager sharedManager;
   final User user;
-  final List<Category> categories;
 
   @override
   State<CategoriesView> createState() => _CategoriesViewState();
@@ -41,6 +41,9 @@ class _CategoriesViewState extends CategoriesViewModel {
     _saveData();
     return Scaffold(
       appBar: const CategoriesAppBar(),
+      floatingActionButton: CategoriesFab(
+        addCategory: _openAddDialog,
+      ),
       body: SingleChildScrollView(
         padding: BasePadding.home,
         physics: BasePhysics.base,
@@ -48,16 +51,16 @@ class _CategoriesViewState extends CategoriesViewModel {
         child: Form(
           key: _formKey,
           child: ListView.builder(
-            itemCount: widget.categories.length,
+            itemCount: widget.user.categories.length,
             physics: BasePhysics.base,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
               return CategoriesListTile(
-                category: widget.categories[index],
-                onTap: () => _openEditDialog(index),
-                onDelete: widget.categories.length > 1 &&
+                category: widget.user.categories[index],
+                onLongPress: () => _openEditDialog(index),
+                onDelete: widget.user.categories.length > 1 &&
                         !isCategoryHaveChange(
-                            widget.user, widget.categories[index])
+                            widget.user, widget.user.categories[index])
                     ? () => _openDeleteDialog(index)
                     : null,
               );

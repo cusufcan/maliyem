@@ -17,10 +17,9 @@ abstract class _HomeViewModel extends State<HomeView> {
   }
 
   void _sortCategories() {
-    // bu ayki tum giderleri baska bir listeye cek
-    var tempExpenses = widget.user.changes.where((element) {
-      return !element.isIncome &&
-          DateTime.parse(element.date).month == DateTime.now().month;
+    // bu ayki tum gelir-giderleri baska bir listeye cek
+    var tempChanges = widget.user.changes.where((element) {
+      return DateTime.parse(element.date).month == DateTime.now().month;
     }).toList();
 
     // tum kategorilerde gez
@@ -28,11 +27,11 @@ abstract class _HomeViewModel extends State<HomeView> {
     for (var category in widget.user.categories) {
       int counter = 0;
       // yeni giderler listesini gez
-      for (var expense in tempExpenses) {
-        // bu kategoriye uygun gider varsa sayac arttir
-        if (category.name == expense.category) counter++;
+      for (var change in tempChanges) {
+        // bu kategoriye uygun gelir-gider varsa sayac arttir
+        if (category.name == change.category) counter++;
       }
-      // kategoriye ait gider sayisini listeye ekle
+      // kategoriye ait gelir-gider sayisini listeye ekle
       categoriesSortedMap[category] = counter;
     }
 
@@ -51,7 +50,7 @@ abstract class _HomeViewModel extends State<HomeView> {
 
   void _sortAccounts() {
     // bu ayki tum gelir-giderleri baska bir listeye cek
-    var tempExpenses = widget.user.changes.where((element) {
+    var tempChanges = widget.user.changes.where((element) {
       return DateTime.parse(element.date).month == DateTime.now().month;
     }).toList();
 
@@ -60,9 +59,9 @@ abstract class _HomeViewModel extends State<HomeView> {
     for (var account in widget.user.accounts) {
       int counter = 0;
       // yeni gelir-gider listesini gez
-      for (var expense in tempExpenses) {
+      for (var change in tempChanges) {
         // bu hesaba uygun gelir-gider varsa sayac arttir
-        if (account.name == expense.account) counter++;
+        if (account.name == change.account) counter++;
       }
       // hesaba ait gelir-gider sayisini listeye ekle
       accountsSortedMap[account] = counter;

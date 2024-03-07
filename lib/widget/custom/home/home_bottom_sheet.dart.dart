@@ -173,6 +173,8 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
       isScrollControlled: true,
       builder: (context) {
         return CustomCategoryBottomSheet(
+          isCategoryAdd: true,
+          user: widget.user,
           onSave: (value) {
             _addCategory(
               Category(name: value),

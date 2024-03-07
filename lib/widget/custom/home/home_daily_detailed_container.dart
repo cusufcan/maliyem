@@ -80,7 +80,7 @@ class HomeDailyDetailedContainer extends StatelessWidget {
               color: findAccount(user, changes[index].account).color,
               category: changes[index].category,
               money: changes[index].amount,
-              onTap: () => onTap(changes[index]),
+              onLongPress: () => onTap(changes[index]),
               onDelete: () => onDelete(changes[index]),
             );
           },

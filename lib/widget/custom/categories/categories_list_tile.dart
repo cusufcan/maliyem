@@ -10,12 +10,12 @@ class CategoriesListTile extends StatelessWidget {
   const CategoriesListTile({
     super.key,
     required this.category,
-    this.onTap,
+    this.onLongPress,
     required this.onDelete,
   });
 
   final Category category;
-  final void Function()? onTap;
+  final void Function()? onLongPress;
   final void Function()? onDelete;
 
   @override
@@ -23,7 +23,7 @@ class CategoriesListTile extends StatelessWidget {
     return Column(
       children: [
         BaseContainer(
-          onTap: onTap,
+          onLongPress: onLongPress,
           color: BaseColor.white,
           padding: EdgeInsets.zero,
           radius: BaseSize.med,

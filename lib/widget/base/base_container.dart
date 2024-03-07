@@ -7,6 +7,7 @@ class BaseContainer extends StatelessWidget {
     this.child,
     this.color,
     this.onTap,
+    this.onLongPress,
     this.circle = false,
     this.gradient,
     this.shadow = true,
@@ -20,11 +21,12 @@ class BaseContainer extends StatelessWidget {
   final Widget? child;
   final Color? color;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
   final bool circle;
   final Gradient? gradient;
   final bool shadow;
   final double radius;
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
   final double? height;
   final double? width;
   final Border? border;
@@ -33,6 +35,7 @@ class BaseContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      onLongPress: onLongPress,
       borderRadius: BorderRadius.circular(radius),
       child: Ink(
         width: width,

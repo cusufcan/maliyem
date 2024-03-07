@@ -43,7 +43,6 @@ class _AccountsViewState extends AccountsViewModel {
       appBar: AccountsAppBar(
         sharedManager: widget.sharedManager,
         user: widget.user,
-        categories: widget.user.categories,
       ),
       body: SingleChildScrollView(
         padding: BasePadding.home,
@@ -58,7 +57,7 @@ class _AccountsViewState extends AccountsViewModel {
             itemBuilder: (BuildContext context, int index) {
               return AccountsListTile(
                 account: widget.accounts[index],
-                onTap: () => _openEditDialog(index),
+                onLongPress: () => _openEditDialog(index),
                 onDelete: widget.accounts.length > 1 &&
                         !isAccountsHaveChange(
                             widget.user, widget.accounts[index])

@@ -11,12 +11,12 @@ class AccountsListTile extends StatelessWidget {
   const AccountsListTile({
     super.key,
     required this.account,
-    this.onTap,
+    this.onLongPress,
     required this.onDelete,
   });
 
   final Account account;
-  final void Function()? onTap;
+  final void Function()? onLongPress;
   final void Function()? onDelete;
 
   @override
@@ -24,7 +24,7 @@ class AccountsListTile extends StatelessWidget {
     return Column(
       children: [
         BaseContainer(
-          onTap: onTap,
+          onLongPress: onLongPress,
           color: stringToColor(account.color),
           padding: EdgeInsets.zero,
           radius: BaseSize.med,

@@ -14,6 +14,8 @@ class BaseSize {
   static const double xLg = 48.0;
   static const double xxLg = 64.0;
 
+  static const double minWidth = 100.0;
+
   static const int intMax = 10;
   static const int stringMax = 50;
 

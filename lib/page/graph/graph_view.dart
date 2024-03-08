@@ -61,50 +61,78 @@ class _GraphViewState extends _GraphViewModel {
               ),
             ),
 
+            const BaseHeightBox(),
+
             // graph list
-            ListView.builder(
-              padding: BasePadding.home,
-              physics: BasePhysics.base,
-              shrinkWrap: true,
-              itemCount: _categoryByAmountsMap.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
+            Expanded(
+              child: Material(
+                child: ListView.builder(
+                  shrinkWrap: true,
                   padding: const EdgeInsets.symmetric(
-                    vertical: BaseSize.sm,
+                    horizontal: BaseSize.med,
                   ),
-                  child: BaseContainer(
-                      color: BaseColor.expense,
-                      gradient: getGradient(getColor(-10)),
-                      padding: const EdgeInsets.all(BaseSize.med),
-                      child: Column(
+                  physics: BasePhysics.base,
+                  itemCount: _categoryByAmountsMap.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: BaseSize.sm,
+                      ),
+                      child: Row(
                         children: [
-                          BaseText(
-                            _categoryByAmountsMap.keys.elementAt(index).name,
-                            alignment: Alignment.centerLeft,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  color: BaseColor.white,
+                          Flexible(
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: MediaQuery.of(context).size.width,
+                                minWidth: BaseSize.minWidth,
+                              ),
+                              child: BaseContainer(
+                                width: _categoryByAmountsMap.values
+                                        .elementAt(index)
+                                        .abs() /
+                                    _totalAmount *
+                                    MediaQuery.of(context).size.width,
+                                color: BaseColor.expense,
+                                gradient: getGradient(getColor(-10)),
+                                padding: const EdgeInsets.all(BaseSize.med),
+                                child: Column(
+                                  children: [
+                                    BaseText(
+                                      _categoryByAmountsMap.keys
+                                          .elementAt(index)
+                                          .name,
+                                      alignment: Alignment.centerLeft,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                            color: BaseColor.white,
+                                          ),
+                                    ),
+                                    BaseText(
+                                      _categoryByAmountsMap.values
+                                          .elementAt(index)
+                                          .abs()
+                                          .toString(),
+                                      alignment: Alignment.centerLeft,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                            color: BaseColor.white,
+                                          ),
+                                    ),
+                                  ],
                                 ),
-                          ),
-                          BaseText(
-                            _categoryByAmountsMap.values
-                                .elementAt(index)
-                                .abs()
-                                .toString(),
-                            alignment: Alignment.centerLeft,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  color: BaseColor.white,
-                                ),
+                              ),
+                            ),
                           ),
                         ],
-                      )),
-                );
-              },
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),

@@ -2,10 +2,12 @@ part of 'graph_view.dart';
 
 abstract class _GraphViewModel extends State<GraphView> {
   final Map<Category, double> _categoryByAmountsMap = {};
+  double _totalAmount = 0;
 
   DateTime showDate = DateTime.now();
 
   void _setAmounts() {
+    _totalAmount = 0;
     for (var category in widget.user.categories) {
       double tempAmount = 0;
       for (var change in widget.user.changes) {
@@ -17,6 +19,7 @@ abstract class _GraphViewModel extends State<GraphView> {
         }
       }
       _categoryByAmountsMap[category] = tempAmount;
+      _totalAmount += tempAmount.abs();
     }
     _categoryByAmountsMap.removeWhere(
       (key, value) => value == 0,
@@ -44,6 +47,5 @@ abstract class _GraphViewModel extends State<GraphView> {
     }
 
     setState(() {});
-    debugPrint(showDate.toString());
   }
 }

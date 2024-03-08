@@ -14,7 +14,6 @@ abstract class _SplashViewModel extends State<SplashView> {
   Future<void> _checkFirstLogin() async {
     await _setShared();
     _getData();
-    await Future.delayed(const Duration(seconds: 2));
     _goToBase();
   }
 

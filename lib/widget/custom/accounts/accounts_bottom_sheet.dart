@@ -2,29 +2,33 @@ import 'package:flutter/material.dart';
 
 import '../../../constant/index.dart';
 import '../../../helper/index.dart';
-import '../../../model/index.dart';
 import '../../base/index.dart';
 import '../index.dart';
 
 class AccountsBottomSheet extends StatefulWidget {
   const AccountsBottomSheet({
     super.key,
-    required this.onSave,
-    required this.accounts,
+    required this.onAccountSave,
   });
 
-  final List<Account> accounts;
-  final void Function(String text, String color) onSave;
+  final void Function(String name, String amount, String color) onAccountSave;
 
   @override
   State<AccountsBottomSheet> createState() => _AccountsBottomSheetState();
 }
 
 class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
-  final _controller = TextEditingController();
+  final _nameController = TextEditingController();
+  final _amountController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   int active = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _amountController.text = BaseSize.none.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +48,20 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             BaseInput(
-              isAccountAdd: true,
-              accounts: widget.accounts,
               autoFocus: true,
+              isAccountAdd: true,
               maxLength: BaseSize.stringMax,
-              controller: _controller,
+              controller: _nameController,
+              action: TextInputAction.next,
               label: BaseString.account,
+            ),
+            const BaseHeightBox(height: BaseSize.semiMed),
+            BaseInput(
+              maxLength: BaseSize.intMax,
+              type: TextInputType.number,
+              action: TextInputAction.done,
+              label: BaseString.amount,
+              controller: _amountController,
             ),
             const BaseHeightBox(height: BaseSize.semiMed),
             CustomAccountHorizontalListView(
@@ -70,11 +82,12 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
 
   void _bottomSheetOnComplete() {
     if (_formKey.currentState!.validate()) {
-      widget.onSave(
-        _controller.text.trim(),
+      widget.onAccountSave(
+        _nameController.text.trim(),
+        _amountController.text.trim(),
         colorToString(BaseColor.colors[active]),
       );
-      clearInputs([_controller]);
+      clearInputs([_nameController, _amountController]);
       Navigator.of(context).pop();
     }
   }

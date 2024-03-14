@@ -6,34 +6,32 @@ import 'package:gelir_gider_takibi/helper/color_helper.dart';
 import 'package:gelir_gider_takibi/helper/int_helper.dart';
 import 'package:gelir_gider_takibi/helper/string_helper.dart';
 import 'package:gelir_gider_takibi/model/change.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
 import 'package:gelir_gider_takibi/widget/base/base_text.dart';
 import 'package:gelir_gider_takibi/widget/custom/home/home_daily_tile.dart';
+import 'package:provider/provider.dart';
 
 class HomeDailyDetailedContainer extends StatelessWidget {
   const HomeDailyDetailedContainer({
     super.key,
-    required this.user,
-    required this.changes,
     required this.onTap,
     required this.onDelete,
+    required this.privateChanges,
   });
 
-  final User user;
-  final List<Change> changes;
+  final List<Change> privateChanges;
   final void Function(Change change) onTap;
   final void Function(Change change) onDelete;
 
   @override
   Widget build(BuildContext context) {
-    if (changes.isEmpty) return const SizedBox.shrink();
-    final DateTime date = DateTime.parse(changes.first.date);
-    final double money = changes.fold(
+    if (privateChanges.isEmpty) return const SizedBox.shrink();
+    final DateTime date = DateTime.parse(privateChanges.first.date);
+    final double money = privateChanges.fold(
       0,
       (previousValue, element) => previousValue + (element.amount),
     );
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -71,17 +69,22 @@ class HomeDailyDetailedContainer extends StatelessWidget {
         ),
         const BaseHeightBox(height: BaseSize.semiMed),
         ListView.builder(
-          itemCount: changes.length,
+          itemCount: privateChanges.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            return HomeDailyTile(
-              account: changes[index].account,
-              color: findAccount(user, changes[index].account).color,
-              category: changes[index].category,
-              money: changes[index].amount,
-              onLongPress: () => onTap(changes[index]),
-              onDelete: () => onDelete(changes[index]),
+            return Consumer<UserModel>(
+              builder: (context, value, child) {
+                return HomeDailyTile(
+                  account: privateChanges[index].account,
+                  color: findAccount(value.user, privateChanges[index].account)
+                      .color,
+                  category: privateChanges[index].category,
+                  money: privateChanges[index].amount,
+                  onLongPress: () => onTap(privateChanges[index]),
+                  onDelete: () => onDelete(privateChanges[index]),
+                );
+              },
             );
           },
         ),

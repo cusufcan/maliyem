@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/accounts/accounts_view.dart';
 import 'package:gelir_gider_takibi/page/home/home_view.dart';
-import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';
 import '../../model/index.dart';
@@ -14,12 +15,7 @@ part 'base_view_model.dart';
 class BaseView extends StatefulWidget {
   const BaseView({
     super.key,
-    required this.sharedManager,
-    required this.user,
   });
-
-  final SharedManager sharedManager;
-  final User user;
 
   @override
   State<BaseView> createState() => _BaseViewState();
@@ -29,21 +25,13 @@ class _BaseViewState extends _BaseViewModel {
   @override
   Widget build(BuildContext context) {
     pages = [
-      HomeView(
-        user: widget.user,
-        sharedManager: widget.sharedManager,
-      ),
-      AccountsView(
-        user: widget.user,
-        accounts: widget.user.accounts,
-        sharedManager: widget.sharedManager,
-      ),
+      const HomeView(),
+      const AccountsView(),
     ];
     fabs = [
       HomeFab(
-        addExpense: () => _showHomeSheet(false),
-        addIncome: () => _showHomeSheet(true),
-      ),
+          addExpense: () => _showHomeSheet(false),
+          addIncome: () => _showHomeSheet(true)),
       AccountsFab(
         addAccount: () => _showAccountsSheet(),
       ),

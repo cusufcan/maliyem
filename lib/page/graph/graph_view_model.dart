@@ -6,11 +6,11 @@ abstract class _GraphViewModel extends State<GraphView> {
 
   DateTime showDate = DateTime.now();
 
-  void _setAmounts() {
+  void _setAmounts(User user) {
     _totalAmount = 0;
-    for (var category in widget.user.categories) {
+    for (var category in user.categories!) {
       double tempAmount = 0;
-      for (var change in widget.user.changes) {
+      for (var change in user.changes!) {
         if (change.category == category.name &&
             !change.isIncome &&
             DateTime.parse(change.date).month == showDate.month &&
@@ -26,6 +26,8 @@ abstract class _GraphViewModel extends State<GraphView> {
     );
 
     _sortMapByAmounts();
+
+    debugPrint(_categoryByAmountsMap.toString());
   }
 
   void _sortMapByAmounts() {

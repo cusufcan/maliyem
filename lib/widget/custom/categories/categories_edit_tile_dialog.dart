@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constant/index.dart';
 import '../../../helper/index.dart';
@@ -9,11 +11,9 @@ class CategoriesEditTileDialog extends StatefulWidget {
   const CategoriesEditTileDialog({
     super.key,
     required this.onSave,
-    required this.user,
     required this.index,
   });
 
-  final User user;
   final int index;
   final void Function(Category newCategory) onSave;
 
@@ -27,40 +27,38 @@ class _CategoriesEditTileDialogState extends State<CategoriesEditTileDialog> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
-    _controller.text = widget.user.categories[widget.index].name;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BaseInput(
-              autoFocus: true,
-              maxLength: BaseSize.stringMax,
-              controller: _controller,
-              label: BaseString.category,
-              isCategoryEdit: true,
-              categories: widget.user.categories,
-              editCategory: widget.user.categories[widget.index],
+    return Consumer<UserModel>(
+      builder: (context, value, child) {
+        _controller.text = value.user.categories![widget.index].name;
+        return SizedBox(
+          width: double.maxFinite,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BaseInput(
+                  autoFocus: true,
+                  maxLength: BaseSize.stringMax,
+                  controller: _controller,
+                  label: BaseString.category,
+                  isCategoryEdit: true,
+                  editCategory: value.user.categories![widget.index],
+                ),
+                const BaseHeightBox(height: BaseSize.semiMed),
+                BaseElevatedButton(
+                  onPressed: _bottomSheetOnComplete,
+                  text: BaseString.edit,
+                ),
+                const BaseHeightBox(),
+              ],
             ),
-            const BaseHeightBox(height: BaseSize.semiMed),
-            BaseElevatedButton(
-              onPressed: _bottomSheetOnComplete,
-              text: BaseString.edit,
-            ),
-            const BaseHeightBox(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

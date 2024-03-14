@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';
 import '../../model/index.dart';
@@ -20,8 +22,6 @@ class BaseInput extends StatelessWidget {
     this.isCategoryAdd = false,
     this.editCategory,
     this.onChanged,
-    this.accounts,
-    this.categories,
     this.editAccount,
   });
 
@@ -34,8 +34,6 @@ class BaseInput extends StatelessWidget {
   final TextInputAction action;
   final int maxLength;
   final bool isAccountAdd;
-  final List<Account>? accounts;
-  final List<Category>? categories;
   final bool isAccountEdit;
   final Account? editAccount;
   final bool isCategoryEdit;
@@ -45,58 +43,62 @@ class BaseInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onChanged: onChanged,
-      keyboardType: type,
-      textInputAction: action,
-      controller: controller,
-      autofocus: autoFocus,
-      maxLength: maxLength,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return BaseString.emptyInput;
-        } else {
-          if (isAccountAdd) {
-            for (var account in accounts!) {
-              if (account.name.toLowerCase() == value.toLowerCase()) {
-                return BaseString.accountExist;
+    return Consumer<UserModel>(
+      builder: (context, value, child) {
+        return TextFormField(
+          onChanged: onChanged,
+          keyboardType: type,
+          textInputAction: action,
+          controller: controller,
+          autofocus: autoFocus,
+          maxLength: maxLength,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return BaseString.emptyInput;
+            } else {
+              if (isAccountAdd) {
+                for (var account in value.user.accounts!) {
+                  if (account.name.toLowerCase() == text.toLowerCase()) {
+                    return BaseString.accountExist;
+                  }
+                }
+              } else if (isAccountEdit) {
+                for (var account in value.user.accounts!) {
+                  if (account.name.toLowerCase() == text.toLowerCase() &&
+                      editAccount!.name.toLowerCase() != text.toLowerCase()) {
+                    return BaseString.accountExist;
+                  }
+                }
               }
-            }
-          } else if (isAccountEdit) {
-            for (var account in accounts!) {
-              if (account.name.toLowerCase() == value.toLowerCase() &&
-                  editAccount!.name.toLowerCase() != value.toLowerCase()) {
-                return BaseString.accountExist;
-              }
-            }
-          }
 
-          if (isCategoryAdd) {
-            for (var category in categories!) {
-              if (category.name.toLowerCase() == value.toLowerCase()) {
-                return BaseString.categoryExist;
+              if (isCategoryAdd) {
+                for (var category in value.user.categories!) {
+                  if (category.name.toLowerCase() == text.toLowerCase()) {
+                    return BaseString.categoryExist;
+                  }
+                }
+              } else if (isCategoryEdit) {
+                for (var category in value.user.categories!) {
+                  if (category.name.toLowerCase() == text.toLowerCase() &&
+                      editCategory!.name.toLowerCase() != text.toLowerCase()) {
+                    return BaseString.categoryExist;
+                  }
+                }
               }
             }
-          } else if (isCategoryEdit) {
-            for (var category in categories!) {
-              if (category.name.toLowerCase() == value.toLowerCase() &&
-                  editCategory!.name.toLowerCase() != value.toLowerCase()) {
-                return BaseString.categoryExist;
-              }
-            }
-          }
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius),
-          borderSide: BorderSide(
-            color: color ?? Theme.of(context).primaryColor,
+            return null;
+          },
+          decoration: InputDecoration(
+            labelText: label,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius),
+              borderSide: BorderSide(
+                color: color ?? Theme.of(context).primaryColor,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -2,33 +2,20 @@ part of 'categories_view.dart';
 
 abstract class _CategoriesViewModel extends State<CategoriesView> {
   final TextEditingController accountController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
-  void _saveData() {
-    widget.sharedManager.setString(
-      SharedEnum.save,
-      jsonEncode(widget.user.toJson()),
-    );
-  }
-
-  void _deleteCategory(int index) {
-    widget.user.categories.removeAt(index);
-    Navigator.of(context).pop();
-    setState(() {});
-  }
 
   void _openAddDialog() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return CustomCategoryBottomSheet(
-          isCategoryAdd: true,
-          user: widget.user,
-          onSave: (value) {
-            _addCategory(
-              Category(name: value),
+        return Consumer<UserModel>(
+          builder: (context, value, child) {
+            return CustomCategoryBottomSheet(
+              isCategoryAdd: true,
+              onSave: (name) {
+                value.addCategory(Category(name: name));
+              },
             );
           },
         );
@@ -36,39 +23,25 @@ abstract class _CategoriesViewModel extends State<CategoriesView> {
     );
   }
 
-  _addCategory(Category category) {
-    widget.user.categories.add(category);
-    setState(() {});
-  }
-
   Future<void> _openDeleteDialog(int index) async {
     await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return BaseAlertDialog(
-          title: BaseString.delete,
-          desc: BaseString.deleteDesc,
-          ok: BaseString.delete,
-          onPressed: () => _deleteCategory(index),
+        return Consumer<UserModel>(
+          builder: (context, value, child) {
+            return BaseAlertDialog(
+              title: BaseString.delete,
+              desc: BaseString.deleteDesc,
+              ok: BaseString.delete,
+              onPressed: () {
+                value.deleteCategory(index);
+                Navigator.of(context).pop();
+              },
+            );
+          },
         );
       },
     );
-  }
-
-  void _updateCategory(Category oldCategory, Category newCategory) {
-    int index = widget.user.categories.indexOf(oldCategory);
-    widget.user.categories.remove(oldCategory);
-    widget.user.categories.insert(index, newCategory);
-    _updateAllChanges(oldCategory, newCategory);
-    setState(() {});
-  }
-
-  void _updateAllChanges(Category oldCategory, Category newCategory) {
-    for (var change in widget.user.changes) {
-      if (change.category == oldCategory.name) {
-        change.category = newCategory.name;
-      }
-    }
   }
 
   Future<void> _openEditDialog(int index) async {
@@ -85,13 +58,16 @@ abstract class _CategoriesViewModel extends State<CategoriesView> {
             alignment: Alignment.centerLeft,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          content: CategoriesEditTileDialog(
-            user: widget.user,
-            index: index,
-            onSave: (newCategory) {
-              _updateCategory(
-                widget.user.categories[index],
-                newCategory,
+          content: Consumer<UserModel>(
+            builder: (context, value, child) {
+              return CategoriesEditTileDialog(
+                index: index,
+                onSave: (newCategory) {
+                  value.updateCategory(
+                    value.user.categories![index],
+                    newCategory,
+                  );
+                },
               );
             },
           ),

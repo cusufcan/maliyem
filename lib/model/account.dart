@@ -1,3 +1,6 @@
+import 'package:gelir_gider_takibi/helper/color_helper.dart';
+
+import '../constant/index.dart';
 import 'index.dart';
 
 class Account extends Name {
@@ -7,12 +10,14 @@ class Account extends Name {
   String color;
 
   Account({
-    required String name,
-    required this.balance,
-    required this.monthlyIncome,
-    required this.monthlyExpense,
-    required this.color,
-  }) : super(name: name);
+    String name = BaseString.cash,
+    this.balance = BaseSize.none,
+    this.monthlyIncome = BaseSize.none,
+    this.monthlyExpense = BaseSize.none,
+    this.color = BaseString.empty,
+  }) : super(name: name) {
+    color = colorToString(BaseColor.colors.first);
+  }
 
   Map<String, dynamic> toJson() {
     return {

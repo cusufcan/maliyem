@@ -16,6 +16,8 @@ class BaseSize {
 
   static const double minWidth = 100.0;
 
+  static const double animationNormal = 150.0;
+
   static const int intMax = 10;
   static const int stringMax = 50;
 
@@ -24,4 +26,6 @@ class BaseSize {
   static const double billion = 1000000000.00;
   static const double trillion = 1000000000000.00;
   static const double quadrillion = 1000000000000000.00;
+
+  static const double fabBottom = 30;
 }

@@ -15,7 +15,7 @@ class CustomCategoryBottomSheet extends StatefulWidget {
     this.index = 0,
   });
 
-  final void Function(String value) onSave;
+  final void Function(String name) onSave;
 
   final User? user;
   final int index;
@@ -55,8 +55,7 @@ class _CustomCategoryBottomSheetState extends State<CustomCategoryBottomSheet> {
               label: BaseString.category,
               isCategoryAdd: widget.isCategoryAdd,
               isCategoryEdit: widget.isCategoryEdit,
-              categories: widget.user?.categories,
-              editCategory: widget.user?.categories[widget.index],
+              editCategory: widget.user?.categories![widget.index],
             ),
             const BaseHeightBox(height: BaseSize.sm),
             BaseElevatedButton(

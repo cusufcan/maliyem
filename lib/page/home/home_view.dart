@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
-import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';
 import '../../model/index.dart';
@@ -14,12 +12,7 @@ part 'home_view_model.dart';
 class HomeView extends StatefulWidget {
   const HomeView({
     super.key,
-    required this.user,
-    required this.sharedManager,
   });
-
-  final SharedManager sharedManager;
-  final User user;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -28,11 +21,8 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends _HomeViewModel {
   @override
   Widget build(BuildContext context) {
-    _setLists();
-    _setUserSettings();
-    _saveData();
     return Scaffold(
-      appBar: HomeAppBar(user: widget.user),
+      appBar: const HomeAppBar(),
       body: SingleChildScrollView(
         padding: BasePadding.home,
         physics: BasePhysics.base,
@@ -40,45 +30,46 @@ class _HomeViewState extends _HomeViewModel {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            HomeSummaryContainer(money: widget.user.balance),
+            const HomeSummaryContainer(),
             const BaseHeightBox(),
-            HomeMonthlyContainer(
-              income: widget.user.monthlyIncome,
-              expense: widget.user.monthlyExpense,
-            ),
+            const HomeMonthlyContainer(),
             const BaseHeightBox(),
-            Visibility(
-              visible: widget.user.balance != BaseSize.none,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  HomeDailyContainer(
-                    money:
-                        widget.user.monthlyIncome + widget.user.monthlyExpense,
+            Consumer<UserModel>(
+              builder: (context, value, child) {
+                return Visibility(
+                  visible: value.user.balance != BaseSize.none,
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      HomeDailyContainer(),
+                      BaseHeightBox(height: BaseSize.sm),
+                    ],
                   ),
-                  const BaseHeightBox(height: BaseSize.sm),
-                ],
-              ),
+                );
+              },
             ),
             const BaseDivider(),
             const BaseHeightBox(height: BaseSize.sm),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: dates.length,
-              itemBuilder: (BuildContext context, int index) {
-                List<Change> tempChanges = [];
-                for (var i = 0; i < widget.user.changes.length; i++) {
-                  if (dates.elementAt(index) ==
-                      DateTime.parse(widget.user.changes[i].date)) {
-                    tempChanges.insert(0, widget.user.changes[i]);
-                  }
-                }
-                return HomeDailyDetailedContainer(
-                  user: widget.user,
-                  changes: tempChanges,
-                  onTap: _openEditDialog,
-                  onDelete: _openDeleteDialog,
+            Consumer<UserModel>(
+              builder: (context, value, child) {
+                return ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: value.dates.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    List<Change> tempChanges = [];
+                    for (var i = 0; i < value.user.changes!.length; i++) {
+                      if (value.dates.elementAt(index) ==
+                          DateTime.parse(value.user.changes![i].date)) {
+                        tempChanges.insert(0, value.user.changes![i]);
+                      }
+                    }
+                    return HomeDailyDetailedContainer(
+                      onTap: _openEditDialog,
+                      onDelete: _openDeleteDialog,
+                      privateChanges: tempChanges,
+                    );
+                  },
                 );
               },
             ),

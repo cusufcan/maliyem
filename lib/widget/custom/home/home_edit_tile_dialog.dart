@@ -7,6 +7,7 @@ import 'package:gelir_gider_takibi/model/account.dart';
 import 'package:gelir_gider_takibi/model/category.dart';
 import 'package:gelir_gider_takibi/model/change.dart';
 import 'package:gelir_gider_takibi/model/user.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:gelir_gider_takibi/widget/base/base_elevated_button.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
 import 'package:gelir_gider_takibi/widget/base/base_input.dart';
@@ -14,16 +15,15 @@ import 'package:gelir_gider_takibi/widget/custom/accounts/accounts_bottom_sheet.
 import 'package:gelir_gider_takibi/widget/custom/custom_category_bottom_sheet.dart';
 import 'package:gelir_gider_takibi/widget/custom/custom_horizontal_list_view.dart';
 import 'package:gelir_gider_takibi/widget/custom/custom_scroll_date_picker.dart';
+import 'package:provider/provider.dart';
 
 class HomeEditTileDialog extends StatefulWidget {
   const HomeEditTileDialog({
     super.key,
     required this.change,
     required this.onSave,
-    required this.user,
   });
 
-  final User user;
   final Change change;
   final void Function(Change newChange) onSave;
 
@@ -44,74 +44,77 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
   void initState() {
     super.initState();
     controller.text = widget.change.amount.toString();
-    accountsActive = widget.user.accounts.indexWhere(
-      (element) => element.name == widget.change.account,
-    );
-    categoriesActive = widget.user.categories.indexWhere(
-      (element) => element.name == widget.change.category,
-    );
+
     date = DateTime.parse(widget.change.date);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BaseInput(
-              autoFocus: true,
-              maxLength: BaseSize.intMax,
-              controller: controller,
-              label: BaseString.amount,
-              type: TextInputType.number,
-              action: TextInputAction.next,
+    return Consumer<UserModel>(
+      builder: (context, value, child) {
+        accountsActive = value.user.accounts!.indexWhere(
+          (element) => element.name == widget.change.account,
+        );
+        categoriesActive = value.user.categories!.indexWhere(
+          (element) => element.name == widget.change.category,
+        );
+        return SizedBox(
+          width: double.maxFinite,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BaseInput(
+                  autoFocus: true,
+                  maxLength: BaseSize.intMax,
+                  controller: controller,
+                  label: BaseString.amount,
+                  type: TextInputType.number,
+                  action: TextInputAction.next,
+                ),
+                const BaseHeightBox(height: BaseSize.semiMed),
+                CustomHorizontalListView(
+                  title: BaseString.account,
+                  isColor: true,
+                  visible: value.user.accounts!.isNotEmpty,
+                  count: value.user.accounts!.length,
+                  active: accountsActive,
+                  onTap: _changeAccountActive,
+                  list: value.user.accounts!,
+                  onBtnTap: _showAccountSheet,
+                ),
+                Visibility(
+                  visible: value.user.categories!.isNotEmpty,
+                  child: const BaseHeightBox(),
+                ),
+                CustomHorizontalListView(
+                  title: BaseString.category,
+                  visible: value.user.categories!.isNotEmpty,
+                  count: value.user.categories!.length,
+                  active: categoriesActive,
+                  onTap: _changeCategoryActive,
+                  list: value.user.categories!,
+                  onBtnTap: _showCategorySheet,
+                ),
+                const BaseHeightBox(height: BaseSize.semiMed),
+                CustomScrollDatePicker(
+                  date: date,
+                  onChanged: _onDateChanged,
+                  color: BaseColor.dialog,
+                ),
+                const BaseHeightBox(height: BaseSize.sm),
+                BaseElevatedButton(
+                  onPressed: () => _bottomSheetOnComplete(value.user),
+                  text: BaseString.update,
+                ),
+              ],
             ),
-            const BaseHeightBox(height: BaseSize.semiMed),
-            CustomHorizontalListView(
-              user: widget.user,
-              title: BaseString.account,
-              isColor: true,
-              visible: widget.user.accounts.isNotEmpty,
-              count: widget.user.accounts.length,
-              active: accountsActive,
-              onTap: _changeAccountActive,
-              list: widget.user.accounts,
-              onBtnTap: _showAccountSheet,
-            ),
-            Visibility(
-              visible: widget.user.categories.isNotEmpty,
-              child: const BaseHeightBox(),
-            ),
-            CustomHorizontalListView(
-              user: widget.user,
-              title: BaseString.category,
-              visible: widget.user.categories.isNotEmpty,
-              count: widget.user.categories.length,
-              active: categoriesActive,
-              onTap: _changeCategoryActive,
-              list: widget.user.categories,
-              onBtnTap: _showCategorySheet,
-            ),
-            const BaseHeightBox(height: BaseSize.semiMed),
-            CustomScrollDatePicker(
-              date: date,
-              onChanged: _onDateChanged,
-              color: BaseColor.dialog,
-            ),
-            const BaseHeightBox(height: BaseSize.sm),
-            BaseElevatedButton(
-              onPressed: _bottomSheetOnComplete,
-              text: BaseString.update,
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -125,11 +128,11 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
     setState(() {});
   }
 
-  void _bottomSheetOnComplete() {
+  void _bottomSheetOnComplete(User user) {
     if (_formKey.currentState!.validate()) {
       widget.onSave(Change(
-        account: widget.user.accounts[accountsActive].name,
-        category: widget.user.categories[categoriesActive].name,
+        account: user.accounts![accountsActive].name,
+        category: user.categories![categoriesActive].name,
         amount: double.parse(controller.text.trim()),
         date: date.toString(),
         isIncome: widget.change.isIncome,
@@ -145,17 +148,20 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return AccountsBottomSheet(
-          accounts: widget.user.accounts,
-          onSave: (value, colorString) {
-            _addAccount(
-              Account(
-                name: value,
-                balance: BaseSize.none,
-                monthlyIncome: BaseSize.none,
-                monthlyExpense: BaseSize.none,
-                color: colorString,
-              ),
+        return Consumer<UserModel>(
+          builder: (context, value, child) {
+            return AccountsBottomSheet(
+              onAccountSave: (name, amount, colorString) {
+                value.addAccount(
+                  Account(
+                    name: name,
+                    balance: BaseSize.none,
+                    monthlyIncome: BaseSize.none,
+                    monthlyExpense: BaseSize.none,
+                    color: colorString,
+                  ),
+                );
+              },
             );
           },
         );
@@ -168,25 +174,17 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return CustomCategoryBottomSheet(
-          onSave: (value) {
-            _addCategory(
-              Category(name: value),
+        return Consumer<UserModel>(
+          builder: (context, value, child) {
+            return CustomCategoryBottomSheet(
+              onSave: (name) {
+                value.addCategory(Category(name: name));
+              },
             );
           },
         );
       },
     );
-  }
-
-  _addCategory(Category category) {
-    widget.user.categories.add(category);
-    setState(() {});
-  }
-
-  _addAccount(Account account) {
-    widget.user.accounts.add(account);
-    setState(() {});
   }
 
   void _onDateChanged(DateTime value) {

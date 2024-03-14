@@ -1,4 +1,5 @@
 class BaseString {
+  static const String empty = '';
   static const String username = 'Misafir';
   static const String home = 'Anasayfa';
   static const String accounts = 'Hesaplar';

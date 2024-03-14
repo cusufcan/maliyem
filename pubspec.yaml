@@ -10,9 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Multiple Floating Action Button
-  flutter_speed_dial: ^7.0.0
-
   # Scroll Date Picker
   scroll_date_picker: ^3.7.3
 
@@ -21,6 +18,9 @@ dependencies:
 
   # Splash
   flutter_native_splash: ^2.3.11
+
+  # Provider
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

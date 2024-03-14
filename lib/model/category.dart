@@ -1,8 +1,9 @@
+import '../constant/index.dart';
 import 'index.dart';
 
 class Category extends Name {
   Category({
-    required String name,
+    String name = BaseString.general,
   }) : super(name: name);
 
   Map<String, dynamic> toJson() {

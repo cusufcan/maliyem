@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';
 import '../../helper/index.dart';
@@ -16,10 +18,8 @@ class CustomHorizontalListView extends StatelessWidget {
     required this.title,
     this.isColor = false,
     this.onBtnTap,
-    required this.user,
   });
 
-  final User user;
   final String title;
   final bool visible;
   final int count;
@@ -64,28 +64,32 @@ class CustomHorizontalListView extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Row(
                   children: [
-                    BaseContainer(
-                      onTap: () => onTap(index),
-                      color: isColor
-                          ? BaseColor.colors[findColorIndex(
-                              user.accounts[index],
-                            )]
-                          : BaseColor.white,
-                      border: Border.all(
-                        strokeAlign: BaseSize.xxSm,
-                        width: BaseSize.xxSm,
-                        color: active == index
-                            ? BaseColor.activeGreen
-                            : BaseColor.transparent,
-                      ),
-                      child: BaseText(
-                        list[index].name,
-                        style: TextStyle(
+                    Consumer<UserModel>(
+                      builder: (context, value, child) {
+                        return BaseContainer(
+                          onTap: () => onTap(index),
                           color: isColor
-                              ? getTextColor(BaseColor.colors[index])
-                              : getTextColor(BaseColor.white),
-                        ),
-                      ),
+                              ? BaseColor.colors[findColorIndex(
+                                  value.user.accounts![index],
+                                )]
+                              : BaseColor.white,
+                          border: Border.all(
+                            strokeAlign: BaseSize.xxSm,
+                            width: BaseSize.xxSm,
+                            color: active == index
+                                ? BaseColor.activeGreen
+                                : BaseColor.transparent,
+                          ),
+                          child: BaseText(
+                            list[index].name,
+                            style: TextStyle(
+                              color: isColor
+                                  ? getTextColor(BaseColor.colors[index])
+                                  : getTextColor(BaseColor.white),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     const BaseWidthBox(),
                   ],
@@ -98,5 +102,3 @@ class CustomHorizontalListView extends StatelessWidget {
     );
   }
 }
-
-// active == index

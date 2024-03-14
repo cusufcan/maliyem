@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_icon.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/model/user.dart';
 import 'package:gelir_gider_takibi/page/graph/graph_view.dart';
 import 'package:gelir_gider_takibi/widget/base/base_text.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
     super.key,
-    required this.user,
   });
-
-  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         pageBuilder: (context, anim, secondAnim) {
-          return GraphView(user: user);
+          return const GraphView();
         },
       ),
     );

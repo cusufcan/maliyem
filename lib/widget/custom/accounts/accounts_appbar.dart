@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/categories/categories_view.dart';
-import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 
 import '../../../constant/index.dart';
-import '../../../model/index.dart';
 import '../../base/index.dart';
 
 class AccountsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AccountsAppBar({
     super.key,
-    required this.sharedManager,
-    required this.user,
   });
-
-  final SharedManager sharedManager;
-  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +35,7 @@ class AccountsAppBar extends StatelessWidget implements PreferredSizeWidget {
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         pageBuilder: (context, anim, secondAnim) {
-          return CategoriesView(
-            user: user,
-            sharedManager: sharedManager,
-          );
+          return const CategoriesView();
         },
       ),
     );

@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_color.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:gelir_gider_takibi/widget/base/base_width_box.dart';
 import 'package:gelir_gider_takibi/widget/custom/home/home_monthly_box.dart';
+import 'package:provider/provider.dart';
 
 class HomeMonthlyContainer extends StatelessWidget {
   const HomeMonthlyContainer({
     super.key,
-    this.income = 0,
-    this.expense = 0,
   });
-
-  final double income;
-  final double expense;
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +17,26 @@ class HomeMonthlyContainer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: HomeMonthlyBox(
-            color: BaseColor.income,
-            title: BaseString.income,
-            money: income,
+          child: Consumer<UserModel>(
+            builder: (context, value, child) {
+              return HomeMonthlyBox(
+                color: BaseColor.income,
+                title: BaseString.income,
+                money: value.user.monthlyIncome,
+              );
+            },
           ),
         ),
         const BaseWidthBox(),
         Expanded(
-          child: HomeMonthlyBox(
-            color: BaseColor.expense,
-            title: BaseString.expense,
-            money: expense,
+          child: Consumer<UserModel>(
+            builder: (context, value, child) {
+              return HomeMonthlyBox(
+                color: BaseColor.expense,
+                title: BaseString.expense,
+                money: value.user.monthlyExpense,
+              );
+            },
           ),
         ),
       ],

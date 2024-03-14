@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constant/index.dart';
 import '../../../helper/index.dart';
@@ -10,13 +12,11 @@ class AccountsEditTileDialog extends StatefulWidget {
   const AccountsEditTileDialog({
     super.key,
     required this.onSave,
-    required this.user,
     required this.index,
   });
 
-  final User user;
   final int index;
-  final void Function(Account newCategory) onSave;
+  final void Function(Account newAcc) onSave;
 
   @override
   State<AccountsEditTileDialog> createState() => _AccountsEditTileDialogState();
@@ -29,46 +29,44 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
   int active = 0;
 
   @override
-  void initState() {
-    super.initState();
-    _controller.text = widget.user.accounts[widget.index].name;
-    active = findColorIndex(widget.user.accounts[widget.index]);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BaseInput(
-              autoFocus: true,
-              maxLength: BaseSize.stringMax,
-              controller: _controller,
-              label: BaseString.account,
-              isAccountEdit: true,
-              accounts: widget.user.accounts,
-              editAccount: widget.user.accounts[widget.index],
+    return Consumer<UserModel>(
+      builder: (context, value, child) {
+        _controller.text = value.user.accounts![widget.index].name;
+        active = findColorIndex(value.user.accounts![widget.index]);
+        return SizedBox(
+          width: double.maxFinite,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BaseInput(
+                  autoFocus: true,
+                  maxLength: BaseSize.stringMax,
+                  controller: _controller,
+                  label: BaseString.account,
+                  isAccountEdit: true,
+                  editAccount: value.user.accounts![widget.index],
+                ),
+                const BaseHeightBox(height: BaseSize.semiMed),
+                CustomAccountHorizontalListView(
+                  active: active,
+                  onTap: _changeAccountActive,
+                ),
+                const BaseHeightBox(height: BaseSize.semiMed),
+                BaseElevatedButton(
+                  onPressed: () => _bottomSheetOnComplete(value.user),
+                  text: BaseString.edit,
+                ),
+                const BaseHeightBox(),
+              ],
             ),
-            const BaseHeightBox(height: BaseSize.semiMed),
-            CustomAccountHorizontalListView(
-              active: active,
-              onTap: _changeAccountActive,
-            ),
-            const BaseHeightBox(height: BaseSize.semiMed),
-            BaseElevatedButton(
-              onPressed: _bottomSheetOnComplete,
-              text: BaseString.edit,
-            ),
-            const BaseHeightBox(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -77,9 +75,9 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
     setState(() {});
   }
 
-  void _bottomSheetOnComplete() {
+  void _bottomSheetOnComplete(User user) {
     if (_formKey.currentState!.validate()) {
-      Account tempAcc = widget.user.accounts[widget.index];
+      Account tempAcc = user.accounts![widget.index];
       widget.onSave(
         Account(
           name: _controller.text.trim(),

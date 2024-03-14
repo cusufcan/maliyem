@@ -1,3 +1,4 @@
+import '../constant/index.dart';
 import 'index.dart';
 
 class User {
@@ -5,19 +6,23 @@ class User {
   double balance;
   double monthlyIncome;
   double monthlyExpense;
-  List<Account> accounts;
-  List<Category> categories;
-  List<Change> changes;
+  List<Account>? accounts;
+  List<Category>? categories;
+  List<Change>? changes;
 
   User({
-    required this.name,
-    required this.balance,
-    required this.monthlyIncome,
-    required this.monthlyExpense,
-    required this.accounts,
-    required this.categories,
-    required this.changes,
-  });
+    this.name = BaseString.username,
+    this.balance = BaseSize.none,
+    this.monthlyIncome = BaseSize.none,
+    this.monthlyExpense = BaseSize.none,
+    this.accounts,
+    this.categories,
+    this.changes,
+  }) {
+    accounts ??= <Account>[Account()];
+    categories ??= <Category>[Category()];
+    changes ??= <Change>[];
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -26,13 +31,13 @@ class User {
       'monthlyIncome': monthlyIncome,
       'monthlyExpense': monthlyExpense,
       'accounts': List<dynamic>.from(
-        accounts.map((e) => e.toJson()),
+        accounts!.map((e) => e.toJson()),
       ),
       'categories': List<dynamic>.from(
-        categories.map((e) => e.toJson()),
+        categories!.map((e) => e.toJson()),
       ),
       'changes': List<dynamic>.from(
-        changes.map((e) => e.toJson()),
+        changes!.map((e) => e.toJson()),
       ),
     };
   }

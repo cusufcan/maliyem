@@ -70,7 +70,7 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
                   maxLength: BaseSize.intMax,
                   controller: widget.amount,
                   label: BaseString.amount,
-                  prefix: const Text(BaseString.tl),
+                  prefix: const Text("${BaseString.tl} "),
                   type: TextInputType.number,
                   action: TextInputAction.next,
                 ),

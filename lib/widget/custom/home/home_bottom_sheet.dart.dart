@@ -141,6 +141,7 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
 
   void _showAccountSheet() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (context) {
@@ -167,6 +168,7 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
 
   void _showCategorySheet() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (context) {

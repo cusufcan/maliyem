@@ -145,6 +145,7 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
 
   void _showAccountSheet() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (context) {
@@ -171,6 +172,7 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
 
   void _showCategorySheet() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (context) {

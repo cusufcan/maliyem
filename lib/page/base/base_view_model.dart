@@ -15,6 +15,7 @@ abstract class _BaseViewModel extends State<BaseView> {
 
   void _showHomeSheet(bool isIncome) {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (context) {
@@ -41,6 +42,7 @@ abstract class _BaseViewModel extends State<BaseView> {
 
   void _showAccountsSheet() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (context) {

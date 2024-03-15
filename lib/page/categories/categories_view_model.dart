@@ -6,6 +6,7 @@ abstract class _CategoriesViewModel extends State<CategoriesView> {
 
   void _openAddDialog() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (context) {

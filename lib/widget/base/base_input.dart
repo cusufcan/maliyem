@@ -23,6 +23,7 @@ class BaseInput extends StatelessWidget {
     this.editCategory,
     this.onChanged,
     this.editAccount,
+    this.prefix,
   });
 
   final TextEditingController controller;
@@ -40,6 +41,7 @@ class BaseInput extends StatelessWidget {
   final Category? editCategory;
   final bool isCategoryAdd;
   final void Function(String value)? onChanged;
+  final Widget? prefix;
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +91,7 @@ class BaseInput extends StatelessWidget {
             return null;
           },
           decoration: InputDecoration(
+            prefix: prefix,
             labelText: label,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(radius),

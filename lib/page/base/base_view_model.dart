@@ -1,16 +1,24 @@
 part of 'base_view.dart';
 
 abstract class _BaseViewModel extends State<BaseView> {
-  List pages = [];
+  List<Widget> pages = [];
   List fabs = [];
 
   final TextEditingController _controller = TextEditingController();
 
+  final PageController _pageController = PageController();
+
   int active = 0;
 
-  void _changePage(int i) {
-    active = i;
-    setState(() {});
+  void _onItemTapped(int index) {
+    setState(() {
+      active = index;
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+    });
   }
 
   void _showHomeSheet(bool isIncome) {
@@ -25,13 +33,16 @@ abstract class _BaseViewModel extends State<BaseView> {
               amount: _controller,
               isIncome: isIncome,
               onSave: (date, categoryIdx, accountIdx) {
-                value.addChange(Change(
-                  account: value.user.accounts![accountIdx].name,
-                  category: value.user.categories![categoryIdx].name,
-                  amount: double.parse(_controller.text),
-                  date: date.toString(),
-                  isIncome: isIncome,
-                ));
+                value.addChange(
+                  Change(
+                    account: value.user.accounts![accountIdx].name,
+                    category: value.user.categories![categoryIdx].name,
+                    amount: double.parse(_controller.text),
+                    date: date.toString(),
+                    isIncome: isIncome,
+                  ),
+                  context,
+                );
               },
             );
           },

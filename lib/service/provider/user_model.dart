@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
 import 'package:gelir_gider_takibi/model/index.dart';
+import 'package:gelir_gider_takibi/service/provider/fab_model.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
+import 'package:provider/provider.dart';
 
 class UserModel extends ChangeNotifier {
   late final SharedManager _sharedManager;
@@ -46,7 +48,7 @@ class UserModel extends ChangeNotifier {
     dates = temp.toSet();
   }
 
-  void addChange(Change change) {
+  void addChange(Change change, BuildContext context) {
     user.changes?.add(change);
     setDates();
 
@@ -55,6 +57,10 @@ class UserModel extends ChangeNotifier {
     _sortCategories();
 
     notifyListeners();
+
+    if (Provider.of<FabModel>(context, listen: false).isFabOpen) {
+      Provider.of<FabModel>(context, listen: false).closeFab();
+    }
 
     saveData();
   }

@@ -5,6 +5,8 @@ import 'package:gelir_gider_takibi/constant/base_color.dart';
 import 'package:gelir_gider_takibi/constant/base_icon.dart';
 import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
+import 'package:gelir_gider_takibi/service/provider/fab_model.dart';
+import 'package:provider/provider.dart';
 
 class HomeFab extends StatefulWidget {
   const HomeFab({
@@ -62,63 +64,94 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
       });
   }
 
+  Widget _buildFab() {
+    return Stack(
+      children: [
+        if (Provider.of<FabModel>(context, listen: false).isFabOpen)
+          GestureDetector(
+            onTap: () {
+              Provider.of<FabModel>(context, listen: false).closeFab();
+            },
+            child: Container(
+              color: Colors.black.withOpacity(0.3),
+              height: double.infinity,
+              width: double.infinity,
+            ),
+          ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              bottom: BaseSize.fabBottom,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Transform.rotate(
+                  angle: _childRotateAnimationValues.value,
+                  child: Transform.scale(
+                    scale: _scaleAnimationValues.value,
+                    child: FloatingActionButton(
+                      onPressed: widget.addIncome,
+                      shape: const CircleBorder(),
+                      tooltip: BaseString.income,
+                      backgroundColor: BaseColor.income,
+                      child: BaseIcon.incomeWhite,
+                    ),
+                  ),
+                ),
+                Transform.rotate(
+                  angle: _childRotateAnimationValues.value,
+                  child: Transform.scale(
+                    scale: _scaleAnimationValues.value,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: BaseSize.med,
+                      ),
+                      child: FloatingActionButton(
+                        onPressed: widget.addExpense,
+                        shape: const CircleBorder(),
+                        tooltip: BaseString.expense,
+                        backgroundColor: BaseColor.expense,
+                        child: BaseIcon.expenseWhite,
+                      ),
+                    ),
+                  ),
+                ),
+                Transform.rotate(
+                  angle: _baseRotateAnimationValues.value,
+                  child: Consumer<FabModel>(
+                    builder: (context, value, child) {
+                      return FloatingActionButton(
+                        onPressed: value.changeFabOpen,
+                        shape: const CircleBorder(),
+                        tooltip: BaseString.add,
+                        child: BaseIcon.add,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: BaseSize.fabBottom,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Transform.rotate(
-            angle: _childRotateAnimationValues.value,
-            child: Transform.scale(
-              scale: _scaleAnimationValues.value,
-              child: FloatingActionButton(
-                onPressed: widget.addIncome,
-                shape: const CircleBorder(),
-                tooltip: BaseString.income,
-                backgroundColor: BaseColor.income,
-                child: BaseIcon.incomeWhite,
-              ),
-            ),
-          ),
-          Transform.rotate(
-            angle: _childRotateAnimationValues.value,
-            child: Transform.scale(
-              scale: _scaleAnimationValues.value,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: BaseSize.med,
-                ),
-                child: FloatingActionButton(
-                  onPressed: widget.addExpense,
-                  shape: const CircleBorder(),
-                  tooltip: BaseString.expense,
-                  backgroundColor: BaseColor.expense,
-                  child: BaseIcon.expenseWhite,
-                ),
-              ),
-            ),
-          ),
-          Transform.rotate(
-            angle: _baseRotateAnimationValues.value,
-            child: FloatingActionButton(
-              onPressed: () {
-                if (_animationController.isDismissed) {
-                  _animationController.forward();
-                } else {
-                  _animationController.reverse();
-                }
-              },
-              shape: const CircleBorder(),
-              tooltip: BaseString.add,
-              child: BaseIcon.add,
-            ),
-          ),
-        ],
-      ),
+    return Consumer<FabModel>(
+      builder: (context, value, child) {
+        if (value.isFabOpen) {
+          _animationController.forward();
+        } else {
+          _animationController.reverse();
+        }
+        return _buildFab();
+      },
     );
   }
 }

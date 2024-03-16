@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/splash/splash_view.dart';
+import 'package:gelir_gider_takibi/service/provider/fab_model.dart';
 import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,9 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => UserModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => FabModel(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -41,8 +41,16 @@ class _BaseViewState extends _BaseViewModel {
       resizeToAvoidBottomInset: false,
       floatingActionButton: fabs[active],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BaseBottomBar(onTap: _changePage, active: active),
-      body: pages[active],
+      bottomNavigationBar: BaseBottomBar(onTap: _onItemTapped, active: active),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            active = index;
+          });
+        },
+        children: pages,
+      ),
     );
   }
 }

@@ -44,7 +44,6 @@ class _CustomCategoryBottomSheetState extends State<CustomCategoryBottomSheet> {
       child: Form(
         key: _formKey,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [

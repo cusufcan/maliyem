@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelir_gider_takibi/service/provider/accounts_dialog_model.dart';
 import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:provider/provider.dart';
 
@@ -26,14 +27,23 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  int active = 0;
-
   @override
   Widget build(BuildContext context) {
     return Consumer<UserModel>(
       builder: (context, value, child) {
         _controller.text = value.user.accounts![widget.index].name;
-        active = findColorIndex(value.user.accounts![widget.index]);
+
+        Future.delayed(Duration.zero).whenComplete(
+          () => Provider.of<AccountsDialogModel>(
+            context,
+            listen: false,
+          ).changeAccountActive(
+            findColorIndex(
+              value.user.accounts![widget.index],
+            ),
+          ),
+        );
+
         return SizedBox(
           width: double.maxFinite,
           child: Form(
@@ -52,14 +62,28 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
                   editAccount: value.user.accounts![widget.index],
                 ),
                 const BaseHeightBox(height: BaseSize.semiMed),
-                CustomAccountHorizontalListView(
-                  active: active,
-                  onTap: _changeAccountActive,
+                Consumer<AccountsDialogModel>(
+                  builder: (context, accountsDialogModel, child) {
+                    return CustomAccountHorizontalListView(
+                      active: accountsDialogModel.active,
+                      onTap: (i) => accountsDialogModel.changeAccountActive(i),
+                    );
+                  },
                 ),
                 const BaseHeightBox(height: BaseSize.semiMed),
-                BaseElevatedButton(
-                  onPressed: () => _bottomSheetOnComplete(value.user),
-                  text: BaseString.edit,
+                Consumer<AccountsDialogModel>(
+                  builder: (context, accountsDialogModel, child) {
+                    return BaseElevatedButton(
+                      onPressed: () {
+                        _bottomSheetOnComplete(
+                          value.user,
+                          accountsDialogModel.active,
+                        );
+                        accountsDialogModel.clearValues();
+                      },
+                      text: BaseString.edit,
+                    );
+                  },
                 ),
                 const BaseHeightBox(),
               ],
@@ -70,12 +94,7 @@ class _AccountsEditTileDialogState extends State<AccountsEditTileDialog> {
     );
   }
 
-  void _changeAccountActive(int index) {
-    active = index;
-    setState(() {});
-  }
-
-  void _bottomSheetOnComplete(User user) {
+  void _bottomSheetOnComplete(User user, int active) {
     if (_formKey.currentState!.validate()) {
       Account tempAcc = user.accounts![widget.index];
       widget.onSave(

@@ -26,8 +26,6 @@ abstract class _GraphViewModel extends State<GraphView> {
     );
 
     _sortMapByAmounts();
-
-    debugPrint(_categoryByAmountsMap.toString());
   }
 
   void _sortMapByAmounts() {

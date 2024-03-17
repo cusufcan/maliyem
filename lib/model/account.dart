@@ -16,7 +16,9 @@ class Account extends Name {
     this.monthlyExpense = BaseSize.none,
     this.color = BaseString.empty,
   }) : super(name: name) {
-    color = colorToString(BaseColor.colors.first);
+    if (color.isEmpty) {
+      color = colorToString(BaseColor.colors.first);
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -40,5 +42,6 @@ class Account extends Name {
   }
 
   @override
-  String toString() => "Account(name: $name)";
+  String toString() =>
+      "Account(name: $name), balance: $balance, monthlyIncome: $monthlyIncome, monthlyExpense: $monthlyExpense, color: $color)";
 }

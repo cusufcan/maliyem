@@ -17,6 +17,7 @@ class BaseSize {
   static const double minWidth = 100.0;
 
   static const double animationNormal = 150.0;
+  static const double animationSlow = 300.0;
 
   static const int intMax = 10;
   static const int stringMax = 50;

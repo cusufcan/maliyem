@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/splash/splash_view.dart';
+import 'package:gelir_gider_takibi/service/provider/accounts_dialog_model.dart';
+import 'package:gelir_gider_takibi/service/provider/accounts_sheet_model.dart';
+import 'package:gelir_gider_takibi/service/provider/base_model.dart';
 import 'package:gelir_gider_takibi/service/provider/fab_model.dart';
+import 'package:gelir_gider_takibi/service/provider/home_dialog_model.dart';
+import 'package:gelir_gider_takibi/service/provider/home_sheet_model.dart';
 import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +25,22 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => FabModel(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => BaseModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeDialogModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeSheetModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AccountsSheetModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AccountsDialogModel(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

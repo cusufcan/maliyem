@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gelir_gider_takibi/service/provider/accounts_sheet_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constant/index.dart';
 import '../../../helper/index.dart';
@@ -22,8 +24,6 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
   final _amountController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  int active = 0;
-
   @override
   void initState() {
     super.initState();
@@ -43,7 +43,6 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
       child: Form(
         key: _formKey,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -64,14 +63,25 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
               controller: _amountController,
             ),
             const BaseHeightBox(height: BaseSize.semiMed),
-            CustomAccountHorizontalListView(
-              active: active,
-              onTap: _changeAccountActive,
+            Consumer<AccountsSheetModel>(
+              builder: (context, accountsSheetModel, child) {
+                return CustomAccountHorizontalListView(
+                  active: accountsSheetModel.active,
+                  onTap: (i) => accountsSheetModel.changeAccountActive(i),
+                );
+              },
             ),
             const BaseHeightBox(height: BaseSize.semiMed),
-            BaseElevatedButton(
-              onPressed: _bottomSheetOnComplete,
-              text: BaseString.add,
+            Consumer<AccountsSheetModel>(
+              builder: (context, accountsSheetModel, child) {
+                return BaseElevatedButton(
+                  onPressed: () {
+                    _bottomSheetOnComplete(accountsSheetModel.active);
+                    accountsSheetModel.clearValues();
+                  },
+                  text: BaseString.add,
+                );
+              },
             ),
             const BaseHeightBox(),
           ],
@@ -80,7 +90,7 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
     );
   }
 
-  void _bottomSheetOnComplete() {
+  void _bottomSheetOnComplete(int active) {
     if (_formKey.currentState!.validate()) {
       widget.onAccountSave(
         _nameController.text.trim(),
@@ -90,10 +100,5 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
       clearInputs([_nameController, _amountController]);
       Navigator.of(context).pop();
     }
-  }
-
-  void _changeAccountActive(int index) {
-    active = index;
-    setState(() {});
   }
 }

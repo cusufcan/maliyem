@@ -12,8 +12,8 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends _SettingsViewModel {
   @override
   Widget build(BuildContext context) {
-    return Placeholder(
-      child: Text(x.toString()),
+    return const Placeholder(
+      child: Text('sa'),
     );
   }
 }

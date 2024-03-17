@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/accounts/accounts_view.dart';
 import 'package:gelir_gider_takibi/page/home/home_view.dart';
+import 'package:gelir_gider_takibi/service/provider/accounts_sheet_model.dart';
+import 'package:gelir_gider_takibi/service/provider/base_model.dart';
+import 'package:gelir_gider_takibi/service/provider/fab_model.dart';
+import 'package:gelir_gider_takibi/service/provider/home_sheet_model.dart';
 import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:provider/provider.dart';
 
@@ -37,20 +41,24 @@ class _BaseViewState extends _BaseViewModel {
       ),
     ];
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: fabs[active],
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BaseBottomBar(onTap: _onItemTapped, active: active),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            active = index;
-          });
-        },
-        children: pages,
-      ),
+    return Consumer<BaseModel>(
+      builder: (context, value, child) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          floatingActionButton: fabs[value.activePage],
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BaseBottomBar(
+            onTap: value.onItemTapped,
+            active: value.activePage,
+          ),
+          body: PageView(
+            controller: value.pageController,
+            onPageChanged: value.changePage,
+            children: pages,
+          ),
+        );
+      },
     );
   }
 }

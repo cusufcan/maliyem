@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:gelir_gider_takibi/widget/custom/graph/graph_chart_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';
-import '../../helper/index.dart';
 import '../../model/index.dart';
 import '../../widget/base/index.dart';
 import '../../widget/custom/graph/index.dart';
@@ -74,60 +74,24 @@ class _GraphViewState extends _GraphViewModel {
                     physics: BasePhysics.base,
                     itemCount: _categoryByAmountsMap.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: BaseSize.sm,
-                        ),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width,
-                                  minWidth: BaseSize.minWidth,
-                                ),
-                                child: BaseContainer(
-                                  width: _categoryByAmountsMap.values
-                                          .elementAt(index)
-                                          .abs() /
-                                      _totalAmount *
-                                      MediaQuery.of(context).size.width,
-                                  color: BaseColor.expense,
-                                  gradient: getGradient(getColor(-10)),
-                                  padding: const EdgeInsets.all(BaseSize.med),
-                                  child: Column(
-                                    children: [
-                                      BaseText(
-                                        _categoryByAmountsMap.keys
-                                            .elementAt(index)
-                                            .name,
-                                        alignment: Alignment.centerLeft,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                              color: BaseColor.white,
-                                            ),
-                                      ),
-                                      BaseText(
-                                        _categoryByAmountsMap.values
-                                            .elementAt(index)
-                                            .abs()
-                                            .toString(),
-                                        alignment: Alignment.centerLeft,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge
-                                            ?.copyWith(
-                                              color: BaseColor.white,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                      return Align(
+                        alignment: Alignment.centerLeft,
+                        child: GraphChartBar(
+                          fill: _categoryByAmountsMap.values
+                                      .elementAt(index)
+                                      .abs() ==
+                                  0
+                              ? 0
+                              : _categoryByAmountsMap.values
+                                      .elementAt(index)
+                                      .abs() /
+                                  _totalAmount,
+                          name:
+                              _categoryByAmountsMap.keys.elementAt(index).name,
+                          amount: _categoryByAmountsMap.values
+                              .elementAt(index)
+                              .abs()
+                              .toString(),
                         ),
                       );
                     },

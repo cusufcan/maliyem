@@ -6,21 +6,6 @@ abstract class _BaseViewModel extends State<BaseView> {
 
   final TextEditingController _controller = TextEditingController();
 
-  final PageController _pageController = PageController();
-
-  int active = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      active = index;
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-    });
-  }
-
   void _showHomeSheet(bool isIncome) {
     showModalBottomSheet(
       useSafeArea: true,
@@ -48,7 +33,10 @@ abstract class _BaseViewModel extends State<BaseView> {
           },
         );
       },
-    );
+    ).whenComplete(() {
+      Provider.of<FabModel>(context, listen: false).closeFab();
+      Provider.of<HomeSheetModel>(context, listen: false).clearValues();
+    });
   }
 
   void _showAccountsSheet() {
@@ -75,6 +63,8 @@ abstract class _BaseViewModel extends State<BaseView> {
           },
         );
       },
-    );
+    ).whenComplete(() {
+      Provider.of<AccountsSheetModel>(context, listen: false).clearValues();
+    });
   }
 }

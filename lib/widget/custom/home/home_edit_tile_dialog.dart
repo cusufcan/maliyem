@@ -7,6 +7,7 @@ import 'package:gelir_gider_takibi/model/account.dart';
 import 'package:gelir_gider_takibi/model/category.dart';
 import 'package:gelir_gider_takibi/model/change.dart';
 import 'package:gelir_gider_takibi/model/user.dart';
+import 'package:gelir_gider_takibi/service/provider/home_dialog_model.dart';
 import 'package:gelir_gider_takibi/service/provider/user_model.dart';
 import 'package:gelir_gider_takibi/widget/base/base_elevated_button.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
@@ -35,29 +36,47 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
   final TextEditingController controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  int accountsActive = 0;
-  int categoriesActive = 0;
-
-  DateTime date = DateTime.now();
-
   @override
   void initState() {
     super.initState();
     controller.text = widget.change.amount.toString();
-
-    date = DateTime.parse(widget.change.date);
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserModel>(
       builder: (context, value, child) {
-        accountsActive = value.user.accounts!.indexWhere(
-          (element) => element.name == widget.change.account,
+        Future.delayed(Duration.zero).whenComplete(
+          () => Provider.of<HomeDialogModel>(
+            context,
+            listen: false,
+          ).changeDate(
+            DateTime.parse(widget.change.date),
+          ),
         );
-        categoriesActive = value.user.categories!.indexWhere(
-          (element) => element.name == widget.change.category,
+
+        Future.delayed(Duration.zero).whenComplete(
+          () => Provider.of<HomeDialogModel>(
+            context,
+            listen: false,
+          ).changeAccountActive(
+            value.user.accounts!.indexWhere(
+              (element) => element.name == widget.change.account,
+            ),
+          ),
         );
+
+        Future.delayed(Duration.zero).whenComplete(
+          () => Provider.of<HomeDialogModel>(
+            context,
+            listen: false,
+          ).changeCategoryActive(
+            value.user.categories!.indexWhere(
+              (element) => element.name == widget.change.category,
+            ),
+          ),
+        );
+
         return SizedBox(
           width: double.maxFinite,
           child: Form(
@@ -76,39 +95,63 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
                   action: TextInputAction.next,
                 ),
                 const BaseHeightBox(height: BaseSize.semiMed),
-                CustomHorizontalListView(
-                  title: BaseString.account,
-                  isColor: true,
-                  visible: value.user.accounts!.isNotEmpty,
-                  count: value.user.accounts!.length,
-                  active: accountsActive,
-                  onTap: _changeAccountActive,
-                  list: value.user.accounts!,
-                  onBtnTap: _showAccountSheet,
+                Consumer<HomeDialogModel>(
+                  builder: (context, homeDialogModel, child) {
+                    return CustomHorizontalListView(
+                      title: BaseString.account,
+                      isColor: true,
+                      visible: value.user.accounts!.isNotEmpty,
+                      count: value.user.accounts!.length,
+                      active: homeDialogModel.accountsActive,
+                      onTap: (i) => homeDialogModel.changeAccountActive(i),
+                      list: value.user.accounts!,
+                      onBtnTap: _showAccountSheet,
+                    );
+                  },
                 ),
                 Visibility(
                   visible: value.user.categories!.isNotEmpty,
                   child: const BaseHeightBox(),
                 ),
-                CustomHorizontalListView(
-                  title: BaseString.category,
-                  visible: value.user.categories!.isNotEmpty,
-                  count: value.user.categories!.length,
-                  active: categoriesActive,
-                  onTap: _changeCategoryActive,
-                  list: value.user.categories!,
-                  onBtnTap: _showCategorySheet,
+                Consumer<HomeDialogModel>(
+                  builder: (context, homeDialogModel, child) {
+                    return CustomHorizontalListView(
+                      title: BaseString.category,
+                      visible: value.user.categories!.isNotEmpty,
+                      count: value.user.categories!.length,
+                      active: homeDialogModel.categoriesActive,
+                      onTap: (i) => homeDialogModel.changeCategoryActive(i),
+                      list: value.user.categories!,
+                      onBtnTap: _showCategorySheet,
+                    );
+                  },
                 ),
                 const BaseHeightBox(height: BaseSize.semiMed),
-                CustomScrollDatePicker(
-                  date: date,
-                  onChanged: _onDateChanged,
-                  color: BaseColor.dialog,
+                Consumer<HomeDialogModel>(
+                  builder: (context, homeDialogModel, child) {
+                    return CustomScrollDatePicker(
+                      date: homeDialogModel.date,
+                      onChanged: (date) => homeDialogModel.changeDate(date),
+                      color: BaseColor.dialog,
+                    );
+                  },
                 ),
                 const BaseHeightBox(height: BaseSize.sm),
-                BaseElevatedButton(
-                  onPressed: () => _bottomSheetOnComplete(value.user),
-                  text: BaseString.update,
+                Consumer<HomeDialogModel>(
+                  builder: (context, homeDialogModel, child) {
+                    return BaseElevatedButton(
+                      onPressed: () {
+                        _bottomSheetOnComplete(
+                          value.user,
+                          homeDialogModel.accountsActive,
+                          homeDialogModel.categoriesActive,
+                          homeDialogModel.date,
+                        );
+                        homeDialogModel.clearValues();
+                      },
+                      text: BaseString.update,
+                    );
+                  },
                 ),
               ],
             ),
@@ -118,25 +161,22 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
     );
   }
 
-  void _changeAccountActive(int index) {
-    accountsActive = index;
-    setState(() {});
-  }
-
-  void _changeCategoryActive(int index) {
-    categoriesActive = index;
-    setState(() {});
-  }
-
-  void _bottomSheetOnComplete(User user) {
+  void _bottomSheetOnComplete(
+    User user,
+    int accountsActive,
+    int categoriesActive,
+    DateTime date,
+  ) {
     if (_formKey.currentState!.validate()) {
-      widget.onSave(Change(
-        account: user.accounts![accountsActive].name,
-        category: user.categories![categoriesActive].name,
-        amount: double.parse(controller.text.trim()),
-        date: date.toString(),
-        isIncome: widget.change.isIncome,
-      ));
+      widget.onSave(
+        Change(
+          account: user.accounts![accountsActive].name,
+          category: user.categories![categoriesActive].name,
+          amount: double.parse(controller.text.trim()),
+          date: date.toString(),
+          isIncome: widget.change.isIncome,
+        ),
+      );
       clearInputs([controller]);
       date = DateTime.now();
       Navigator.of(context).pop();
@@ -187,10 +227,5 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
         );
       },
     );
-  }
-
-  void _onDateChanged(DateTime value) {
-    date = value;
-    setState(() {});
   }
 }

@@ -1,15 +1,13 @@
 part of 'graph_view.dart';
 
 abstract class _GraphViewModel extends State<GraphView> {
-  final Map<Category, double> _categoryByAmountsMap = {};
-  double _totalAmount = 0;
+  final Map<String, double> _categoryByAmountsMap = {};
 
   DateTime showDate = DateTime.now();
 
   void _setAmounts(User user) {
-    _totalAmount = 0;
     for (var category in user.categories!) {
-      double tempAmount = 0;
+      double tempAmount = 0.0;
       for (var change in user.changes!) {
         if (change.category == category.name &&
             !change.isIncome &&
@@ -18,8 +16,7 @@ abstract class _GraphViewModel extends State<GraphView> {
           tempAmount += change.amount;
         }
       }
-      _categoryByAmountsMap[category] = tempAmount;
-      _totalAmount += tempAmount.abs();
+      _categoryByAmountsMap[category.name] = -tempAmount;
     }
     _categoryByAmountsMap.removeWhere(
       (key, value) => value == 0,
@@ -29,9 +26,9 @@ abstract class _GraphViewModel extends State<GraphView> {
   }
 
   void _sortMapByAmounts() {
-    List<MapEntry<Category, double>> sortedEntries =
+    List<MapEntry<String, double>> sortedEntries =
         _categoryByAmountsMap.entries.toList();
-    sortedEntries.sort((a, b) => a.value.compareTo(b.value));
+    sortedEntries.sort((a, b) => b.value.compareTo(a.value));
 
     _categoryByAmountsMap.clear();
     for (var entry in sortedEntries) {

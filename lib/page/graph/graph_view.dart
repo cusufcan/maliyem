@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/service/provider/user_model.dart';
-import 'package:gelir_gider_takibi/widget/custom/graph/graph_chart_bar.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';
@@ -60,44 +60,24 @@ class _GraphViewState extends _GraphViewModel {
                   ),
                 ),
               ),
-
               const BaseHeightBox(),
-
-              // graph list
-              Expanded(
-                child: Material(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: BaseSize.med,
+              // PIE CHART
+              if (_categoryByAmountsMap.isNotEmpty)
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: PieChart(
+                      chartValuesOptions: const ChartValuesOptions(
+                        showChartValuesInPercentage: true,
+                      ),
+                      legendOptions: const LegendOptions(
+                        showLegendsInRow: true,
+                        legendPosition: LegendPosition.bottom,
+                        showLegends: true,
+                      ),
+                      dataMap: _categoryByAmountsMap,
                     ),
-                    physics: BasePhysics.base,
-                    itemCount: _categoryByAmountsMap.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Align(
-                        alignment: Alignment.centerLeft,
-                        child: GraphChartBar(
-                          fill: _categoryByAmountsMap.values
-                                      .elementAt(index)
-                                      .abs() ==
-                                  0
-                              ? 0
-                              : _categoryByAmountsMap.values
-                                      .elementAt(index)
-                                      .abs() /
-                                  _totalAmount,
-                          name:
-                              _categoryByAmountsMap.keys.elementAt(index).name,
-                          amount: _categoryByAmountsMap.values
-                              .elementAt(index)
-                              .abs()
-                              .toString(),
-                        ),
-                      );
-                    },
                   ),
                 ),
-              ),
             ],
           );
         },

@@ -49,16 +49,24 @@ class HomeDailyTile extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                BaseChip(
-                  text: account,
-                  color: stringToColor(color),
+                Expanded(
+                  child: BaseChip(
+                    text: account,
+                    color: stringToColor(color),
+                  ),
                 ),
                 const BaseWidthBox(width: BaseSize.semiMed),
-                BaseChip(text: category),
+                Expanded(
+                  child: BaseChip(
+                    text: category,
+                  ),
+                ),
                 const Spacer(),
-                CustomActionChip(
-                  text: BaseString.delete,
-                  onTap: onDelete,
+                Expanded(
+                  child: CustomActionChip(
+                    text: BaseString.delete,
+                    onTap: onDelete,
+                  ),
                 ),
               ],
             ),

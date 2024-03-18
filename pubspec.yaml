@@ -22,6 +22,9 @@ dependencies:
   # Provider
   provider: ^6.1.2
 
+  # Pie Chart
+  pie_chart: ^5.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

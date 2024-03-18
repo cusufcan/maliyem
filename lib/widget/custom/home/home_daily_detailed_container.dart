@@ -6,7 +6,7 @@ import 'package:gelir_gider_takibi/helper/color_helper.dart';
 import 'package:gelir_gider_takibi/helper/int_helper.dart';
 import 'package:gelir_gider_takibi/helper/string_helper.dart';
 import 'package:gelir_gider_takibi/model/change.dart';
-import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:gelir_gider_takibi/service/provider/index.dart';
 import 'package:gelir_gider_takibi/widget/base/base_height_box.dart';
 import 'package:gelir_gider_takibi/widget/base/base_text.dart';
 import 'package:gelir_gider_takibi/widget/custom/home/home_daily_tile.dart';

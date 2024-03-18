@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/base/base_view.dart';
-import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:gelir_gider_takibi/service/provider/index.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';

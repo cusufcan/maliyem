@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/base_color.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/service/provider/user_model.dart';
+import 'package:gelir_gider_takibi/service/provider/index.dart';
 import 'package:gelir_gider_takibi/widget/base/base_width_box.dart';
 import 'package:gelir_gider_takibi/widget/custom/home/home_monthly_box.dart';
 import 'package:provider/provider.dart';

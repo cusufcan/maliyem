@@ -1,7 +1,7 @@
 name: gelir_gider_takibi
 description: "Maliyem Gelir Gider Takibi."
 publish_to: "none"
-version: 0.2.5+8
+version: 0.3.0+9
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
@@ -35,3 +35,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/image/
+    - assets/onboarding/

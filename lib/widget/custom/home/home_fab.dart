@@ -5,7 +5,7 @@ import 'package:gelir_gider_takibi/constant/base_color.dart';
 import 'package:gelir_gider_takibi/constant/base_icon.dart';
 import 'package:gelir_gider_takibi/constant/base_size.dart';
 import 'package:gelir_gider_takibi/constant/base_string.dart';
-import 'package:gelir_gider_takibi/service/provider/fab_model.dart';
+import 'package:gelir_gider_takibi/service/provider/index.dart';
 import 'package:provider/provider.dart';
 
 class HomeFab extends StatefulWidget {

@@ -31,73 +31,82 @@ class CustomHorizontalListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: visible,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BaseText(
-                title,
-                alignment: Alignment.centerLeft,
-              ),
-              BaseText(
-                BaseString.add,
-                alignment: Alignment.centerLeft,
-                onTap: onBtnTap,
-                style: const TextStyle(
-                  color: BaseColor.activeGreen,
+    return Material(
+      color: BaseColor.transparent,
+      child: Visibility(
+        visible: visible,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BaseText(
+                  title,
+                  alignment: Alignment.centerLeft,
                 ),
-              ),
-            ],
-          ),
-          const BaseHeightBox(height: BaseSize.semiMed),
-          SizedBox(
-            height: BaseSize.xLg,
-            child: ListView.builder(
-              itemCount: count,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return Row(
-                  children: [
-                    Consumer<UserModel>(
-                      builder: (context, value, child) {
-                        return BaseContainer(
-                          onTap: () => onTap(index),
-                          color: isColor
-                              ? BaseColor.colors[findColorIndex(
-                                  value.user.accounts![index],
-                                )]
-                              : BaseColor.white,
-                          border: Border.all(
-                            strokeAlign: BaseSize.xxSm,
-                            width: BaseSize.xxSm,
-                            color: active == index
-                                ? BaseColor.activeGreen
-                                : BaseColor.transparent,
-                          ),
-                          child: BaseText(
-                            list[index].name,
-                            style: TextStyle(
-                              color: isColor
-                                  ? getTextColor(BaseColor.colors[index])
-                                  : getTextColor(BaseColor.white),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    const BaseWidthBox(),
-                  ],
-                );
-              },
+                BaseText(
+                  BaseString.add,
+                  alignment: Alignment.centerLeft,
+                  onTap: onBtnTap,
+                  style: const TextStyle(
+                    color: BaseColor.activeGreen,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            const BaseHeightBox(height: BaseSize.semiMed),
+            SizedBox(
+              height: BaseSize.xLg,
+              child: ListView.builder(
+                itemCount: count,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return Row(
+                    children: [
+                      Consumer<UserModel>(
+                        builder: (context, value, child) {
+                          return BaseContainer(
+                            onTap: () => onTap(index),
+                            color: isColor
+                                ? BaseColor.colors[findColorIndex(
+                                    value.user.accounts![index],
+                                  )]
+                                : BaseColor.white,
+                            border: Border.all(
+                              width: BaseSize.xxSm,
+                              color: active == index
+                                  ? BaseColor.activeGreen
+                                  : BaseColor.transparent,
+                            ),
+                            child: BaseText(
+                              list[index].name,
+                              style: TextStyle(
+                                fontWeight: active == index
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                color: isColor
+                                    ? getTextColor(
+                                        BaseColor.colors[findColorIndex(
+                                        value.user.accounts![index],
+                                      )])
+                                    : getTextColor(BaseColor.white),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      const BaseWidthBox(),
+                    ],
+                  );
+                },
+              ),
+            ),
+            const BaseHeightBox(),
+          ],
+        ),
       ),
     );
   }

@@ -29,6 +29,7 @@ class _HomeViewState extends _HomeViewModel {
         }
       },
       child: Scaffold(
+        key: const ValueKey(BaseKey.home),
         appBar: const HomeAppBar(),
         body: SingleChildScrollView(
           padding: BasePadding.home,

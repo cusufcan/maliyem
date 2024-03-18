@@ -85,10 +85,6 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
                     );
                   },
                 ),
-                Visibility(
-                  visible: value.user.categories!.isNotEmpty,
-                  child: const BaseHeightBox(),
-                ),
                 Consumer<HomeSheetModel>(
                   builder: (context, homeSheetModel, child) {
                     return CustomHorizontalListView(
@@ -102,7 +98,6 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
                     );
                   },
                 ),
-                const BaseHeightBox(height: BaseSize.semiMed),
                 Consumer<HomeSheetModel>(
                   builder: (context, homeSheetModel, child) {
                     return CustomScrollDatePicker(

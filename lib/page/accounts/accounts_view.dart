@@ -22,6 +22,7 @@ class _AccountsViewState extends _AccountsViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const ValueKey(BaseKey.accounts),
       appBar: const AccountsAppBar(),
       body: Consumer<UserModel>(
         builder: (context, value, child) {

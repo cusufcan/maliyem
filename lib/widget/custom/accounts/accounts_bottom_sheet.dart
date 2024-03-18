@@ -27,7 +27,7 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _amountController.text = BaseSize.none.toString();
+    _amountController.text = BaseSize.none.toInt().toString();
   }
 
   @override
@@ -56,6 +56,7 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
             ),
             const BaseHeightBox(height: BaseSize.semiMed),
             BaseInput(
+              prefix: const Text(BaseString.tl),
               maxLength: BaseSize.intMax,
               type: TextInputType.number,
               action: TextInputAction.done,

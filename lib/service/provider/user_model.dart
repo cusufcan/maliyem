@@ -29,6 +29,11 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool isFirstLogin() {
+    final bool isFirst = !_sharedManager.hasData(SharedEnum.first);
+    return isFirst;
+  }
+
   void saveData() {
     _sharedManager.setString(
       SharedEnum.save,
@@ -46,11 +51,14 @@ class UserModel extends ChangeNotifier {
     dates = temp.toSet();
   }
 
+  //* GELIR-GIDER METODLARI
+
   void addChange(Change change, BuildContext context) {
     user.changes?.add(change);
     setDates();
 
-    _setUserSettings();
+    _updateAccountAfterChangeAdd(change);
+
     _sortAccounts();
     _sortCategories();
 
@@ -65,7 +73,8 @@ class UserModel extends ChangeNotifier {
     user.changes?.insert(index, newChange);
     setDates();
 
-    _setUserSettings();
+    _updateAccountAfterChangeUpdate(oldChange, newChange);
+
     _sortAccounts();
     _sortCategories();
 
@@ -78,7 +87,8 @@ class UserModel extends ChangeNotifier {
     user.changes?.remove(change);
     setDates();
 
-    _setUserSettings();
+    _updateAccountAfterChangeDelete(change);
+
     _sortAccounts();
     _sortCategories();
 
@@ -87,27 +97,12 @@ class UserModel extends ChangeNotifier {
     saveData();
   }
 
-  void _updateAllChangesOnAccount(Account oldAccount, Account newAccount) {
-    for (var change in user.changes ?? []) {
-      if (change.account == oldAccount.name) {
-        change.account = newAccount.name;
-      }
-    }
-  }
-
-  void _updateAllChangesOnCategory(Category oldCategory, Category newCategory) {
-    for (var change in user.changes ?? []) {
-      if (change.category == oldCategory.name) {
-        change.category = newCategory.name;
-      }
-    }
-  }
+  //* HESAP METODLARI
 
   void addAccount(Account account) {
-    user.accounts?.add(account);
+    _updateUserAfterAccountAdd(account);
 
-    //? SONRA BAKILACAK
-    // user.balance += account.balance;
+    user.accounts?.add(account);
 
     notifyListeners();
     saveData();
@@ -124,11 +119,14 @@ class UserModel extends ChangeNotifier {
   }
 
   void deleteAccount(int index) {
+    _updateUserAfterAccountDelete(user.accounts![index]);
     user.accounts?.removeAt(index);
 
     notifyListeners();
     saveData();
   }
+
+  //* KATEGORI METODLARI
 
   void addCategory(Category category) {
     user.categories?.add(category);
@@ -153,98 +151,154 @@ class UserModel extends ChangeNotifier {
     saveData();
   }
 
-  void _setUserSettings() {
-    double tempBalance = 0;
-    double tempMonthlyIncome = 0;
-    double tempMonthlyExpense = 0;
-    for (var change in user.changes ?? []) {
-      var changeDate = DateTime.parse(change.date);
-      bool isDateUp = changeDate.month == DateTime.now().month &&
-          changeDate.year == DateTime.now().year;
+  //* GIZLI METODLAR
 
-      tempBalance += change.amount;
-      tempMonthlyIncome += change.isIncome && isDateUp ? change.amount : 0;
-      tempMonthlyExpense +=
-          !change.isIncome && isDateUp ? change.amount.abs() : 0;
+  void _updateAccountAfterChangeAdd(Change change) {
+    // hesabi bul
+    Account tempAcc = user.accounts!.firstWhere(
+      (element) => change.account == element.name,
+    );
+
+    // hesabin bakiyesini guncelle
+    tempAcc.balance += change.amount;
+
+    // tarih bu ay ve bu yil mi diye bak
+    final now = DateTime.now();
+    bool isDateUp = DateTime.parse(change.date).month == now.month &&
+        DateTime.parse(change.date).year == now.year;
+
+    if (isDateUp) {
+      // hesabin bu ayki gelir-giderlerini guncelle
+      if (change.isIncome) {
+        tempAcc.monthlyIncome += change.amount;
+      } else {
+        tempAcc.monthlyExpense += change.amount.abs();
+      }
     }
 
-    user.balance = tempBalance;
-    user.monthlyIncome = tempMonthlyIncome;
-    user.monthlyExpense = tempMonthlyExpense;
+    _updateUserAfterChangeAdd(change, isDateUp);
+  }
 
-    // hesaplardaki degerleri duzenle
-    for (var account in user.accounts ?? [Account()]) {
-      double tempAccountBalance = 0;
-      double tempAccountMonthlyIncome = 0;
-      double tempAccountMonthlyExpense = 0;
+  void _updateAccountAfterChangeUpdate(Change oldChange, Change newChange) {
+    // hesabi bul
+    Account tempAcc = user.accounts!.firstWhere(
+      (element) => oldChange.account == element.name,
+    );
 
-      if (user.changes?.isEmpty ?? true) {
-        account.balance = 0;
-        account.monthlyIncome = 0;
-        account.monthlyExpense = 0;
-        break;
+    // hesabin bakiyesini guncelle
+    tempAcc.balance -= oldChange.amount;
+    tempAcc.balance += newChange.amount;
+
+    // tarih bu ay ve bu yil mi diye bak
+    final now = DateTime.now();
+    bool isDateUp = DateTime.parse(newChange.date).month == now.month &&
+        DateTime.parse(newChange.date).year == now.year;
+
+    // hesabin bu ayki gelir-giderlerini guncelle
+    if (newChange.isIncome) {
+      tempAcc.monthlyIncome -= oldChange.amount;
+      if (isDateUp) tempAcc.monthlyIncome += newChange.amount;
+    } else {
+      tempAcc.monthlyExpense -= oldChange.amount.abs();
+      if (isDateUp) tempAcc.monthlyExpense += newChange.amount.abs();
+    }
+
+    _updateUserAfterChangeUpdate(oldChange, newChange, isDateUp);
+  }
+
+  void _updateAccountAfterChangeDelete(Change change) {
+    // hesabi bul
+    Account tempAcc = user.accounts!.firstWhere(
+      (element) => change.account == element.name,
+    );
+
+    // hesabin bakiyesini guncelle
+    tempAcc.balance -= change.amount;
+
+    // tarih bu ay ve bu yil mi diye bak
+    final now = DateTime.now();
+    bool isDateUp = DateTime.parse(change.date).month == now.month &&
+        DateTime.parse(change.date).year == now.year;
+
+    if (isDateUp) {
+      // hesabin bu ayki gelir-giderlerini guncelle
+      if (change.isIncome) {
+        tempAcc.monthlyIncome -= change.amount;
+      } else {
+        tempAcc.monthlyExpense -= change.amount.abs();
       }
-      for (var change in user.changes ?? []) {
-        var tempDate = DateTime.parse(change.date);
-        bool isDateUp = tempDate.month == DateTime.now().month;
+    }
 
-        if (change.account == account.name) {
-          tempAccountBalance += change.amount;
-          tempAccountMonthlyIncome +=
-              change.isIncome && isDateUp ? change.amount : 0;
-          tempAccountMonthlyExpense +=
-              !change.isIncome && isDateUp ? change.amount : 0;
-        }
+    _updateUserAfterChangeDelete(change, isDateUp);
+  }
+
+  void _updateUserAfterChangeAdd(Change change, bool isDateUp) {
+    // kullanici bakiyesini guncelle
+    user.balance += change.amount;
+
+    // kullanicinin bu ayki gelir-giderlerini guncelle
+    if (isDateUp) {
+      if (change.isIncome) {
+        user.monthlyIncome += change.amount;
+      } else {
+        user.monthlyExpense += change.amount.abs();
       }
-      account.balance = tempAccountBalance;
-      account.monthlyIncome = tempAccountMonthlyIncome;
-      account.monthlyExpense = tempAccountMonthlyExpense;
     }
   }
 
-  void _sortAccounts() {
-    // bu ayki tum gelir-giderleri baska bir listeye cek
-    var tempChanges = user.changes?.where((element) {
-      return DateTime.parse(element.date).month == DateTime.now().month;
-    }).toList();
+  void _updateUserAfterChangeUpdate(
+      Change oldChange, Change newChange, bool isDateUp) {
+    // kullanici bakiyesini guncelle
+    user.balance -= oldChange.amount;
+    user.balance += newChange.amount;
 
-    // tum kategorilerde gez
-    Map<Account, int> accountsSortedMap = {};
-    for (var account in user.accounts ?? [Account()]) {
-      int counter = 0;
-      // yeni gelir-gider listesini gez
-      for (var change in tempChanges ?? []) {
-        // bu hesaba uygun gelir-gider varsa sayac arttir
-        if (account.name == change.account) counter++;
-      }
-      // hesaba ait gelir-gider sayisini listeye ekle
-      accountsSortedMap[account] = counter;
+    // kullanicinin bu ayki gelir-giderlerini guncelle
+    if (newChange.isIncome) {
+      user.monthlyIncome -= oldChange.amount;
+      if (isDateUp) user.monthlyIncome += newChange.amount;
+    } else {
+      user.monthlyExpense -= oldChange.amount.abs();
+      if (isDateUp) user.monthlyExpense += newChange.amount.abs();
     }
+  }
 
-    // hesaplari gelir-gider sayisina gore sirala
-    accountsSortedMap = Map.fromEntries(
-      accountsSortedMap.entries.toList()
-        ..sort((e1, e2) => e2.value.compareTo(e1.value)),
-    );
+  void _updateUserAfterChangeDelete(Change change, bool isDateUp) {
+    // kullanici bakiyesini guncelle
+    user.balance -= change.amount;
 
-    // kullanici hesaplarini yeni siralamaya gore guncelle
-    user.accounts?.clear();
-    accountsSortedMap.forEach((key, value) {
-      user.accounts?.add(key);
-    });
+    // kullanicinin bu ayki gelir-giderlerini guncelle
+    if (isDateUp) {
+      if (change.isIncome) {
+        user.monthlyIncome -= change.amount;
+      } else {
+        user.monthlyExpense -= change.amount.abs();
+      }
+    }
+  }
+
+  void _updateUserAfterAccountAdd(Account account) {
+    // kullanici bakiyesini guncelle
+    user.balance += account.balance;
+  }
+
+  void _updateUserAfterAccountDelete(Account account) {
+    // kullanici bakiyesini guncelle
+    user.balance -= account.balance;
   }
 
   void _sortCategories() {
     // bu ayki tum gelir-giderleri baska bir listeye cek
+    final now = DateTime.now();
     var tempChanges = user.changes?.where((element) {
-      return DateTime.parse(element.date).month == DateTime.now().month;
+      return DateTime.parse(element.date).month == now.month &&
+          DateTime.parse(element.date).year == now.year;
     }).toList();
 
     // tum kategorilerde gez
     Map<Category, int> categoriesSortedMap = {};
     for (var category in user.categories ?? [Category()]) {
       int counter = 0;
-      // yeni giderler listesini gez
+      // yeni gelir-giderler listesini gez
       for (var change in tempChanges ?? []) {
         // bu kategoriye uygun gelir-gider varsa sayac arttir
         if (category.name == change.category) counter++;
@@ -253,7 +307,7 @@ class UserModel extends ChangeNotifier {
       categoriesSortedMap[category] = counter;
     }
 
-    // kategorileri gider sayisina gore sirala
+    // kategorileri gelir-gider sayisina gore sirala
     categoriesSortedMap = Map.fromEntries(
       categoriesSortedMap.entries.toList()
         ..sort((e1, e2) => e2.value.compareTo(e1.value)),
@@ -264,5 +318,28 @@ class UserModel extends ChangeNotifier {
     categoriesSortedMap.forEach((key, value) {
       user.categories?.add(key);
     });
+  }
+
+  void _sortAccounts() {
+    // hesaplari bakiyelere gore buyukten kucuge sirala
+    user.accounts?.sort(
+      (a, b) => b.balance.compareTo(a.balance),
+    );
+  }
+
+  void _updateAllChangesOnAccount(Account oldAccount, Account newAccount) {
+    for (var change in user.changes ?? []) {
+      if (change.account == oldAccount.name) {
+        change.account = newAccount.name;
+      }
+    }
+  }
+
+  void _updateAllChangesOnCategory(Category oldCategory, Category newCategory) {
+    for (var change in user.changes ?? []) {
+      if (change.category == oldCategory.name) {
+        change.category = newCategory.name;
+      }
+    }
   }
 }

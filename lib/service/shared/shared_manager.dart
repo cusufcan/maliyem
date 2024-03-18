@@ -16,4 +16,8 @@ class SharedManager {
   String? getString(SharedEnum key) {
     return manager.getString(key.name);
   }
+
+  bool hasData(SharedEnum key) {
+    return manager.containsKey(key.name);
+  }
 }

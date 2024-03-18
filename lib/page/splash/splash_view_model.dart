@@ -10,7 +10,16 @@ abstract class _SplashViewModel extends State<SplashView> {
   Future<void> _checkFirstLogin() async {
     await _setShared();
     _getData();
-    _goToBase();
+    bool isFirst = _isFirstLogin();
+    if (isFirst) {
+      _goToOnboarding();
+    } else {
+      _goToBase();
+    }
+  }
+
+  bool _isFirstLogin() {
+    return Provider.of<UserModel>(context, listen: false).isFirstLogin();
   }
 
   Future<void> _setShared() async {
@@ -22,6 +31,18 @@ abstract class _SplashViewModel extends State<SplashView> {
   }
 
   void _goToBase() {
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (context, anim, secondAnim) {
+          return const BaseView();
+        },
+      ),
+    );
+  }
+
+  void _goToOnboarding() {
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         transitionDuration: Duration.zero,

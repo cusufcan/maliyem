@@ -1,3 +1,4 @@
 enum SharedEnum {
-  save;
+  save,
+  first;
 }

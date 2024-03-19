@@ -22,8 +22,10 @@ class BaseInput extends StatelessWidget {
     this.isCategoryAdd = false,
     this.editCategory,
     this.onChanged,
+    this.onTap,
     this.editAccount,
     this.prefix,
+    this.focusNode,
   });
 
   final TextEditingController controller;
@@ -41,6 +43,8 @@ class BaseInput extends StatelessWidget {
   final Category? editCategory;
   final bool isCategoryAdd;
   final void Function(String value)? onChanged;
+  final void Function()? onTap;
+  final FocusNode? focusNode;
   final Widget? prefix;
 
   @override
@@ -54,6 +58,8 @@ class BaseInput extends StatelessWidget {
           controller: controller,
           autofocus: autoFocus,
           maxLength: maxLength,
+          onTap: onTap,
+          focusNode: focusNode,
           validator: (text) {
             if (text == null || text.isEmpty) {
               return BaseString.emptyInput;

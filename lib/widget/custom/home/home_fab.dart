@@ -13,10 +13,12 @@ class HomeFab extends StatefulWidget {
     super.key,
     required this.addIncome,
     required this.addExpense,
+    required this.addTransfer,
   });
 
   final VoidCallback addIncome;
   final VoidCallback addExpense;
+  final VoidCallback addTransfer;
 
   @override
   State<HomeFab> createState() => _HomeFabState();
@@ -56,7 +58,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
       });
 
     _childRotateAnimationValues = Tween<double>(
-      begin: pi,
+      begin: -pi,
       end: BaseSize.none,
     ).animate(_animationController)
       ..addListener(() {
@@ -93,12 +95,17 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                   angle: _childRotateAnimationValues.value,
                   child: Transform.scale(
                     scale: _scaleAnimationValues.value,
-                    child: FloatingActionButton(
-                      onPressed: widget.addIncome,
-                      shape: const CircleBorder(),
-                      tooltip: BaseString.income,
-                      backgroundColor: BaseColor.income,
-                      child: BaseIcon.incomeWhite,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: BaseSize.med,
+                      ),
+                      child: FloatingActionButton(
+                        onPressed: widget.addTransfer,
+                        shape: const CircleBorder(),
+                        tooltip: BaseString.transfer,
+                        backgroundColor: BaseColor.transfer,
+                        child: BaseIcon.transferWhite,
+                      ),
                     ),
                   ),
                 ),
@@ -107,8 +114,26 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                   child: Transform.scale(
                     scale: _scaleAnimationValues.value,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: BaseSize.med,
+                      padding: const EdgeInsets.only(
+                        bottom: BaseSize.med,
+                      ),
+                      child: FloatingActionButton(
+                        onPressed: widget.addIncome,
+                        shape: const CircleBorder(),
+                        tooltip: BaseString.income,
+                        backgroundColor: BaseColor.income,
+                        child: BaseIcon.incomeWhite,
+                      ),
+                    ),
+                  ),
+                ),
+                Transform.rotate(
+                  angle: _childRotateAnimationValues.value,
+                  child: Transform.scale(
+                    scale: _scaleAnimationValues.value,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: BaseSize.med,
                       ),
                       child: FloatingActionButton(
                         onPressed: widget.addExpense,

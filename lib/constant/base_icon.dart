@@ -5,6 +5,7 @@ import 'index.dart';
 class BaseIcon {
   static const income = Icon(Icons.file_download_outlined);
   static const expense = Icon(Icons.file_upload_outlined);
+  static const transfer = Icon(Icons.swap_horiz_outlined);
 
   static const incomeWhite = Icon(
     Icons.file_download_outlined,
@@ -12,6 +13,11 @@ class BaseIcon {
   );
   static const expenseWhite = Icon(
     Icons.file_upload_outlined,
+    color: BaseColor.white,
+  );
+
+  static const transferWhite = Icon(
+    Icons.swap_horiz_outlined,
     color: BaseColor.white,
   );
 

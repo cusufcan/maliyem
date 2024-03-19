@@ -10,6 +10,9 @@ class BaseString {
 
   static const String icPath = 'assets/image/ic_foreground.png';
 
+  static const String sender = 'Gönderen';
+  static const String receiver = 'Alıcı';
+
   static const String tl = '₺';
   static const String tr = 'tr';
   static const String hello = 'Merhaba';
@@ -26,6 +29,7 @@ class BaseString {
 
   static const String income = 'Gelir';
   static const String expense = 'Gider';
+  static const String transfer = 'Transfer';
 
   static const String monthlyIncome = 'Aylık Gelir';
   static const String monthlyExpense = 'Aylık Gider';
@@ -48,6 +52,11 @@ class BaseString {
   static const String emptyInput = 'Boş bırakılamaz';
   static const String accountExist = 'Hesap zaten var';
   static const String categoryExist = 'Kategori zaten var';
+
+  static const String transferSuccess = 'Transfer başarıyla gerçekleşti.';
+  static const String accountNotFound = 'Hesap bulunamadı.';
+  static const String accountBalanceIsNotEnough = 'Hesap bakiyesi yetersiz.';
+  static const String accountIsSame = 'Hesaplar aynı olamaz.';
 
   static const String today = 'Bugün';
   static const String yesterday = 'Dün';

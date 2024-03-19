@@ -67,4 +67,29 @@ abstract class _BaseViewModel extends State<BaseView> {
       Provider.of<AccountsSheetModel>(context, listen: false).clearValues();
     });
   }
+
+  void _showTransferSheet() {
+    showModalBottomSheet(
+      useSafeArea: true,
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return Consumer<UserModel>(
+          builder: (context, user, child) {
+            return TransferBottomSheet(
+              onTransferSave: (transferFrom, transferTo, amount) {
+                user.transferAccounts(
+                  transferFrom,
+                  transferTo,
+                  amount,
+                );
+              },
+            );
+          },
+        );
+      },
+    ).whenComplete(() {
+      Provider.of<FabModel>(context, listen: false).closeFab();
+    });
+  }
 }

@@ -12,6 +12,7 @@ class BaseColor {
 
   static const income = Color(0xFF42A5F5);
   static const expense = Color(0xFFEF5350);
+  static const transfer = Color(0xFF66BB6A);
   static const neutral = Colors.grey;
 
   static const colors = [

@@ -20,7 +20,7 @@ class BaseSize {
   static const double animationSlow = 300.0;
 
   static const int intMax = 10;
-  static const int stringMax = 50;
+  static const int stringMax = 25;
 
   static const double kilo = 1000.00;
   static const double million = 1000000.00;

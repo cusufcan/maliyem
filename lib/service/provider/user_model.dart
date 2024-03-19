@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
+import 'package:gelir_gider_takibi/constant/enum/transfer_error_enum.dart';
 import 'package:gelir_gider_takibi/model/index.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 
@@ -149,6 +150,33 @@ class UserModel extends ChangeNotifier {
 
     notifyListeners();
     saveData();
+  }
+
+  //* TRANSFER METODLARI
+
+  TransferError transferAccounts(
+    Account? transferFrom,
+    Account? transferTo,
+    double amount,
+  ) {
+    // transfer yapilan hesaplarin bakiyelerini guncelle
+    if (transferFrom != null && transferTo != null) {
+      if (transferFrom.balance < amount) {
+        return TransferError.accountBalanceIsNotEnough;
+      }
+      if (transferFrom == transferTo) {
+        return TransferError.accountIsSame;
+      }
+
+      transferFrom.balance -= amount;
+      transferTo.balance += amount;
+
+      notifyListeners();
+      saveData();
+
+      return TransferError.success;
+    }
+    return TransferError.accountNotFound;
   }
 
   //* GIZLI METODLAR

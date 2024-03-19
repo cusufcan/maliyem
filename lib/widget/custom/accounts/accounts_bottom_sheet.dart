@@ -13,7 +13,11 @@ class AccountsBottomSheet extends StatefulWidget {
     required this.onAccountSave,
   });
 
-  final void Function(String name, String amount, String color) onAccountSave;
+  final void Function(
+    String name,
+    String amount,
+    String color,
+  ) onAccountSave;
 
   @override
   State<AccountsBottomSheet> createState() => _AccountsBottomSheetState();
@@ -25,9 +29,11 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
-    _amountController.text = BaseSize.none.toInt().toString();
+  void dispose() {
+    _nameController.dispose();
+    _amountController.dispose();
+
+    super.dispose();
   }
 
   @override

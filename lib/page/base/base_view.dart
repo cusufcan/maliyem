@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/accounts/accounts_view.dart';
 import 'package:gelir_gider_takibi/page/home/home_view.dart';
 import 'package:gelir_gider_takibi/service/provider/index.dart';
+import 'package:gelir_gider_takibi/widget/custom/transfer/transfer_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/index.dart';
@@ -30,8 +31,10 @@ class _BaseViewState extends _BaseViewModel {
     ];
     fabs = [
       HomeFab(
-          addExpense: () => _showHomeSheet(false),
-          addIncome: () => _showHomeSheet(true)),
+        addExpense: () => _showHomeSheet(false),
+        addIncome: () => _showHomeSheet(true),
+        addTransfer: () => _showTransferSheet(),
+      ),
       AccountsFab(
         addAccount: () => _showAccountsSheet(),
       ),

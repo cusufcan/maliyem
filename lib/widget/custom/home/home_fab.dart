@@ -100,6 +100,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                         bottom: BaseSize.med,
                       ),
                       child: FloatingActionButton(
+                        heroTag: BaseString.transfer,
                         onPressed: widget.addTransfer,
                         shape: const CircleBorder(),
                         tooltip: BaseString.transfer,
@@ -118,6 +119,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                         bottom: BaseSize.med,
                       ),
                       child: FloatingActionButton(
+                        heroTag: BaseString.income,
                         onPressed: widget.addIncome,
                         shape: const CircleBorder(),
                         tooltip: BaseString.income,
@@ -136,6 +138,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                         bottom: BaseSize.med,
                       ),
                       child: FloatingActionButton(
+                        heroTag: BaseString.expense,
                         onPressed: widget.addExpense,
                         shape: const CircleBorder(),
                         tooltip: BaseString.expense,
@@ -150,6 +153,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                   child: Consumer<FabModel>(
                     builder: (context, value, child) {
                       return FloatingActionButton(
+                        heroTag: BaseString.add,
                         onPressed: value.changeFabOpen,
                         shape: const CircleBorder(),
                         tooltip: BaseString.add,

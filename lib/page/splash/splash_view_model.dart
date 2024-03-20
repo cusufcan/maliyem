@@ -48,7 +48,7 @@ abstract class _SplashViewModel extends State<SplashView> {
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         pageBuilder: (context, anim, secondAnim) {
-          return const BaseView();
+          return const OnboardingBaseView();
         },
       ),
     );

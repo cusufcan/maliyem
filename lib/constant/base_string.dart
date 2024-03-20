@@ -58,6 +58,9 @@ class BaseString {
   static const String accountBalanceIsNotEnough = 'Hesap bakiyesi yetersiz.';
   static const String accountIsSame = 'Hesaplar aynı olamaz.';
 
+  static const String onboardingNext = 'İleri';
+  static const String onboardingStart = 'Başla';
+
   static const String today = 'Bugün';
   static const String yesterday = 'Dün';
   static const List<String> days = [
@@ -83,5 +86,12 @@ class BaseString {
     'Ekim',
     'Kasım',
     'Aralık',
+  ];
+
+  static const List<String> onboardingStrings = [
+    'Gelir ve giderlerinizi takip edin.',
+    'Hesaplarınız arasında transfer yapın.',
+    'Kategoriler oluşturun ve harcamalarınızı kategorilendirin.',
+    'Haydi başlayalım!',
   ];
 }

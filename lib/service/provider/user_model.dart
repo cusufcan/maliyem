@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/enum/shared_enum.dart';
 import 'package:gelir_gider_takibi/constant/enum/transfer_error_enum.dart';
+import 'package:gelir_gider_takibi/constant/index.dart';
 import 'package:gelir_gider_takibi/model/index.dart';
 import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 
@@ -39,6 +40,13 @@ class UserModel extends ChangeNotifier {
     _sharedManager.setString(
       SharedEnum.save,
       jsonEncode(user.toJson()),
+    );
+  }
+
+  void saveFirstLogin() {
+    _sharedManager.setString(
+      SharedEnum.first,
+      BaseString.ok,
     );
   }
 

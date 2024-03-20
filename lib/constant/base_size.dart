@@ -29,4 +29,5 @@ class BaseSize {
   static const double quadrillion = 1000000000000000.00;
 
   static const double fabBottom = 30;
+  static const double onboardingBottom = 20;
 }

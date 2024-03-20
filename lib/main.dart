@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/splash/splash_view.dart';
 import 'package:gelir_gider_takibi/service/provider/index.dart';
+import 'package:gelir_gider_takibi/service/provider/onboarding_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -34,6 +35,9 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AccountsDialogModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => OnboardingModel(),
         ),
       ],
       child: MaterialApp(

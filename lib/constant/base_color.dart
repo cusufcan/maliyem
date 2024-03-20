@@ -4,11 +4,13 @@ class BaseColor {
   static const transparent = Colors.transparent;
   static const white = Colors.white;
   static const black = Colors.black;
+  static const text = Color(0xFF424242);
 
   static const surface = Color(0xFFF7F2F9);
   static const dialog = Color(0xFFEEE8F4);
   static const active = Color(0xFF42A5F5);
   static const activeGreen = Color(0xFF66BB6A);
+  static const inactive = Color(0xFFE0E0E0);
 
   static const income = Color(0xFF42A5F5);
   static const expense = Color(0xFFEF5350);

@@ -8,6 +8,7 @@ class BaseText extends StatelessWidget {
     this.maxLines = 1,
     this.overflow = TextOverflow.ellipsis,
     this.alignment = Alignment.center,
+    this.textAlign,
     this.onTap,
   });
 
@@ -16,6 +17,7 @@ class BaseText extends StatelessWidget {
   final int maxLines;
   final TextOverflow overflow;
   final Alignment alignment;
+  final TextAlign? textAlign;
   final void Function()? onTap;
 
   @override
@@ -29,6 +31,7 @@ class BaseText extends StatelessWidget {
           style: style ?? Theme.of(context).textTheme.bodyMedium,
           maxLines: maxLines,
           overflow: overflow,
+          textAlign: textAlign,
         ),
       ),
     );

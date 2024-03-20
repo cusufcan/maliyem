@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/base/base_view.dart';
+import 'package:gelir_gider_takibi/page/onboarding/onboarding_base_view.dart';
 import 'package:gelir_gider_takibi/service/provider/index.dart';
 import 'package:provider/provider.dart';
 

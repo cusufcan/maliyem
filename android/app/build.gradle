@@ -76,4 +76,4 @@ flutter {
 
 dependencies {}
 
-android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'
+android.buildTypes.release.ndk.debugSymbolLevel = { FULL }

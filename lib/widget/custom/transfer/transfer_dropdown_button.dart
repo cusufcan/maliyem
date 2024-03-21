@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/constant/index.dart';
+import 'package:gelir_gider_takibi/helper/index.dart';
 import 'package:gelir_gider_takibi/model/index.dart';
 import 'package:gelir_gider_takibi/service/provider/index.dart';
 import 'package:gelir_gider_takibi/widget/base/index.dart';
@@ -49,7 +50,7 @@ class TransferDropdownButton extends StatelessWidget {
               ),
               Expanded(
                 child: BaseText(
-                  "${BaseString.tl} ${accountForTransfer?.balance ?? BaseSize.none} ",
+                  "${BaseString.tl} ${formatNumber(num: accountForTransfer?.balance ?? BaseSize.none)} ",
                   alignment: Alignment.centerRight,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,

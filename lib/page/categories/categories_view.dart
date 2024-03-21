@@ -31,7 +31,6 @@ class _CategoriesViewState extends _CategoriesViewModel {
       body: SingleChildScrollView(
         padding: BasePadding.home,
         physics: BasePhysics.base,
-        key: BaseKey.accounts,
         child: Form(
           key: _formKey,
           child: Consumer<UserModel>(

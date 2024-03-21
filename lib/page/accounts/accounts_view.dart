@@ -18,11 +18,12 @@ class AccountsView extends StatefulWidget {
   State<AccountsView> createState() => _AccountsViewState();
 }
 
-class _AccountsViewState extends _AccountsViewModel {
+class _AccountsViewState extends _AccountsViewModel
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
-      key: const ValueKey(BaseKey.accounts),
       appBar: const AccountsAppBar(),
       body: Consumer<UserModel>(
         builder: (context, value, child) {
@@ -47,4 +48,7 @@ class _AccountsViewState extends _AccountsViewModel {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

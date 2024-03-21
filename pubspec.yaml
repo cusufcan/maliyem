@@ -1,7 +1,7 @@
 name: gelir_gider_takibi
 description: "Maliyem Gelir Gider Takibi."
 publish_to: "none"
-version: 0.3.0+9
+version: 0.3.1+10
 
 environment:
   sdk: ">=3.2.6 <4.0.0"

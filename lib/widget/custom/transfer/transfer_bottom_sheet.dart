@@ -50,7 +50,13 @@ class _TransferBottomSheetState extends State<TransferBottomSheet> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const BaseWidthBox(width: BaseSize.med),
+                BaseText(
+                  BaseString.transfer,
+                  alignment: Alignment.centerLeft,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const BaseHeightBox(height: BaseSize.lg),
                 TransferDropdownContent(
                   accountForTransfer: transferFrom,
                   title: BaseString.sender,
@@ -116,6 +122,9 @@ class _TransferBottomSheetState extends State<TransferBottomSheet> {
           return AlertDialog(
             title: const Text(BaseString.transfer),
             content: Text(message),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(BaseSize.sm),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),

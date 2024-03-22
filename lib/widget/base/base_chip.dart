@@ -19,7 +19,7 @@ class BaseChip extends StatelessWidget {
     return Chip(
       backgroundColor: color,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(BaseSize.lg),
+        borderRadius: BorderRadius.circular(BaseSize.sm),
       ),
       side: BorderSide.none,
       label: BaseText(

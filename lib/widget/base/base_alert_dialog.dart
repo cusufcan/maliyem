@@ -22,7 +22,7 @@ class BaseAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(BaseSize.med),
+        borderRadius: BorderRadius.circular(BaseSize.sm),
       ),
       scrollable: true,
       title: BaseText(
@@ -32,7 +32,12 @@ class BaseAlertDialog extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
       ),
-      content: desc != null ? BaseText(desc!) : null,
+      content: desc != null
+          ? BaseText(
+              desc!,
+              alignment: Alignment.centerLeft,
+            )
+          : null,
       actions: [
         ButtonBar(
           children: [

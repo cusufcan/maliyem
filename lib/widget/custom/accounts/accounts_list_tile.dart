@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constant/index.dart';
 import '../../../helper/index.dart';
 import '../../../model/index.dart';
 import '../../base/index.dart';
@@ -26,7 +25,6 @@ class AccountsListTile extends StatelessWidget {
           onLongPress: onLongPress,
           color: stringToColor(account.color),
           padding: EdgeInsets.zero,
-          radius: BaseSize.med,
           child: Column(
             children: [
               AccountsTileTop(

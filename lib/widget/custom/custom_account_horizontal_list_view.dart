@@ -20,6 +20,7 @@ class CustomAccountHorizontalListView extends StatelessWidget {
       child: ListView.builder(
         itemCount: BaseColor.colors.length,
         shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           return Row(

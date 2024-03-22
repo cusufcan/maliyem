@@ -7,7 +7,7 @@ abstract class _HomeViewModel extends State<HomeView> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(BaseSize.med),
+            borderRadius: BorderRadius.circular(BaseSize.sm),
           ),
           scrollable: true,
           title: BaseText(

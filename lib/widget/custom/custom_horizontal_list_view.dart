@@ -60,6 +60,7 @@ class CustomHorizontalListView extends StatelessWidget {
             SizedBox(
               height: BaseSize.xLg,
               child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: count,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,

@@ -23,29 +23,26 @@ class _AccountsViewState extends _AccountsViewModel
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: const AccountsAppBar(),
-      body: Consumer<UserModel>(
-        builder: (context, value, child) {
-          return ListView.builder(
-            padding: BasePadding.home,
-            itemCount: value.user.accounts!.length,
-            physics: BasePhysics.base,
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              return AccountsListTile(
-                account: value.user.accounts![index],
-                onLongPress: () => _openEditDialog(index),
-                onDelete: value.user.accounts!.length > 1 &&
-                        !isAccountsHaveChange(
-                            value.user, value.user.accounts![index])
-                    ? () => _openDeleteDialog(index)
-                    : null,
-              );
-            },
-          );
-        },
-      ),
+    return Consumer<UserModel>(
+      builder: (context, value, child) {
+        return ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          padding: BasePadding.home,
+          itemCount: value.user.accounts!.length,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            return AccountsListTile(
+              account: value.user.accounts![index],
+              onLongPress: () => _openEditDialog(index),
+              onDelete: value.user.accounts!.length > 1 &&
+                      !isAccountsHaveChange(
+                          value.user, value.user.accounts![index])
+                  ? () => _openDeleteDialog(index)
+                  : null,
+            );
+          },
+        );
+      },
     );
   }
 

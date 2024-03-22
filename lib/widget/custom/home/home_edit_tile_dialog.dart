@@ -187,6 +187,12 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, value, child) {
@@ -214,6 +220,12 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, value, child) {

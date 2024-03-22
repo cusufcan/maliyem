@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gelir_gider_takibi/constant/base_size.dart';
-import 'package:gelir_gider_takibi/constant/base_string.dart';
+import 'package:gelir_gider_takibi/constant/index.dart';
 import 'package:gelir_gider_takibi/helper/color_helper.dart';
 import 'package:gelir_gider_takibi/helper/icon_helper.dart';
 import 'package:gelir_gider_takibi/helper/int_helper.dart';
@@ -39,10 +38,8 @@ class HomeDailyTile extends StatelessWidget {
           horizontal: BaseSize.med,
           vertical: BaseSize.semiMed,
         ),
-        color: getColor(money).withOpacity(0.5),
+        color: getColor(money).withOpacity(0.7),
         gradient: getGradient(getColor(money)),
-        radius: BaseSize.med,
-        shadow: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -76,11 +73,8 @@ class HomeDailyTile extends StatelessWidget {
                 BaseContainer(
                   circle: true,
                   color: getColor(money),
-                  gradient: getGradient(
-                    getColor(money),
-                    reverse: true,
-                  ),
-                  child: getIcon(money),
+                  shadow: false,
+                  child: getIconWhite(money),
                 ),
                 const BaseWidthBox(width: BaseSize.semiMed),
                 BaseText(

@@ -30,7 +30,7 @@ abstract class _AccountsViewModel extends State<AccountsView> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(BaseSize.med),
+            borderRadius: BorderRadius.circular(BaseSize.sm),
           ),
           scrollable: true,
           title: BaseText(

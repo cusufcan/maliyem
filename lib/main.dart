@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelir_gider_takibi/page/splash/splash_view.dart';
 import 'package:gelir_gider_takibi/service/provider/index.dart';
 import 'package:gelir_gider_takibi/service/provider/onboarding_model.dart';
+import 'package:gelir_gider_takibi/service/provider/settings_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -38,6 +39,9 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => OnboardingModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SettingsModel(),
         ),
       ],
       child: MaterialApp(

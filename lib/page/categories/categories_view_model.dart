@@ -9,6 +9,12 @@ abstract class _CategoriesViewModel extends State<CategoriesView> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, value, child) {
@@ -51,7 +57,7 @@ abstract class _CategoriesViewModel extends State<CategoriesView> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(BaseSize.med),
+            borderRadius: BorderRadius.circular(BaseSize.sm),
           ),
           scrollable: true,
           title: BaseText(

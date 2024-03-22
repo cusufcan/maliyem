@@ -32,6 +32,7 @@ class TransferDropdownButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(
                     BaseSize.sm,
                   ),
+                  underline: const SizedBox(),
                   padding: const EdgeInsets.all(
                     BaseSize.sm,
                   ),

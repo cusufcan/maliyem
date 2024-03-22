@@ -47,6 +47,13 @@ class _CustomCategoryBottomSheetState extends State<CustomCategoryBottomSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
+            BaseText(
+              '${BaseString.category} ${BaseString.add}',
+              alignment: Alignment.centerLeft,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const BaseHeightBox(height: BaseSize.lg),
             BaseInput(
               autoFocus: true,
               maxLength: BaseSize.stringMax,

@@ -38,8 +38,12 @@ abstract class _GraphViewModel extends State<GraphView> {
 
   void _changeDate(bool isForward) {
     if (isForward) {
+      if (DateTime.now().month == showDate.month &&
+          DateTime.now().year == showDate.year - 1) return;
       showDate = DateTime(showDate.year, showDate.month + 1, showDate.day);
     } else {
+      if (DateTime.now().month == showDate.month &&
+          DateTime.now().year == showDate.year + 1) return;
       showDate = DateTime(showDate.year, showDate.month - 1, showDate.day);
     }
 

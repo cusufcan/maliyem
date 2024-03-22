@@ -59,7 +59,7 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const BaseHeightBox(height: BaseSize.semiMed),
+                const BaseHeightBox(height: BaseSize.lg),
                 BaseInput(
                   autoFocus: true,
                   maxLength: BaseSize.intMax,
@@ -151,6 +151,12 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, value, child) {
@@ -178,6 +184,12 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, value, child) {

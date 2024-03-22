@@ -23,6 +23,9 @@ class BaseElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(BaseSize.sm),
+        ),
       ),
       child: BaseText(
         text,

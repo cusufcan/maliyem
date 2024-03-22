@@ -17,27 +17,20 @@ class CategoriesTileTop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(BaseSize.med),
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: BaseSize.sm,
+        horizontal: BaseSize.med,
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: BaseSize.med,
-          horizontal: BaseSize.semiLg,
-        ),
-        child: Row(
-          children: [
-            Expanded(child: CategoriesTileNameText(name: name)),
-            const BaseWidthBox(),
-            CustomActionChip(
-              text: BaseString.delete,
-              onTap: onDelete,
-            ),
-          ],
-        ),
+      child: Row(
+        children: [
+          Expanded(child: CategoriesTileNameText(name: name)),
+          const BaseWidthBox(),
+          CustomActionChip(
+            text: BaseString.delete,
+            onTap: onDelete,
+          ),
+        ],
       ),
     );
   }

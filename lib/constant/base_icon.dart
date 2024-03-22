@@ -6,6 +6,7 @@ class BaseIcon {
   static const income = Icon(Icons.file_download_outlined);
   static const expense = Icon(Icons.file_upload_outlined);
   static const transfer = Icon(Icons.swap_horiz_outlined);
+  static const settings = Icon(Icons.settings_outlined);
 
   static const incomeWhite = Icon(
     Icons.file_download_outlined,
@@ -29,6 +30,8 @@ class BaseIcon {
 
   static const add = Icon(Icons.add);
   static const remove = Icon(Icons.remove);
+
+  static const delete = Icon(Icons.delete_outlined);
 
   static const category = Icon(Icons.category_outlined);
   static const graph = Icon(Icons.bar_chart_outlined);

@@ -11,6 +11,12 @@ abstract class _BaseViewModel extends State<BaseView> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, value, child) {
@@ -44,6 +50,12 @@ abstract class _BaseViewModel extends State<BaseView> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, user, child) {
@@ -73,6 +85,12 @@ abstract class _BaseViewModel extends State<BaseView> {
       useSafeArea: true,
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(BaseSize.semiMed),
+          topRight: Radius.circular(BaseSize.semiMed),
+        ),
+      ),
       builder: (context) {
         return Consumer<UserModel>(
           builder: (context, user, child) {

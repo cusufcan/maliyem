@@ -20,4 +20,8 @@ class SharedManager {
   bool hasData(SharedEnum key) {
     return manager.containsKey(key.name);
   }
+
+  Future<void> clear(SharedEnum key) async {
+    await manager.remove(key.name);
+  }
 }

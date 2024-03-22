@@ -10,6 +10,8 @@ import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 class UserModel extends ChangeNotifier {
   late final SharedManager _sharedManager;
 
+  SharedManager get sharedManager => _sharedManager;
+
   late User user = User(
     accounts: [Account()],
     categories: [Category()],
@@ -29,6 +31,16 @@ class UserModel extends ChangeNotifier {
       setDates();
     }
     notifyListeners();
+  }
+
+  void clearUser() {
+    user = User(
+      accounts: [Account()],
+      categories: [Category()],
+    );
+    dates = {};
+    notifyListeners();
+    saveData();
   }
 
   bool isFirstLogin() {

@@ -25,7 +25,7 @@ class CategoriesListTile extends StatelessWidget {
           onLongPress: onLongPress,
           color: BaseColor.white,
           padding: EdgeInsets.zero,
-          radius: BaseSize.med,
+          radius: BaseSize.sm,
           child: CategoriesTileTop(
             name: category.name,
             onDelete: onDelete,

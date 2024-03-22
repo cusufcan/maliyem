@@ -4,6 +4,7 @@ class BaseString {
   static const String home = 'Anasayfa';
   static const String accounts = 'Hesaplar';
   static const String categories = 'Kategoriler';
+  static const String settings = 'Ayarlar';
   static const String cash = 'Nakit';
   static const String general = 'Genel';
   static const String graph = 'Grafik';
@@ -19,13 +20,19 @@ class BaseString {
 
   static const String ok = 'Tamam';
   static const String cancel = 'İptal';
+  static const String close = 'Kapat';
 
   static const String add = 'Ekle';
   static const String edit = 'Düzenle';
   static const String update = 'Güncelle';
   static const String delete = 'Sil';
+  static const String successs = 'Başarılı';
 
   static const String deleteDesc = 'Silmek istediğinize emin misiniz?';
+
+  static const String sureAboutDeleteTitle = 'Emin misiniz?';
+  static const String sureAboutDeleteDesc = 'Tüm verileriniz silinmek üzere.';
+  static const String allDataDeleted = 'Tüm verileriniz silindi.';
 
   static const String income = 'Gelir';
   static const String expense = 'Gider';

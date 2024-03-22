@@ -15,8 +15,8 @@ Color getColor(double money) {
 
 Gradient getGradient(Color color, {bool reverse = false}) {
   return LinearGradient(
-    begin: reverse ? Alignment.centerRight : Alignment.centerLeft,
-    end: reverse ? Alignment.centerLeft : Alignment.centerRight,
+    begin: reverse ? Alignment.topRight : Alignment.topLeft,
+    end: reverse ? Alignment.bottomLeft : Alignment.bottomRight,
     colors: [
       color,
       color.withOpacity(0.7),

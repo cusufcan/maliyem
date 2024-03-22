@@ -52,6 +52,13 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
+            BaseText(
+              '${BaseString.account} ${BaseString.add}',
+              alignment: Alignment.centerLeft,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const BaseHeightBox(height: BaseSize.lg),
             BaseInput(
               autoFocus: true,
               isAccountAdd: true,

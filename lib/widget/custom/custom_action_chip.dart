@@ -8,9 +8,11 @@ class CustomActionChip extends StatelessWidget {
     super.key,
     required this.text,
     this.onTap,
+    this.radius = BaseSize.sm,
   });
 
   final String text;
+  final double radius;
   final void Function()? onTap;
 
   @override
@@ -20,7 +22,7 @@ class CustomActionChip extends StatelessWidget {
       onPressed: onTap,
       backgroundColor: BaseColor.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(BaseSize.lg),
+        borderRadius: BorderRadius.circular(radius),
       ),
       side: BorderSide.none,
       label: BaseText(

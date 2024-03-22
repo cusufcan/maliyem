@@ -10,7 +10,7 @@ class BaseInput extends StatelessWidget {
     super.key,
     required this.controller,
     this.label = BaseString.label,
-    this.radius = BaseSize.semiMed,
+    this.radius = BaseSize.sm,
     this.color,
     this.autoFocus = false,
     this.type = TextInputType.text,

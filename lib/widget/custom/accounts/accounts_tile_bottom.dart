@@ -20,7 +20,7 @@ class AccountsTileBottom extends StatelessWidget {
         decoration: const BoxDecoration(
           color: BaseColor.white,
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(BaseSize.med),
+            bottom: Radius.circular(BaseSize.sm),
           ),
         ),
         child: Padding(

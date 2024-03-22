@@ -30,14 +30,13 @@ class _CategoriesViewState extends _CategoriesViewModel {
       ),
       body: SingleChildScrollView(
         padding: BasePadding.home,
-        physics: BasePhysics.base,
         child: Form(
           key: _formKey,
           child: Consumer<UserModel>(
             builder: (context, value, child) {
               return ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: value.user.categories!.length,
-                physics: BasePhysics.base,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   return CategoriesListTile(

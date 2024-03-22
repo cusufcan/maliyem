@@ -22,7 +22,7 @@ class AccountsTileTop extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(BaseSize.med),
+          top: Radius.circular(BaseSize.sm),
         ),
       ),
       child: Padding(
@@ -39,6 +39,7 @@ class AccountsTileTop extends StatelessWidget {
                 CustomActionChip(
                   text: BaseString.delete,
                   onTap: onDelete,
+                  radius: BaseSize.lg,
                 ),
               ],
             ),

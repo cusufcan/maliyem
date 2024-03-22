@@ -36,7 +36,7 @@ class _GraphViewState extends _GraphViewModel {
                   padding: const EdgeInsets.all(BaseSize.sm),
                   color: BaseColor.surface,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
                         icon: const Icon(Icons.arrow_back_ios_outlined),
@@ -44,11 +44,14 @@ class _GraphViewState extends _GraphViewModel {
                           _changeDate(false);
                         },
                       ),
-                      BaseText(
-                        '${BaseString.months[showDate.month - 1]} ${showDate.year}',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                      Expanded(
+                        child: BaseText(
+                          '${BaseString.months[showDate.month - 1]} ${showDate.year}',
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.arrow_forward_ios_outlined),
@@ -61,7 +64,6 @@ class _GraphViewState extends _GraphViewModel {
                 ),
               ),
               const BaseHeightBox(),
-              // PIE CHART
               if (_categoryByAmountsMap.isNotEmpty)
                 Expanded(
                   child: SingleChildScrollView(

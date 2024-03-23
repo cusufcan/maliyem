@@ -2,7 +2,7 @@
 
 Maliyem, kişisel ve işletme finans yönetimi için tasarlanmış kullanıcı dostu bir gelir gider takibi uygulamasıdır. Mali durumunuzu kontrol altında tutmak, harcamalarınızı izlemek ve gelirinizi artırmak için güçlü araçlar sunuyoruz.
 
-# Maliyem'in sunduğu özellikler:
+### Maliyem'in sunduğu özellikler:
 
 Kolay Kullanım: Basit arayüzümüzle, gelirinizi ve giderlerinizi kolayca takip edin.
 Kapsamlı Analizler: Harcamalarınızı detaylı raporlarla izleyin ve finansal alışkanlıklarınızı anlayın.

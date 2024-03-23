@@ -35,11 +35,11 @@ class _TransferBottomSheetState extends State<TransferBottomSheet> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom + BaseSize.med,
+            bottom: MediaQuery.of(context).viewInsets.bottom + BaseSize.md,
             top: BaseSize.semiLg,
           ) +
           const EdgeInsets.symmetric(
-            horizontal: BaseSize.med,
+            horizontal: BaseSize.md,
           ),
       child: Form(
         key: _formKey,
@@ -65,7 +65,7 @@ class _TransferBottomSheetState extends State<TransferBottomSheet> {
                     setState(() {});
                   },
                 ),
-                const BaseHeightBox(height: BaseSize.med),
+                const BaseHeightBox(height: BaseSize.md),
                 TransferDropdownContent(
                   accountForTransfer: transferTo,
                   title: BaseString.receiver,
@@ -74,7 +74,7 @@ class _TransferBottomSheetState extends State<TransferBottomSheet> {
                     setState(() {});
                   },
                 ),
-                const BaseWidthBox(width: BaseSize.med),
+                const BaseWidthBox(width: BaseSize.md),
               ],
             ),
             const BaseHeightBox(height: BaseSize.lg),

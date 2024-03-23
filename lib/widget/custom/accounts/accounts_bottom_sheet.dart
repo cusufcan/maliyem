@@ -40,11 +40,11 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom + BaseSize.med,
+            bottom: MediaQuery.of(context).viewInsets.bottom + BaseSize.md,
             top: BaseSize.semiLg,
           ) +
           const EdgeInsets.symmetric(
-            horizontal: BaseSize.med,
+            horizontal: BaseSize.md,
           ),
       child: Form(
         key: _formKey,

@@ -17,6 +17,8 @@ class BaseColor {
   static const transfer = Color(0xFF66BB6A);
   static const neutral = Colors.grey;
 
+  static const border = Color(0xFFE0E0E0);
+
   static const colors = [
     Color(0xFF0C359E),
     Color(0xFFEE99C2),

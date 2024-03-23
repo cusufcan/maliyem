@@ -97,7 +97,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                     scale: _scaleAnimationValues.value,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        bottom: BaseSize.med,
+                        bottom: BaseSize.md,
                       ),
                       child: FloatingActionButton(
                         heroTag: BaseString.transfer,
@@ -116,7 +116,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                     scale: _scaleAnimationValues.value,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        bottom: BaseSize.med,
+                        bottom: BaseSize.md,
                       ),
                       child: FloatingActionButton(
                         heroTag: BaseString.income,
@@ -135,7 +135,7 @@ class _HomeFabState extends State<HomeFab> with TickerProviderStateMixin {
                     scale: _scaleAnimationValues.value,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        bottom: BaseSize.med,
+                        bottom: BaseSize.md,
                       ),
                       child: FloatingActionButton(
                         heroTag: BaseString.expense,

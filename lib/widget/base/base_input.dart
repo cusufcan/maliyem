@@ -23,9 +23,15 @@ class BaseInput extends StatelessWidget {
     this.editCategory,
     this.onChanged,
     this.onTap,
+    this.onEditingComplete,
+    this.onTapOutside,
     this.editAccount,
     this.prefix,
+    this.prefixIcon,
+    this.suffix,
+    this.suffixIcon,
     this.focusNode,
+    this.contentPadding,
   });
 
   final TextEditingController controller;
@@ -44,8 +50,14 @@ class BaseInput extends StatelessWidget {
   final bool isCategoryAdd;
   final void Function(String value)? onChanged;
   final void Function()? onTap;
+  final void Function()? onEditingComplete;
+  final void Function(PointerDownEvent event)? onTapOutside;
   final FocusNode? focusNode;
   final Widget? prefix;
+  final Widget? prefixIcon;
+  final Widget? suffix;
+  final Widget? suffixIcon;
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +72,8 @@ class BaseInput extends StatelessWidget {
           maxLength: maxLength,
           onTap: onTap,
           focusNode: focusNode,
+          onEditingComplete: onEditingComplete,
+          onTapOutside: onTapOutside,
           validator: (text) {
             if (text == null || text.isEmpty) {
               return BaseString.emptyInput;
@@ -98,6 +112,10 @@ class BaseInput extends StatelessWidget {
           },
           decoration: InputDecoration(
             prefix: prefix,
+            prefixIcon: prefixIcon,
+            suffix: suffix,
+            suffixIcon: suffixIcon,
+            contentPadding: contentPadding,
             labelText: label,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(radius),

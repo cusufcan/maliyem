@@ -11,7 +11,7 @@ class User {
   List<Change>? changes;
 
   User({
-    this.name = BaseString.username,
+    this.name = BaseString.guest,
     this.balance = BaseSize.none,
     this.monthlyIncome = BaseSize.none,
     this.monthlyExpense = BaseSize.none,

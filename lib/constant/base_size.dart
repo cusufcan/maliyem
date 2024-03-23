@@ -7,7 +7,7 @@ class BaseSize {
   static const double sm = 8.0;
   // MEDIUM
   static const double semiMed = 12.0;
-  static const double med = 16.0;
+  static const double md = 16.0;
   // HIGH
   static const double semiLg = 24.0;
   static const double lg = 32.0;

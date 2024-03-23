@@ -39,6 +39,14 @@ class UserModel extends ChangeNotifier {
       categories: [Category()],
     );
     dates = {};
+
+    notifyListeners();
+    saveData();
+  }
+
+  void changeUserName(String newName) {
+    user.name = newName;
+
     notifyListeners();
     saveData();
   }

@@ -27,7 +27,7 @@ class AccountsTileTop extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: BaseSize.med,
+          vertical: BaseSize.md,
           horizontal: BaseSize.semiLg,
         ),
         child: Column(

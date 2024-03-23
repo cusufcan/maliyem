@@ -1,6 +1,7 @@
 class BaseString {
   static const String empty = '';
-  static const String username = 'Misafir';
+  static const String guest = 'Misafir';
+  static const String username = 'Kullanıcı Adı';
   static const String home = 'Anasayfa';
   static const String accounts = 'Hesaplar';
   static const String categories = 'Kategoriler';
@@ -8,6 +9,7 @@ class BaseString {
   static const String cash = 'Nakit';
   static const String general = 'Genel';
   static const String graph = 'Grafik';
+  static const String menu = 'Menü';
 
   static const String icPath = 'assets/image/ic_foreground.png';
 
@@ -30,6 +32,7 @@ class BaseString {
 
   static const String deleteDesc = 'Silmek istediğinize emin misiniz?';
 
+  static const String deleteData = 'Verileri Sil';
   static const String sureAboutDeleteTitle = 'Emin misiniz?';
   static const String sureAboutDeleteDesc = 'Tüm verileriniz silinmek üzere.';
   static const String allDataDeleted = 'Tüm verileriniz silindi.';
@@ -59,6 +62,8 @@ class BaseString {
   static const String emptyInput = 'Boş bırakılamaz';
   static const String accountExist = 'Hesap zaten var';
   static const String categoryExist = 'Kategori zaten var';
+
+  static const String darkMode = 'Karanlık Tema';
 
   static const String transferSuccess = 'Transfer başarıyla gerçekleşti.';
   static const String accountNotFound = 'Hesap bulunamadı.';

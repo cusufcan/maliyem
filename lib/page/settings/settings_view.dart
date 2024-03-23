@@ -14,57 +14,103 @@ class SettingsView extends StatelessWidget {
     return Scaffold(
       appBar: const SettingsAppBar(),
       body: Consumer<SettingsModel>(
-        builder: (context, settingsModel, child) {
-          return ListView(
+        builder: (ctx, settings, child) {
+          settings.controller.text =
+              Provider.of<UserModel>(ctx, listen: false).user.name;
+          return Padding(
             padding: BasePadding.home,
-            children: [
-              ListTile(
-                title: const Text('Karanlık Tema'),
-                trailing: Switch(
-                  value: settingsModel.isDarkMode,
-                  // onChanged: (value) => settingsModel.changeTheme(value),
-                  onChanged: (value) {},
-                ),
-              ),
-              BaseElevatedButton(
-                text: 'Verileri Temizle',
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => BaseAlertDialog(
-                      title: BaseString.sureAboutDeleteTitle,
-                      desc: BaseString.sureAboutDeleteDesc,
-                      onPressed: () {
-                        final manager =
-                            Provider.of<UserModel>(context, listen: false)
-                                .sharedManager;
-                        settingsModel.clearAllData(context, manager);
-                        Navigator.of(context).pop();
-
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(BaseSize.sm),
-                            ),
-                            title: const Text(BaseString.successs),
-                            content: const Text(BaseString.allDataDeleted),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.of(context).pop(),
-                                child: const Text(
-                                  BaseString.close,
-                                ),
-                              ),
-                            ],
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: BaseSize.md,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: BaseColor.border,
                           ),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
+                          borderRadius: BorderRadius.circular(
+                            BaseSize.sm,
+                          ),
+                        ),
+                        title: const Text(BaseString.darkMode),
+                        leading: BaseIcon.dark,
+                        onTap: () => settings.changeTheme(!settings.isDarkMode),
+                        trailing: Switch(
+                          value: settings.isDarkMode,
+                          onChanged: (value) => settings.changeTheme(value),
+                        ),
+                      ),
+                      const BaseHeightBox(height: BaseSize.lg),
+                      BaseInput(
+                        controller: settings.controller,
+                        label: BaseString.username,
+                        prefixIcon: BaseIcon.user,
+                        focusNode: settings.focusNode,
+                        onTap: () => settings.addFocus(),
+                        onEditingComplete: () {
+                          settings.clearFocus(context);
+                          settings.changeUserName(context);
+                        },
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.only(right: BaseSize.sm),
+                          child: IconButton(
+                            onPressed: () => settings.iconOnClick(ctx),
+                            icon: settings.focusNode.hasFocus
+                                ? BaseIcon.ok
+                                : BaseIcon.edit,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                BaseElevatedButton(
+                  text: BaseString.deleteData,
+                  backgroundColor: BaseColor.expense,
+                  onPressed: () {
+                    showDialog(
+                      context: ctx,
+                      builder: (context) => BaseAlertDialog(
+                        title: BaseString.sureAboutDeleteTitle,
+                        desc: BaseString.sureAboutDeleteDesc,
+                        onPressed: () {
+                          final manager =
+                              Provider.of<UserModel>(context, listen: false)
+                                  .sharedManager;
+                          settings.clearAllData(context, manager);
+                          Navigator.of(context).pop();
+
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(BaseSize.sm),
+                              ),
+                              title: const Text(BaseString.successs),
+                              content: const Text(BaseString.allDataDeleted),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: const Text(
+                                    BaseString.close,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
+                const BaseHeightBox(),
+              ],
+            ),
           );
         },
       ),

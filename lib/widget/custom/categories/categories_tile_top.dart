@@ -20,7 +20,7 @@ class CategoriesTileTop extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: BaseSize.sm,
-        horizontal: BaseSize.med,
+        horizontal: BaseSize.md,
       ),
       child: Row(
         children: [

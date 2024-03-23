@@ -35,7 +35,7 @@ class HomeDailyTile extends StatelessWidget {
       child: BaseContainer(
         onLongPress: onLongPress,
         padding: const EdgeInsets.symmetric(
-          horizontal: BaseSize.med,
+          horizontal: BaseSize.md,
           vertical: BaseSize.semiMed,
         ),
         color: getColor(money).withOpacity(0.7),

@@ -6,7 +6,7 @@ class SharedManager {
 
   Future<void> init() async {
     manager = await SharedPreferences.getInstance();
-    // await manager.clear();
+    await manager.clear();
   }
 
   Future<void> setString(SharedEnum key, String value) async {

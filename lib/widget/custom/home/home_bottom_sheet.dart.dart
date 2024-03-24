@@ -49,79 +49,81 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
               ),
           child: Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                BaseText(
-                  widget.isIncome ? BaseString.income : BaseString.expense,
-                  alignment: Alignment.centerLeft,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const BaseHeightBox(height: BaseSize.lg),
-                BaseInput(
-                  autoFocus: true,
-                  maxLength: BaseSize.intMax,
-                  controller: widget.amount,
-                  label: BaseString.amount,
-                  prefix: const Text("${BaseString.tl} "),
-                  type: TextInputType.number,
-                  action: TextInputAction.next,
-                ),
-                const BaseHeightBox(height: BaseSize.semiMed),
-                Consumer<HomeSheetModel>(
-                  builder: (context, homeSheetModel, child) {
-                    return CustomHorizontalListView(
-                      title: BaseString.account,
-                      isColor: true,
-                      visible: value.user.accounts!.isNotEmpty,
-                      count: value.user.accounts!.length,
-                      active: homeSheetModel.accountsActive,
-                      onTap: homeSheetModel.changeAccountActive,
-                      list: value.user.accounts!,
-                      onBtnTap: _showAccountSheet,
-                    );
-                  },
-                ),
-                Consumer<HomeSheetModel>(
-                  builder: (context, homeSheetModel, child) {
-                    return CustomHorizontalListView(
-                      title: BaseString.category,
-                      visible: value.user.categories!.isNotEmpty,
-                      count: value.user.categories!.length,
-                      active: homeSheetModel.categoriesActive,
-                      onTap: homeSheetModel.changeCategoryActive,
-                      list: value.user.categories!,
-                      onBtnTap: _showCategorySheet,
-                    );
-                  },
-                ),
-                Consumer<HomeSheetModel>(
-                  builder: (context, homeSheetModel, child) {
-                    return CustomScrollDatePicker(
-                      date: homeSheetModel.date,
-                      onChanged: (date) => homeSheetModel.changeDate(date),
-                    );
-                  },
-                ),
-                const BaseHeightBox(height: BaseSize.sm),
-                Consumer<HomeSheetModel>(
-                  builder: (context, homeSheetModel, child) {
-                    return BaseElevatedButton(
-                      onPressed: () {
-                        _bottomSheetOnComplete(
-                          homeSheetModel.date,
-                          homeSheetModel.accountsActive,
-                          homeSheetModel.categoriesActive,
-                        );
-                        homeSheetModel.clearValues();
-                      },
-                      text: BaseString.add,
-                    );
-                  },
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  BaseText(
+                    widget.isIncome ? BaseString.income : BaseString.expense,
+                    alignment: Alignment.centerLeft,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const BaseHeightBox(height: BaseSize.lg),
+                  BaseInput(
+                    autoFocus: true,
+                    maxLength: BaseSize.intMax,
+                    controller: widget.amount,
+                    label: BaseString.amount,
+                    prefix: const Text("${BaseString.tl} "),
+                    type: TextInputType.number,
+                    action: TextInputAction.next,
+                  ),
+                  const BaseHeightBox(height: BaseSize.semiMed),
+                  Consumer<HomeSheetModel>(
+                    builder: (context, homeSheetModel, child) {
+                      return CustomHorizontalListView(
+                        title: BaseString.account,
+                        isColor: true,
+                        visible: value.user.accounts!.isNotEmpty,
+                        count: value.user.accounts!.length,
+                        active: homeSheetModel.accountsActive,
+                        onTap: homeSheetModel.changeAccountActive,
+                        list: value.user.accounts!,
+                        onBtnTap: _showAccountSheet,
+                      );
+                    },
+                  ),
+                  Consumer<HomeSheetModel>(
+                    builder: (context, homeSheetModel, child) {
+                      return CustomHorizontalListView(
+                        title: BaseString.category,
+                        visible: value.user.categories!.isNotEmpty,
+                        count: value.user.categories!.length,
+                        active: homeSheetModel.categoriesActive,
+                        onTap: homeSheetModel.changeCategoryActive,
+                        list: value.user.categories!,
+                        onBtnTap: _showCategorySheet,
+                      );
+                    },
+                  ),
+                  Consumer<HomeSheetModel>(
+                    builder: (context, homeSheetModel, child) {
+                      return CustomScrollDatePicker(
+                        date: homeSheetModel.date,
+                        onChanged: (date) => homeSheetModel.changeDate(date),
+                      );
+                    },
+                  ),
+                  const BaseHeightBox(height: BaseSize.sm),
+                  Consumer<HomeSheetModel>(
+                    builder: (context, homeSheetModel, child) {
+                      return BaseElevatedButton(
+                        onPressed: () {
+                          _bottomSheetOnComplete(
+                            homeSheetModel.date,
+                            homeSheetModel.accountsActive,
+                            homeSheetModel.categoriesActive,
+                          );
+                          homeSheetModel.clearValues();
+                        },
+                        text: BaseString.add,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

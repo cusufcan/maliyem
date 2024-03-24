@@ -17,9 +17,9 @@ class AccountsTileBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Container(
-        decoration: const BoxDecoration(
-          color: BaseColor.white,
-          borderRadius: BorderRadius.vertical(
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(BaseSize.sm),
           ),
         ),

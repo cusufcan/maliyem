@@ -23,7 +23,7 @@ class CategoriesListTile extends StatelessWidget {
       children: [
         BaseContainer(
           onLongPress: onLongPress,
-          color: BaseColor.white,
+          color: Theme.of(context).cardColor,
           padding: EdgeInsets.zero,
           radius: BaseSize.sm,
           child: CategoriesTileTop(

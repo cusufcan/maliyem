@@ -5,22 +5,8 @@ import 'package:gelir_gider_takibi/service/shared/shared_manager.dart';
 import 'package:provider/provider.dart';
 
 class SettingsModel extends ChangeNotifier {
-  bool isDarkMode = false;
-
   final controller = TextEditingController();
   final focusNode = FocusNode();
-
-  void changeTheme(bool value) {
-    isDarkMode = value;
-
-    if (isDarkMode) {
-      // dark theme aktif edilecek
-    } else {
-      // light theme aktif edilecek
-    }
-
-    notifyListeners();
-  }
 
   void clearAllData(BuildContext context, SharedManager manager) {
     manager.clear(SharedEnum.save);

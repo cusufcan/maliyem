@@ -24,7 +24,9 @@ class CategoriesTileTop extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(child: CategoriesTileNameText(name: name)),
+          Expanded(
+            child: CategoriesTileNameText(name: name),
+          ),
           const BaseWidthBox(),
           CustomActionChip(
             text: BaseString.delete,

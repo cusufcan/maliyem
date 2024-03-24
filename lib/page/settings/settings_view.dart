@@ -24,27 +24,6 @@ class SettingsView extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
-                      ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: BaseSize.md,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: BaseColor.border,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            BaseSize.sm,
-                          ),
-                        ),
-                        title: const Text(BaseString.darkMode),
-                        leading: BaseIcon.dark,
-                        onTap: () => settings.changeTheme(!settings.isDarkMode),
-                        trailing: Switch(
-                          value: settings.isDarkMode,
-                          onChanged: (value) => settings.changeTheme(value),
-                        ),
-                      ),
-                      const BaseHeightBox(height: BaseSize.lg),
                       BaseInput(
                         controller: settings.controller,
                         label: BaseString.username,

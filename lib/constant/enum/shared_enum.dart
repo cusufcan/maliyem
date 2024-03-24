@@ -1,4 +1,5 @@
 enum SharedEnum {
   save,
-  first;
+  first,
+  dark;
 }

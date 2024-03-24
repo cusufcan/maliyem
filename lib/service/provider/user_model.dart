@@ -33,6 +33,15 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool getThemeData() {
+    final themeData = _sharedManager.getString(SharedEnum.dark);
+    debugPrint(themeData.toString());
+    if (themeData != null) {
+      if (themeData == 'true') return true;
+    }
+    return false;
+  }
+
   void clearUser() {
     user = User(
       accounts: [Account()],
@@ -67,6 +76,13 @@ class UserModel extends ChangeNotifier {
     _sharedManager.setString(
       SharedEnum.first,
       BaseString.ok,
+    );
+  }
+
+  void saveThemeData(bool dark) {
+    _sharedManager.setString(
+      SharedEnum.dark,
+      dark.toString(),
     );
   }
 

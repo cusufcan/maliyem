@@ -34,7 +34,6 @@ class _GraphViewState extends _GraphViewModel {
                 padding: BasePadding.home,
                 child: BaseContainer(
                   padding: const EdgeInsets.all(BaseSize.sm),
-                  color: BaseColor.surface,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

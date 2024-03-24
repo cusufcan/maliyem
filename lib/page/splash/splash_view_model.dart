@@ -19,15 +19,24 @@ abstract class _SplashViewModel extends State<SplashView> {
   }
 
   bool _isFirstLogin() {
-    return Provider.of<UserModel>(context, listen: false).isFirstLogin();
+    return Provider.of<UserModel>(
+      context,
+      listen: false,
+    ).isFirstLogin();
   }
 
   Future<void> _setShared() async {
-    await Provider.of<UserModel>(context, listen: false).setShared();
+    await Provider.of<UserModel>(
+      context,
+      listen: false,
+    ).setShared();
   }
 
   void _getData() {
-    Provider.of<UserModel>(context, listen: false).getSavedUser();
+    Provider.of<UserModel>(
+      context,
+      listen: false,
+    ).getSavedUser();
   }
 
   void _goToBase() {

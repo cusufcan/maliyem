@@ -131,7 +131,10 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
                     return CustomScrollDatePicker(
                       date: homeDialogModel.date,
                       onChanged: (date) => homeDialogModel.changeDate(date),
-                      color: BaseColor.dialog,
+                      color: MediaQuery.of(context).platformBrightness !=
+                              Brightness.dark
+                          ? BaseColor.dialog
+                          : null,
                     );
                   },
                 ),

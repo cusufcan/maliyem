@@ -22,6 +22,15 @@ class _HomeViewState extends _HomeViewModel with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    Widget empty = const Align(
+      alignment: Alignment.center,
+      child: BaseText(
+        BaseString.noData,
+        style: TextStyle(color: Colors.grey),
+      ),
+    );
+
     return GestureDetector(
       onTap: () {
         if (Provider.of<FabModel>(context, listen: false).isFabOpen) {
@@ -54,6 +63,9 @@ class _HomeViewState extends _HomeViewModel with AutomaticKeepAliveClientMixin {
           const BaseHeightBox(height: BaseSize.sm),
           Consumer<UserModel>(
             builder: (context, value, child) {
+              if (value.user.changes!.isEmpty) {
+                return empty;
+              }
               return ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

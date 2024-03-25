@@ -10,7 +10,6 @@ import '../base/index.dart';
 class CustomHorizontalListView extends StatelessWidget {
   const CustomHorizontalListView({
     super.key,
-    required this.visible,
     required this.count,
     required this.active,
     required this.onTap,
@@ -21,7 +20,6 @@ class CustomHorizontalListView extends StatelessWidget {
   });
 
   final String title;
-  final bool visible;
   final int count;
   final int active;
   final void Function(int index) onTap;
@@ -33,81 +31,78 @@ class CustomHorizontalListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: BaseColor.transparent,
-      child: Visibility(
-        visible: visible,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BaseText(
-                  title,
-                  alignment: Alignment.centerLeft,
-                ),
-                BaseText(
-                  BaseString.add,
-                  alignment: Alignment.centerLeft,
-                  onTap: onBtnTap,
-                  style: const TextStyle(
-                    color: BaseColor.activeGreen,
-                  ),
-                ),
-              ],
-            ),
-            const BaseHeightBox(height: BaseSize.semiMed),
-            SizedBox(
-              height: BaseSize.xLg,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: count,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return Row(
-                    children: [
-                      Consumer<UserModel>(
-                        builder: (context, value, child) {
-                          return BaseContainer(
-                            onTap: () => onTap(index),
-                            color: isColor
-                                ? BaseColor.colors[findColorIndex(
-                                    value.user.accounts![index],
-                                  )]
-                                : BaseColor.white,
-                            border: Border.all(
-                              width: BaseSize.xxSm,
-                              color: active == index
-                                  ? BaseColor.activeGreen
-                                  : BaseColor.transparent,
-                            ),
-                            child: BaseText(
-                              list[index].name,
-                              style: TextStyle(
-                                fontWeight: active == index
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                                color: isColor
-                                    ? getTextColor(
-                                        BaseColor.colors[findColorIndex(
-                                        value.user.accounts![index],
-                                      )])
-                                    : getTextColor(BaseColor.white),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const BaseWidthBox(),
-                    ],
-                  );
-                },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BaseText(
+                title,
+                alignment: Alignment.centerLeft,
               ),
+              BaseText(
+                BaseString.add,
+                alignment: Alignment.centerLeft,
+                onTap: onBtnTap,
+                style: const TextStyle(
+                  color: BaseColor.activeGreen,
+                ),
+              ),
+            ],
+          ),
+          const BaseHeightBox(height: BaseSize.semiMed),
+          SizedBox(
+            height: BaseSize.xLg,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: count,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return Row(
+                  children: [
+                    Consumer<UserModel>(
+                      builder: (context, value, child) {
+                        return BaseContainer(
+                          onTap: () => onTap(index),
+                          color: isColor
+                              ? BaseColor.colors[findColorIndex(
+                                  value.user.accounts![index],
+                                )]
+                              : BaseColor.white,
+                          border: Border.all(
+                            width: BaseSize.xxSm,
+                            color: active == index
+                                ? BaseColor.activeGreen
+                                : BaseColor.transparent,
+                          ),
+                          child: BaseText(
+                            list[index].name,
+                            style: TextStyle(
+                              fontWeight: active == index
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                              color: isColor
+                                  ? getTextColor(
+                                      BaseColor.colors[findColorIndex(
+                                      value.user.accounts![index],
+                                    )])
+                                  : getTextColor(BaseColor.white),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    const BaseWidthBox(),
+                  ],
+                );
+              },
             ),
-            const BaseHeightBox(),
-          ],
-        ),
+          ),
+          const BaseHeightBox(),
+        ],
       ),
     );
   }

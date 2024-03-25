@@ -51,10 +51,13 @@ class BaseContainer extends StatelessWidget {
           boxShadow: [
             if (shadow)
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 1,
+                color: MediaQuery.of(context).platformBrightness ==
+                        Brightness.light
+                    ? BaseColor.grey.withOpacity(0.2)
+                    : BaseColor.black.withOpacity(0.2),
+                spreadRadius: 0.8,
                 blurRadius: 2,
-                offset: const Offset(0, 2),
+                offset: const Offset(0, 1),
               ),
           ],
         ),

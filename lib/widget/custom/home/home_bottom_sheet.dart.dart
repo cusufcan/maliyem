@@ -76,7 +76,6 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
                       return CustomHorizontalListView(
                         title: BaseString.account,
                         isColor: true,
-                        visible: value.user.accounts!.isNotEmpty,
                         count: value.user.accounts!.length,
                         active: homeSheetModel.accountsActive,
                         onTap: homeSheetModel.changeAccountActive,
@@ -89,7 +88,6 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
                     builder: (context, homeSheetModel, child) {
                       return CustomHorizontalListView(
                         title: BaseString.category,
-                        visible: value.user.categories!.isNotEmpty,
                         count: value.user.categories!.length,
                         active: homeSheetModel.categoriesActive,
                         onTap: homeSheetModel.changeCategoryActive,

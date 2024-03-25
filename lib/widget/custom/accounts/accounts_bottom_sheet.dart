@@ -90,8 +90,10 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
               builder: (context, accountsSheetModel, child) {
                 return BaseElevatedButton(
                   onPressed: () {
-                    _bottomSheetOnComplete(accountsSheetModel.active);
-                    accountsSheetModel.clearValues();
+                    final response = _bottomSheetOnComplete(
+                      accountsSheetModel.active,
+                    );
+                    if (response) accountsSheetModel.clearValues();
                   },
                   text: BaseString.add,
                 );
@@ -104,7 +106,7 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
     );
   }
 
-  void _bottomSheetOnComplete(int active) {
+  bool _bottomSheetOnComplete(int active) {
     if (_formKey.currentState!.validate()) {
       widget.onAccountSave(
         _nameController.text.trim(),
@@ -113,6 +115,8 @@ class _AccountsBottomSheetState extends State<AccountsBottomSheet> {
       );
       clearInputs([_nameController, _amountController]);
       Navigator.of(context).pop();
+      return true;
     }
+    return false;
   }
 }

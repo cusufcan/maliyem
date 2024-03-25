@@ -37,6 +37,8 @@ class BaseString {
   static const String sureAboutDeleteDesc = 'Tüm verileriniz silinmek üzere.';
   static const String allDataDeleted = 'Tüm verileriniz silindi.';
 
+  static const String noData = 'Gösterilecek veri bulunmamakta.';
+
   static const String income = 'Gelir';
   static const String expense = 'Gider';
   static const String transfer = 'Transfer';

@@ -99,7 +99,6 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
                     return CustomHorizontalListView(
                       title: BaseString.account,
                       isColor: true,
-                      visible: value.user.accounts!.isNotEmpty,
                       count: value.user.accounts!.length,
                       active: homeDialogModel.accountsActive,
                       onTap: (i) => homeDialogModel.changeAccountActive(i),
@@ -116,7 +115,6 @@ class _HomeEditTileDialogState extends State<HomeEditTileDialog> {
                   builder: (context, homeDialogModel, child) {
                     return CustomHorizontalListView(
                       title: BaseString.category,
-                      visible: value.user.categories!.isNotEmpty,
                       count: value.user.categories!.length,
                       active: homeDialogModel.categoriesActive,
                       onTap: (i) => homeDialogModel.changeCategoryActive(i),

@@ -9,11 +9,13 @@ class AccountsTileTop extends StatelessWidget {
   const AccountsTileTop({
     super.key,
     required this.name,
+    required this.accountColor,
     required this.balance,
     this.onDelete,
   });
 
   final String name;
+  final Color accountColor;
   final double balance;
   final void Function()? onDelete;
 
@@ -34,7 +36,14 @@ class AccountsTileTop extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(child: AccountsTileNameText(name: name)),
+                Expanded(
+                  child: AccountsTileNameText(
+                    name: name,
+                    textColor: accountColor == BaseColor.white
+                        ? BaseColor.text
+                        : BaseColor.white,
+                  ),
+                ),
                 const BaseWidthBox(),
                 CustomActionChip(
                   text: BaseString.delete,
@@ -43,7 +52,12 @@ class AccountsTileTop extends StatelessWidget {
                 ),
               ],
             ),
-            AccountsTileBalanceText(balance: balance),
+            AccountsTileBalanceText(
+              balance: balance,
+              textColor: accountColor == BaseColor.white
+                  ? BaseColor.text
+                  : BaseColor.white,
+            ),
           ],
         ),
       ),

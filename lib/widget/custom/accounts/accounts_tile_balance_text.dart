@@ -8,8 +8,10 @@ class AccountsTileBalanceText extends StatelessWidget {
   const AccountsTileBalanceText({
     super.key,
     required this.balance,
+    required this.textColor,
   });
 
+  final Color textColor;
   final double balance;
 
   @override
@@ -18,7 +20,7 @@ class AccountsTileBalanceText extends StatelessWidget {
       '${formatNumber(num: balance, short: true)} ${BaseString.tl}',
       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
-            color: BaseColor.white,
+            color: textColor,
           ),
     );
   }

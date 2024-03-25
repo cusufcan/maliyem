@@ -30,6 +30,7 @@ class AccountsListTile extends StatelessWidget {
               AccountsTileTop(
                 name: account.name,
                 balance: account.balance,
+                accountColor: stringToColor(account.color),
                 onDelete: onDelete,
               ),
               AccountsTileBottom(

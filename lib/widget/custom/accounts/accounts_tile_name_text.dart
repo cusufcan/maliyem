@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../constant/index.dart';
 import '../../base/index.dart';
 
 class AccountsTileNameText extends StatelessWidget {
   const AccountsTileNameText({
     super.key,
     required this.name,
+    required this.textColor,
   });
 
   final String name;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class AccountsTileNameText extends StatelessWidget {
       name,
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w500,
-            color: BaseColor.white,
+            color: textColor,
           ),
       alignment: Alignment.centerLeft,
     );

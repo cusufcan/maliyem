@@ -25,15 +25,6 @@ class _GraphPageState extends State<GraphPage>
   Widget build(BuildContext context) {
     super.build(context);
 
-    Widget empty = const BaseText(
-      BaseString.noData,
-      style: TextStyle(color: Colors.grey),
-    );
-
-    if (widget.categoryByAmountsMap.isEmpty) {
-      return empty;
-    }
-
     return Column(
       children: [
         // graph month
@@ -86,6 +77,11 @@ class _GraphPageState extends State<GraphPage>
                 dataMap: widget.categoryByAmountsMap,
               ),
             ),
+          ),
+        if (widget.categoryByAmountsMap.isEmpty)
+          const BaseText(
+            BaseString.noData,
+            style: TextStyle(color: Colors.grey),
           ),
       ],
     );
